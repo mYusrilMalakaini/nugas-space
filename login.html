@@ -1,569 +1,424 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - NUGAS Space</title>
-  
-  <!-- Font Poppins & Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NUGAS Space</title>
 
-  <style>
-    /* CSS Reset */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <!-- Tailwind CSS hasil compile -->
+    <link href="./assets/css/output.css" rel="stylesheet">
 
-    body {
-      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow-x: hidden;
-      background-color: #1a1a1a;
-    }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    /* Background Image dengan foto suasana belajar kayu sesuai desain Figma */
-    .bg-image {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      z-index: 1;
-      filter: brightness(0.95);
-    }
-
-    /* Soft overlay tipis */
-    .bg-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.08);
-      z-index: 2;
-      backdrop-filter: blur(1px);
-    }
-
-    /* Tombol Kembali ke Beranda di pojok kiri atas */
-    .back-home-btn {
-      position: fixed;
-      top: 24px;
-      left: 24px;
-      z-index: 20;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(8px);
-      padding: 8px 16px;
-      border-radius: 999px;
-      color: #0f172a;
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-      transition: all 0.2s ease;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-    }
-
-    .back-home-btn:hover {
-      background: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
-      color: #0077ff;
-    }
-
-    /* Login Card Container */
-    .login-wrapper {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 380px;
-      margin: 20px;
-    }
-
-    .login-card {
-      background: #ffffff;
-      border-radius: 14px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.24);
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      padding: 0 0 28px 0;
-    }
-
-    /* Tab Switcher: Customer & Staff */
-    .tab-header {
-      display: flex;
-      border-bottom: 1px solid #ebecef;
-      background-color: #fafbfc;
-    }
-
-    .tab-btn {
-      flex: 1;
-      padding: 13px 0;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #64748b;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      position: relative;
-      transition: color 0.2s ease;
-      text-align: center;
-      font-family: inherit;
-    }
-
-    .tab-btn.active {
-      color: #0f172a;
-      background: #ffffff;
-    }
-
-    .tab-btn.active::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      height: 2.5px;
-      background-color: #0077ff;
-    }
-
-    .card-body {
-      padding: 24px 28px 0;
-    }
-
-    /* Brand Logo & Heading */
-    .brand-section {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .logo-container {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
-    }
-
-    .brand-section h2 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 3px;
-    }
-
-    .brand-section p {
-      font-size: 0.75rem;
-      color: #94a3b8;
-    }
-
-    /* Form Fields */
-    .form-group {
-      margin-bottom: 15px;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #475569;
-      margin-bottom: 6px;
-    }
-
-    .input-box {
-      position: relative;
-      display: flex;
-      align-items: center;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .input-box:focus-within {
-      border-color: #0077ff;
-      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.12);
-    }
-
-    .input-box .left-icon {
-      position: absolute;
-      left: 12px;
-      color: #94a3b8;
-      font-size: 0.85rem;
-      pointer-events: none;
-    }
-
-    .input-box input {
-      width: 100%;
-      padding: 10px 38px 10px 36px;
-      border: none;
-      outline: none;
-      font-size: 0.82rem;
-      font-family: inherit;
-      color: #1e293b;
-      background: transparent;
-      border-radius: 6px;
-    }
-
-    .input-box input::placeholder {
-      color: #94a3b8;
-      font-size: 0.82rem;
-    }
-
-    .toggle-password {
-      position: absolute;
-      right: 12px;
-      background: none;
-      border: none;
-      color: #94a3b8;
-      cursor: pointer;
-      font-size: 0.85rem;
-      padding: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.15s ease;
-    }
-
-    .toggle-password:hover {
-      color: #475569;
-    }
-
-    /* Remember me & Forgot password */
-    .meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 10px;
-      margin-bottom: 18px;
-      font-size: 0.72rem;
-    }
-
-    .remember-me {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #475569;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .remember-me input[type="checkbox"] {
-      accent-color: #0077ff;
-      cursor: pointer;
-      width: 13px;
-      height: 13px;
-    }
-
-    .forgot-link {
-      color: #0077ff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: text-decoration 0.2s;
-    }
-
-    .forgot-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Buttons */
-    .btn-login {
-      width: 100%;
-      background-color: #0077ff;
-      color: #ffffff;
-      border: none;
-      padding: 10px 0;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
-
-    .btn-login:hover {
-      background-color: #0066dc;
-      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.25);
-    }
-
-    .btn-login:active {
-      transform: scale(0.99);
-    }
-
-    /* Divider */
-    .divider-row {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      margin: 16px 0 14px;
-    }
-
-    .divider-row::before,
-    .divider-row::after {
-      content: '';
-      flex: 1;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .divider-row span {
-      padding: 0 10px;
-      color: #94a3b8;
-      font-size: 0.7rem;
-      white-space: nowrap;
-    }
-
-    /* Sign Up Button */
-    .btn-signup {
-      width: 100%;
-      background-color: #ffffff;
-      color: #334155;
-      border: 1px solid #cbd5e1;
-      padding: 9px 0;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-      display: block;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    .btn-signup:hover {
-      background-color: #f8fafc;
-      border-color: #94a3b8;
-      color: #0f172a;
-    }
-
-    /* Toast Notification */
-    .toast-msg {
-      display: none;
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #0f172a;
-      color: #ffffff;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, 10px); }
-      to { opacity: 1; transform: translate(-50%, 0); }
-    }
-
-    @media (max-width: 480px) {
-      .login-wrapper {
-        margin: 16px;
-      }
-      .card-body {
-        padding: 20px 20px 0;
-      }
-      .back-home-btn {
-        top: 16px;
-        left: 16px;
-        font-size: 0.75rem;
-        padding: 6px 12px;
-      }
-    }
-  </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
 
-  <!-- Fullscreen study atmosphere background -->
-  <img 
-    class="bg-image" 
-    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=85" 
-    alt="Mahasiswa sedang nugas dan belajar"
-  >
-  <div class="bg-overlay"></div>
+<body class="min-h-screen flex items-center justify-center relative overflow-x-hidden bg-slate-900 font-['Poppins']">
 
-  <!-- Tombol kembali yang menghubungkan ke Beranda.html / index.html -->
-  <a href="Beranda.html" class="back-home-btn" title="Kembali ke Beranda Nugas">
-    <i class="fa-solid fa-arrow-left"></i>
-    <span>Ke Beranda</span>
-  </a>
+    <!-- Background Image -->
+    <img
+        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=85"
+        alt="Suasana belajar mahasiswa"
+        class="fixed inset-0 w-full h-full object-cover"
+    >
 
-  <!-- Login Card Centered -->
-  <div class="login-wrapper">
-    <div class="login-card">
-      
-      <!-- Top Navigation Tabs (Customer / Staff) -->
-      <div class="tab-header">
-        <button class="tab-btn active" id="tabCustomer" onclick="switchTab('customer')">Customer</button>
-        <button class="tab-btn" id="tabStaff" onclick="switchTab('staff')">Staff</button>
-      </div>
+    <!-- Background Overlay -->
+    <div class="fixed inset-0 bg-black/30 backdrop-blur-[1px]"></div>
 
-      <div class="card-body">
-        
-        <!-- Logo & Title Section -->
-        <div class="brand-section">
-          <div class="logo-container">
-            <!-- Vector Logo NUGAS space persis mockup -->
-            <svg class="logo-svg" style="height: 38px; width: auto;" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 36L12 12L24 28L24 12" stroke="#0f172a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 14L12 10L25 10" stroke="#c93b3b" stroke-width="3.5" stroke-linecap="round"/>
-              <text x="36" y="27" fill="#0f172a" font-family="'Poppins', sans-serif" font-weight="900" font-size="21" letter-spacing="0.5">NUGAS</text>
-              <text x="115" y="38" fill="#475569" font-family="'Poppins', sans-serif" font-weight="600" font-size="12" letter-spacing="1.5">space</text>
-            </svg>
-          </div>
-          <h2 id="loginTitle">Login to your account</h2>
-          <p id="loginSubtitle">Enter your credentials below</p>
+    <!-- Back to Home -->
+    <a
+        href="Beranda.html"
+        class="fixed top-6 left-6 z-20 inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-800 shadow-lg transition hover:-translate-y-0.5 hover:bg-white hover:text-red-600"
+    >
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Ke Beranda</span>
+    </a>
+
+    <!-- Login Wrapper -->
+    <main class="relative z-10 w-full max-w-sm mx-4 my-20">
+
+        <!-- Login Card -->
+        <div class="overflow-hidden rounded-2xl border border-white/80 bg-white shadow-2xl">
+
+            <!-- Customer / Staff Tabs -->
+            <div class="flex border-b border-slate-200 bg-slate-50">
+
+                <button
+                    type="button"
+                    id="tabCustomer"
+                    class="tab-btn flex-1 border-b-[3px] border-red-600 bg-white py-3 text-sm font-semibold text-slate-900"
+                >
+                    Customer
+                </button>
+
+                <button
+                    type="button"
+                    id="tabStaff"
+                    class="tab-btn flex-1 border-b-[3px] border-transparent py-3 text-sm font-semibold text-slate-500 transition hover:text-slate-800"
+                >
+                    Staff
+                </button>
+
+            </div>
+
+            <!-- Card Body -->
+            <div class="px-7 pt-7 pb-8">
+
+                <!-- Brand -->
+                <div class="mb-7 text-center">
+
+                    <div class="mb-3 inline-flex items-center gap-1">
+                        <span class="text-3xl font-extrabold tracking-tight text-slate-900">
+                            NUGAS
+                        </span>
+
+                        <span class="mt-3 text-xs font-bold uppercase tracking-widest text-red-600">
+                            space
+                        </span>
+                    </div>
+
+                    <h1
+                        id="loginTitle"
+                        class="text-lg font-bold text-slate-800"
+                    >
+                        Login to your account
+                    </h1>
+
+                    <p
+                        id="loginSubtitle"
+                        class="mt-1 text-xs text-slate-400"
+                    >
+                        Enter your credentials below
+                    </p>
+
+                </div>
+
+                <!-- Login Form -->
+                <form id="loginForm">
+
+                    <!-- Email -->
+                    <div class="mb-5">
+
+                        <label
+                            for="emailInput"
+                            class="mb-2 block text-xs font-semibold text-slate-600"
+                        >
+                            Email
+                        </label>
+
+                        <div class="flex items-center rounded-lg border border-slate-300 transition focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100">
+
+                            <i class="fa-regular fa-envelope ml-3 text-sm text-slate-400"></i>
+
+                            <input
+                                type="email"
+                                id="emailInput"
+                                placeholder="john@doe.com"
+                                required
+                                autocomplete="email"
+                                class="w-full rounded-lg bg-transparent px-3 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-4">
+
+                        <label
+                            for="passwordInput"
+                            class="mb-2 block text-xs font-semibold text-slate-600"
+                        >
+                            Password
+                        </label>
+
+                        <div class="flex items-center rounded-lg border border-slate-300 transition focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-100">
+
+                            <i class="fa-solid fa-lock ml-3 text-sm text-slate-400"></i>
+
+                            <input
+                                type="password"
+                                id="passwordInput"
+                                placeholder="Masukkan password"
+                                required
+                                autocomplete="current-password"
+                                class="w-full rounded-lg bg-transparent px-3 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400"
+                            >
+
+                            <button
+                                type="button"
+                                id="togglePasswordBtn"
+                                class="px-3 text-slate-400 transition hover:text-slate-700"
+                                title="Lihat atau sembunyikan password"
+                            >
+                                <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="mb-6 flex items-center justify-between text-xs">
+
+                        <label class="flex cursor-pointer items-center gap-2 text-slate-600">
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                                class="accent-red-600"
+                            >
+                            Remember me
+                        </label>
+
+                        <a
+                            href="#"
+                            id="forgotPassword"
+                            class="font-medium text-red-600 transition hover:text-red-700 hover:underline"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+                    <!-- Login Button -->
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="w-full rounded-lg bg-red-600 py-3 text-sm font-semibold text-white shadow-md shadow-red-600/20 transition hover:bg-red-700 active:scale-[0.99]"
+                    >
+                        Login
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="my-5 flex items-center gap-3">
+
+                        <div class="h-px flex-1 bg-slate-200"></div>
+
+                        <span class="whitespace-nowrap text-xs text-slate-400">
+                            Don't have an account?
+                        </span>
+
+                        <div class="h-px flex-1 bg-slate-200"></div>
+
+                    </div>
+
+                    <!-- Sign Up -->
+                    <a
+                        href="#"
+                        id="signUp"
+                        class="block w-full rounded-lg border border-slate-300 py-2.5 text-center text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50"
+                    >
+                        Sign up
+                    </a>
+
+                </form>
+
+            </div>
         </div>
+    </main>
 
-        <!-- Form Elements -->
-        <form id="loginForm" onsubmit="handleLoginSubmit(event)">
-          
-          <!-- Email Field -->
-          <div class="form-group">
-            <label for="emailInput">Email</label>
-            <div class="input-box">
-              <i class="fa-regular fa-envelope left-icon"></i>
-              <input 
-                type="email" 
-                id="emailInput" 
-                placeholder="john@doe.com" 
-                required 
-                autocomplete="email"
-              >
-            </div>
-          </div>
-
-          <!-- Password Field with Show/Hide toggle -->
-          <div class="form-group">
-            <label for="passwordInput">Password</label>
-            <div class="input-box">
-              <i class="fa-solid fa-lock left-icon"></i>
-              <input 
-                type="password" 
-                id="passwordInput" 
-                placeholder="••••••••••••" 
-                required 
-                autocomplete="current-password"
-              >
-              <button 
-                type="button" 
-                class="toggle-password" 
-                id="togglePasswordBtn" 
-                onclick="togglePasswordVisibility()" 
-                title="Lihat / Sembunyikan Password"
-              >
-                <i class="fa-regular fa-eye" id="eyeIcon"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Remember me & Forgot Password -->
-          <div class="meta-row">
-            <label class="remember-me">
-              <input type="checkbox" id="rememberMe">
-              <span>Remember me</span>
-            </label>
-            <a href="javascript:void(0)" onclick="showToast('Fitur reset kata sandi telah dikirim ke email.')" class="forgot-link">
-              Forgot password?
-            </a>
-          </div>
-
-          <!-- Primary Submit Button -->
-          <button type="submit" class="btn-login" id="submitBtn">Login</button>
-
-          <!-- Divider -->
-          <div class="divider-row">
-            <span>Don't have an account?</span>
-          </div>
-
-          <!-- Secondary Sign Up Button -->
-          <a href="javascript:void(0)" onclick="showToast('Pendaftaran akun baru Nugas Space dibuka segera.')" class="btn-signup">
-            Sign up
-          </a>
-        </form>
-
-      </div>
+    <!-- Toast Notification -->
+    <div
+        id="toast"
+        role="status"
+        aria-live="polite"
+        class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-lg bg-slate-900 px-5 py-3 text-center text-sm text-white shadow-xl"
+    >
+        Notifikasi
     </div>
-  </div>
 
-  <!-- Toast Notification Message -->
-  <div class="toast-msg" id="toast">Notifikasi</div>
+    <!-- JavaScript -->
+    <script>
 
-  <script>
-    // Toggle Show/Hide Password
-    function togglePasswordVisibility() {
-      const pwdInput = document.getElementById('passwordInput');
-      const eyeIcon = document.getElementById('eyeIcon');
-      
-      if (pwdInput.type === 'password') {
-        pwdInput.type = 'text';
-        eyeIcon.classList.remove('fa-eye');
-        eyeIcon.classList.add('fa-eye-slash');
-      } else {
-        pwdInput.type = 'password';
-        eyeIcon.classList.remove('fa-eye-slash');
-        eyeIcon.classList.add('fa-eye');
-      }
-    }
+        // Mengambil elemen HTML
+        const tabCustomer = document.getElementById("tabCustomer");
+        const tabStaff = document.getElementById("tabStaff");
 
-    // Switch between Customer and Staff tabs
-    function switchTab(role) {
-      const tabCustomer = document.getElementById('tabCustomer');
-      const tabStaff = document.getElementById('tabStaff');
-      const emailInput = document.getElementById('emailInput');
-      const title = document.getElementById('loginTitle');
-      const subtitle = document.getElementById('loginSubtitle');
+        const emailInput = document.getElementById("emailInput");
+        const passwordInput = document.getElementById("passwordInput");
 
-      if (role === 'staff') {
-        tabStaff.classList.add('active');
-        tabCustomer.classList.remove('active');
-        emailInput.placeholder = 'staff@nugas.space';
-        title.textContent = 'Staff Portal';
-        subtitle.textContent = 'Masuk dengan kredensial staf NUGAS';
-      } else {
-        tabCustomer.classList.add('active');
-        tabStaff.classList.remove('active');
-        emailInput.placeholder = 'john@doe.com';
-        title.textContent = 'Login to your account';
-        subtitle.textContent = 'Enter your credentials below';
-      }
-    }
+        const loginTitle = document.getElementById("loginTitle");
+        const loginSubtitle = document.getElementById("loginSubtitle");
 
-    // Handle Form Submit & Redirect
-    function handleLoginSubmit(e) {
-      e.preventDefault();
-      const isStaff = document.getElementById('tabStaff').classList.contains('active');
-      const roleName = isStaff ? 'Staf' : 'Customer';
-      
-      showToast(`Login berhasil sebagai ${roleName}! Mengarahkan ke Beranda...`);
+        const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+        const eyeIcon = document.getElementById("eyeIcon");
 
-      // Mengarahkan kembali ke file Beranda.html setelah login
-      setTimeout(() => {
-        window.location.href = 'Beranda.html';
-      }, 1200);
-    }
+        const loginForm = document.getElementById("loginForm");
+        const toast = document.getElementById("toast");
 
-    // Floating Notification Message
-    function showToast(text) {
-      const toast = document.getElementById('toast');
-      toast.textContent = text;
-      toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.display = 'none';
-      }, 2500);
-    }
-  </script>
+        let currentRole = "customer";
+        let toastTimer;
+
+        // Mengganti tampilan tab
+        function switchTab(role) {
+
+            currentRole = role;
+
+            if (role === "staff") {
+
+                tabStaff.classList.add(
+                    "border-red-600",
+                    "bg-white",
+                    "text-slate-900"
+                );
+
+                tabStaff.classList.remove(
+                    "border-transparent",
+                    "text-slate-500"
+                );
+
+                tabCustomer.classList.remove(
+                    "border-red-600",
+                    "bg-white",
+                    "text-slate-900"
+                );
+
+                tabCustomer.classList.add(
+                    "border-transparent",
+                    "text-slate-500"
+                );
+
+                emailInput.placeholder = "staff@nugas.space";
+
+                loginTitle.textContent = "Staff Portal";
+                loginSubtitle.textContent = "Masuk dengan kredensial staf NUGAS";
+
+            } else {
+
+                tabCustomer.classList.add(
+                    "border-red-600",
+                    "bg-white",
+                    "text-slate-900"
+                );
+
+                tabCustomer.classList.remove(
+                    "border-transparent",
+                    "text-slate-500"
+                );
+
+                tabStaff.classList.remove(
+                    "border-red-600",
+                    "bg-white",
+                    "text-slate-900"
+                );
+
+                tabStaff.classList.add(
+                    "border-transparent",
+                    "text-slate-500"
+                );
+
+                emailInput.placeholder = "john@doe.com";
+
+                loginTitle.textContent = "Login to your account";
+                loginSubtitle.textContent = "Enter your credentials below";
+
+            }
+
+        }
+
+        // Event untuk mengganti tab
+        tabCustomer.addEventListener("click", function() {
+            switchTab("customer");
+        });
+
+        tabStaff.addEventListener("click", function() {
+            switchTab("staff");
+        });
+
+        // Toggle password
+        togglePasswordBtn.addEventListener("click", function() {
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+
+            } else {
+
+                passwordInput.type = "password";
+
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+
+            }
+
+        });
+
+        // Menampilkan toast
+        function showToast(message) {
+
+            clearTimeout(toastTimer);
+
+            toast.textContent = message;
+
+            toast.classList.remove("hidden");
+            toast.classList.add("block");
+
+            toastTimer = setTimeout(function() {
+
+                toast.classList.add("hidden");
+                toast.classList.remove("block");
+
+            }, 2500);
+
+        }
+
+        // Login form
+        loginForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (email === "" || password === "") {
+
+                showToast("Email dan password wajib diisi!");
+
+                return;
+
+            }
+
+            const roleName = currentRole === "staff" ? "Staff" : "Customer";
+
+            showToast(
+                "Simulasi login sebagai " + roleName + " berhasil!"
+            );
+
+            setTimeout(function() {
+
+                window.location.href = "Beranda.html";
+
+            }, 1200);
+
+        });
+
+        // Forgot Password
+        document.getElementById("forgotPassword").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            showToast("Fitur reset kata sandi belum tersedia.");
+
+        });
+
+        // Sign Up
+        document.getElementById("signUp").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            showToast("Halaman pendaftaran belum tersedia.");
+
+        });
+
+    </script>
+
 </body>
 </html>
