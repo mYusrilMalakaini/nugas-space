@@ -1,0 +1,24 @@
+{
+  "name": "nugas-space",
+  "version": "1.0.0",
+  "description": "Aplikasi reservasi meja dan ruang belajar/kerja berbasis web - TUBES Pemweb Kelompok 7",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mYusrilMalakaini/nugas-space.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mYusrilMalakaini/nugas-space/issues"
+  },
+  "homepage": "https://github.com/mYusrilMalakaini/nugas-space#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  }
+}
