@@ -1,1149 +1,672 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NUGAS - Ideal Untuk Mahasiswa</title>
-  
-  <!-- Font Poppins & Font Awesome Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    :root {
-      --primary-red: #c93b3b;
-      --primary-red-hover: #b02a2a;
-      --dark-navy: #09192c;
-      --navy-card: #0f243e;
-      --text-dark: #1e293b;
-      --text-muted: #64748b;
-      --bg-cream: #fafafa;
-      --border-color: #e2e8f0;
-      --radius-sm: 6px;
-      --radius-md: 12px;
-      --radius-lg: 18px;
-    }
+    <title>NUGAS Space - Ideal Untuk Mahasiswa</title>
 
-    html {
-      scroll-behavior: smooth;
-    }
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-dark);
-      background-color: #ffffff;
-      line-height: 1.5;
-    }
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    .container {
-      width: 90%;
-      max-width: 1040px;
-      margin-inline: auto;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* --- NAVBAR --- */
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.4rem 0;
-    }
-
-    .brand-logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 0.9;
-    }
-
-    .brand-logo .logo-main {
-      font-size: 1.45rem;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      color: #0b192c;
-    }
-
-    .brand-logo .logo-sub {
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--primary-red);
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
-    .nav-menu {
-      display: flex;
-      list-style: none;
-      gap: 2.2rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-
-    .nav-menu a {
-      transition: color 0.2s ease;
-    }
-
-    .nav-menu a:hover,
-    .nav-menu a.active {
-      color: var(--primary-red);
-      font-weight: 600;
-    }
-
-    .btn-red {
-      background-color: var(--primary-red);
-      color: #fff;
-      padding: 0.52rem 1.45rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s ease;
-      box-shadow: 0 4px 12px rgba(201, 59, 59, 0.2);
-    }
-
-    .btn-red:hover {
-      background-color: var(--primary-red-hover);
-      box-shadow: 0 6px 16px rgba(201, 59, 59, 0.3);
-    }
-
-    /* --- HERO SECTION --- */
-    .hero {
-      position: relative;
-      padding: 2.5rem 0 4.5rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      align-items: center;
-      gap: 2.5rem;
-    }
-
-    .hero-text h1 {
-      font-size: 2.9rem;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .hero-text h1 span {
-      color: var(--primary-red);
-    }
-
-    .hero-text p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 420px;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-
-    .hero-img-box {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.09);
-      height: 320px;
-    }
-
-    .hero-img-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Floating Search Bar */
-    .floating-search-wrapper {
-      position: absolute;
-      bottom: 15px;
-      left: 0;
-      width: 78%;
-      z-index: 10;
-    }
-
-    .search-card {
-      background: #ffffff;
-      padding: 9px 12px 9px 16px;
-      border-radius: var(--radius-sm);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.09);
-      border: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .search-input-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-    }
-
-    .search-input-group i {
-      color: var(--primary-red);
-      font-size: 0.95rem;
-    }
-
-    .search-input-group input {
-      border: none;
-      outline: none;
-      width: 100%;
-      font-size: 0.84rem;
-      color: var(--text-dark);
-      font-family: inherit;
-    }
-
-    .search-note {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-top: 7px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* --- SECTION HEADINGS --- */
-    .section-title {
-      text-align: center;
-      margin: 4.5rem 0 2.2rem;
-    }
-
-    .section-title h2 {
-      font-size: 1.65rem;
-      font-weight: 700;
-    }
-
-    .section-title h2 span {
-      color: var(--primary-red);
-    }
-
-    .section-title p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 0.35rem;
-    }
-
-    /* --- FEATURES 8-GRID --- */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
-      margin-bottom: 4rem;
-    }
-
-    .feature-card {
-      border: 1px solid #edf2f7;
-      border-radius: var(--radius-md);
-      padding: 1.4rem 1.2rem;
-      background: #fff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-      transition: all 0.25s ease;
-      position: relative;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.06);
-    }
-
-    .feature-icon {
-      font-size: 1.35rem;
-      margin-bottom: 0.85rem;
-      color: var(--primary-red);
-    }
-
-    .feature-card h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      margin-bottom: 0.35rem;
-    }
-
-    .feature-card p {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    .tag-badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background-color: var(--dark-navy);
-      color: #fff;
-      font-size: 0.58rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px;
-      letter-spacing: 0.6px;
-    }
-
-    /* --- AMBIENCE BANNER --- */
-    .ambience-banner {
-      background-color: var(--dark-navy);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      color: #fff;
-      margin-bottom: 4.5rem;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-    }
-
-    .ambience-img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      padding: 1.6rem 2.4rem;
-      align-items: center;
-      position: relative;
-    }
-
-    .stat-lead h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .stat-lead p {
-      font-size: 0.78rem;
-      color: #94a3b8;
-    }
-
-    .stat-box {
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-      padding-left: 2rem;
-    }
-
-    .stat-box h3 {
-      font-size: 1.65rem;
-      font-weight: 700;
-      line-height: 1.1;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .stat-box p {
-      font-size: 0.75rem;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
-
-    .banner-nav-btn {
-      position: absolute;
-      right: 24px;
-      bottom: 24px;
-      display: flex;
-      gap: 6px;
-    }
-
-    .banner-nav-btn button {
-      background: var(--primary-red);
-      color: #fff;
-      border: none;
-      width: 26px;
-      height: 26px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      transition: background 0.2s;
-    }
-
-    .banner-nav-btn button:hover {
-      background: var(--primary-red-hover);
-    }
-
-    /* --- OUR SPACE SECTION --- */
-    .space-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 4.5rem;
-    }
-
-    .space-card {
-      display: flex;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      background: #fff;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .space-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    }
-
-    .space-card img {
-      width: 44%;
-      object-fit: cover;
-      height: 100%;
-      min-height: 175px;
-    }
-
-    .space-info {
-      padding: 1.15rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 56%;
-    }
-
-    .space-info h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-    }
-
-    .space-info p {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
-
-    .space-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.8rem;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 0.6rem;
-    }
-
-    .space-price {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--primary-red);
-    }
-
-    .btn-arrow {
-      background: var(--primary-red);
-      color: #fff;
-      border: none;
-      width: 26px;
-      height: 26px;
-      border-radius: 4px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 0.75rem;
-      transition: 0.2s;
-    }
-
-    .btn-arrow:hover {
-      background: var(--primary-red-hover);
-    }
-
-    /* --- TUKAR POIN SECTION --- */
-    .poin-section {
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: 3rem;
-      align-items: center;
-      margin-bottom: 4.5rem;
-      padding: 1rem 0;
-    }
-
-    .poin-left h2 {
-      font-size: 1.7rem;
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 0.6rem;
-    }
-
-    .poin-left h2 span {
-      color: var(--primary-red);
-    }
-
-    .poin-left p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .poin-right {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-    }
-
-    .poin-card {
-      background: #fff;
-      border-radius: var(--radius-md);
-      padding: 1.15rem 1.4rem;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-    }
-
-    .poin-card.card-orange {
-      border-left: 4px solid #f59e0b;
-    }
-
-    .poin-card.card-red {
-      border-left: 4px solid var(--primary-red);
-    }
-
-    .poin-card-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.35rem;
-    }
-
-    .poin-card h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 0.25rem;
-    }
-
-    .poin-card p {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    /* --- SPECIAL HAPPY HOUR BAR --- */
-    .happy-hour {
-      background: #09192c;
-      color: #fff;
-      border-radius: var(--radius-md);
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 4.5rem;
-      box-shadow: 0 8px 25px rgba(9, 25, 44, 0.15);
-    }
-
-    .hh-title {
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: 1px;
-    }
-
-    .hh-badge {
-      background-color: var(--primary-red);
-      font-size: 0.65rem;
-      padding: 2px 7px;
-      border-radius: 3px;
-      margin-left: 6px;
-      font-weight: 700;
-    }
-
-    .hh-time {
-      font-size: 0.78rem;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
-
-    .hh-price {
-      text-align: right;
-    }
-
-    .hh-price small {
-      font-size: 0.7rem;
-      color: #94a3b8;
-    }
-
-    .hh-price strong {
-      font-size: 1.15rem;
-      color: #f87171;
-    }
-
-    /* --- FAQ INTERACTIVE --- */
-    .faq-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.85rem;
-      margin-bottom: 4.5rem;
-    }
-
-    .faq-item {
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      background: #fff;
-      cursor: pointer;
-      transition: all 0.2s;
-      overflow: hidden;
-    }
-
-    .faq-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.9rem 1.15rem;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-
-    .faq-item:hover {
-      border-color: var(--primary-red);
-    }
-
-    .faq-icon {
-      font-size: 0.95rem;
-      font-weight: 700;
-      transition: transform 0.2s;
-    }
-
-    .faq-body {
-      display: none;
-      padding: 0 1.15rem 0.9rem;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      border-top: 1px dashed #f1f5f9;
-      margin-top: 4px;
-      padding-top: 8px;
-    }
-
-    .faq-item.active .faq-body {
-      display: block;
-    }
-
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
-      color: var(--primary-red);
-    }
-
-    /* --- LOCATION / VISIT --- */
-    .visit-card {
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      margin-bottom: 4.5rem;
-      background: #fff;
-    }
-
-    .visit-left {
-      padding: 2.2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .visit-left h3 {
-      font-size: 1.45rem;
-      font-weight: 800;
-      margin-bottom: 0.35rem;
-    }
-
-    .visit-left h3 span {
-      color: var(--primary-red);
-    }
-
-    .visit-left p {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 1.2rem;
-    }
-
-    .map-preview {
-      width: 100%;
-      height: 125px;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      margin-bottom: 1.2rem;
-      border: 1px solid var(--border-color);
-    }
-
-    .map-preview iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .visit-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      border-top: 1px solid #f1f5f9;
-      padding-top: 1rem;
-    }
-
-    .visit-right img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* --- FOOTER --- */
-    .footer {
-      background-color: var(--dark-navy);
-      color: #94a3b8;
-      padding: 3.5rem 0 1.5rem;
-      font-size: 0.78rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-      gap: 2.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .footer-col h4 {
-      color: #fff;
-      font-size: 0.88rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col ul li {
-      margin-bottom: 0.45rem;
-    }
-
-    .footer-col ul li a:hover {
-      color: #fff;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
-      padding-top: 1.5rem;
-      font-size: 0.72rem;
-      color: #64748b;
-    }
-
-    /* --- RESPONSIVE MOBILE --- */
-    @media (max-width: 900px) {
-      .hero-grid,
-      .space-grid,
-      .poin-section,
-      .visit-card,
-      .footer-grid,
-      .faq-grid,
-      .stats-row {
-        grid-template-columns: 1fr;
-      }
-
-      .floating-search-wrapper {
-        position: static;
-        width: 100%;
-        margin-top: 1.5rem;
-      }
-
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .stat-box {
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.12);
-        padding-left: 0;
-        padding-top: 1rem;
-        margin-top: 1rem;
-      }
-
-      .space-card {
-        flex-direction: column;
-      }
-
-      .space-card img {
-        width: 100%;
-        height: 150px;
-      }
-
-      .space-info {
-        width: 100%;
-      }
-
-      .nav-menu {
-        display: none;
-      }
-    }
-  </style>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="./assets/css/output.css">
 </head>
-<body>
 
-  <!-- 1. NAVBAR -->
-  <header class="container">
-    <nav class="navbar">
-      <a href="Beranda.html" class="brand-logo">
-        <span class="logo-main">NUGAS</span>
-        <span class="logo-sub">SPACE</span>
-      </a>
-      <ul class="nav-menu">
-        <li><a href="Beranda.html" class="active">Home</a></li>
-        <li><a href="Fasilitas.html">Our Space</a></li>
-        <li><a href="#poin">Tukar Poin</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-      <a href="login.html" class="btn-red"><i class="fa-solid fa-arrow-right-to-bracket"></i> Join Us</a>
-    </nav>
-  </header>
+<body class="bg-white font-['Poppins'] text-slate-800">
 
-  <main>
-    <!-- 2. HERO SECTION DENGAN FLOATING SEARCH BAR -->
-    <section class="hero container" id="home">
-      <div class="hero-grid">
-        <div class="hero-text">
-          <h1>Ideal Untuk<br><span>Mahasiswa.</span></h1>
-          <p>Temukan ketenangan dan kenyamanan belajar dengan fasilitas lengkap untuk dukung tugas kuliahmu.</p>
-        </div>
-        <div class="hero-img-box">
-          <img src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=700&q=80" alt="Suasana Nugas Space">
-        </div>
-      </div>
+    <!-- NAVBAR -->
+    <header class="mx-auto w-[90%] max-w-6xl">
+        <nav class="flex items-center justify-between py-6">
 
-      <!-- Floating Search Card -->
-      <div class="floating-search-wrapper">
-        <div class="search-card">
-          <div class="search-input-group">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Cari cabang atau jenis ruangan nugas terdekat...">
-          </div>
-          <button type="button" class="btn-red" onclick="window.location.href='Fasilitas.html'">Cari Ruang</button>
-        </div>
-        <div class="search-note">
-          <i class="fa-solid fa-location-dot" style="color: var(--primary-red);"></i> Tersedia di Surabaya, Malang, dan Yogyakarta
-        </div>
-      </div>
-    </section>
+            <a href="Beranda.html" class="flex flex-col leading-none">
+                <span class="text-2xl font-extrabold text-slate-900">NUGAS</span>
+                <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-600">SPACE</span>
+            </a>
 
-    <!-- 3. JUST BRILLIANT WORKSPACE (8 FEATURES GRID) -->
-    <section class="container">
-      <div class="section-title">
-        <h2>Just Brilliant <span>Workspace</span></h2>
-        <p>Dirancang khusus dengan standar kenyamanan dan fokus tertinggi untuk kebutuhan mahasiswa</p>
-      </div>
+            <ul class="hidden items-center gap-8 text-sm font-medium text-slate-500 md:flex">
+                <li>
+                    <a href="Beranda.html" class="font-semibold text-red-600">Home</a>
+                </li>
+                <li>
+                    <a href="Fasilitas.html" class="transition hover:text-red-600">Our Space</a>
+                </li>
+                <li>
+                    <a href="#poin" class="transition hover:text-red-600">Tukar Poin</a>
+                </li>
+                <li>
+                    <a href="#faq" class="transition hover:text-red-600">FAQ</a>
+                </li>
+            </ul>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-regular fa-clock"></i></div>
-          <h4>08.00 - 23.00</h4>
-          <p>Buka hingga larut malam untuk menemani deadline tugasmu.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
-          <h4>High Speed Wi-Fi</h4>
-          <p>Koneksi stabil dan cepat tanpa hambatan saat render & streaming.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-plug"></i></div>
-          <h4>Plug per Meja</h4>
-          <p>Stop kontak personal tersedia di setiap bangku dan meja belajar.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-mug-hot"></i></div>
-          <h4>Free Flow</h4>
-          <p>Gratis refill air mineral, teh, dan kopi sepuasnya tanpa batas.</p>
-        </div>
-        <div class="feature-card">
-          <span class="tag-badge">OUTDOOR</span>
-          <div class="feature-icon"><i class="fa-solid fa-smoking"></i></div>
-          <h4>Smoking Room</h4>
-          <p>Area outdoor terpisah untuk bersantai tanpa mengganggu yang lain.</p>
-        </div>
-        <div class="feature-card">
-          <span class="tag-badge">FREE</span>
-          <div class="feature-icon"><i class="fa-solid fa-square-parking"></i></div>
-          <h4>Free Parkir</h4>
-          <p>Area parkir motor dan mobil luas, aman, dan tanpa biaya target.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-mosque"></i></div>
-          <h4>Musholla</h4>
-          <p>Tempat ibadah bersih, ber-AC, dan nyaman di dalam gedung.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fa-regular fa-snowflake"></i></div>
-          <h4>Full AC</h4>
-          <p>Suhu ruangan yang selalu sejuk agar tetap fokus dan segar.</p>
-        </div>
-      </div>
-    </section>
+            <a href="login.html"
+               class="rounded-md bg-red-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700">
+                <i class="fa-solid fa-arrow-right-to-bracket mr-2"></i>
+                Join Us
+            </a>
 
-    <!-- 4. DARK BANNER (GOOD AMBIENCE & STATS) -->
-    <section class="container">
-      <div class="ambience-banner">
-        <img class="ambience-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1100&q=80" alt="Diskusi Belajar">
-        <div class="stats-row">
-          <div class="stat-lead">
-            <h3><i class="fa-solid fa-circle-check" style="color:var(--primary-red); font-size: 1rem;"></i> Good Ambience</h3>
-            <p>Pencahayaan optimal dan suasana tenang untuk produktivitas maksimal</p>
-          </div>
-          <div class="stat-box">
-            <h3>100+</h3>
-            <p>Kapasitas Kursi Belajar</p>
-          </div>
-          <div class="stat-box">
-            <h3>200+</h3>
-            <p>Mahasiswa Setiap Hari</p>
-          </div>
-          <div class="banner-nav-btn">
-            <button title="Previous"><i class="fa-solid fa-chevron-left"></i></button>
-            <button title="Next"><i class="fa-solid fa-chevron-right"></i></button>
-          </div>
-        </div>
-      </div>
-    </section>
+        </nav>
+    </header>
 
-    <!-- 5. OUR SPACE -->
-    <section class="container" id="space">
-      <div class="section-title">
-        <h2>Our <span>Space</span></h2>
-        <p>Pilih tipe area sesuai gaya belajar dan kebutuhan kelompokmu</p>
-      </div>
 
-      <div class="space-grid">
-        <div class="space-card">
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=500&q=80" alt="Individual Desk">
-          <div class="space-info">
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="relative mx-auto w-[90%] max-w-6xl pb-16 pt-6">
+
+            <div class="grid items-center gap-10 md:grid-cols-2">
+
+                <div>
+                    <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
+                        Ideal Untuk
+                        <br>
+                        <span class="text-red-600">Mahasiswa.</span>
+                    </h1>
+
+                    <p class="mt-5 max-w-md text-sm leading-relaxed text-slate-500">
+                        Temukan ketenangan dan kenyamanan belajar dengan fasilitas lengkap untuk dukung tugas kuliahmu.
+                    </p>
+                </div>
+
+                <div class="h-64 overflow-hidden rounded-xl shadow-xl md:h-80">
+                    <img
+                        src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=700&q=80"
+                        alt="Suasana Nugas Space"
+                        class="h-full w-full object-cover"
+                    >
+                </div>
+
+            </div>
+
+            <!-- SEARCH BAR -->
+            <div class="mt-7 w-full">
+
+                <div class="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-3 shadow-xl sm:flex-row sm:items-center ">
+
+                    <div class="flex flex-1 items-center gap-3 px-2">
+                        <i class="fa-solid fa-magnifying-glass text-red-600"></i>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Cari cabang atau jenis ruangan nugas terdekat..."
+                            class="w-full border-none text-sm outline-none"
+                        >
+                    </div>
+
+                    <a href="Fasilitas.html"
+                       class="rounded-md bg-red-600 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-red-700">
+                        Cari Ruang
+                    </a>
+
+                </div>
+
+                <p class="mt-3 text-xs text-slate-400">
+                    <i class="fa-solid fa-location-dot px-2 mr-0 text-red-600"></i>
+                    Tersedia di Surabaya
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+        <section class="mx-auto w-[90%] max-w-6xl">
+
+            <div class="mb-9 text-center">
+                <h2 class="text-2xl font-bold">
+                    Just Brilliant <span class="text-red-600">Workspace</span>
+                </h2>
+
+                <p class="mt-2 text-sm text-slate-500">
+                    Dirancang khusus dengan standar kenyamanan dan fokus tertinggi untuk kebutuhan mahasiswa
+                </p>
+            </div>
+
+            <div class="mb-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+                <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fa-regular fa-clock mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">08.00 - 23.00</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Buka hingga larut malam untuk menemani deadline tugasmu.
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fa-solid fa-bolt mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">High Speed Wi-Fi</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Koneksi stabil dan cepat tanpa hambatan saat render dan streaming.
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fa-solid fa-plug mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">Plug per Meja</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Stop kontak personal tersedia di setiap bangku dan meja belajar.
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fa-solid fa-mug-hot mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">Free Flow</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Gratis refill air mineral, teh, dan kopi sepuasnya.
+                    </p>
+                </div>
+
+                <div class="relative rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <span class="absolute right-4 top-4 rounded bg-slate-900 px-2 py-1 text-[9px] font-bold text-white">OUTDOOR</span>
+                    <i class="fa-solid fa-smoking mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">Smoking Room</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Area outdoor terpisah untuk bersantai tanpa mengganggu yang lain.
+                    </p>
+                </div>
+
+                <div class="relative rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <span class="absolute right-4 top-4 rounded bg-slate-900 px-2 py-1 text-[9px] font-bold text-white">FREE</span>
+                    <i class="fa-solid fa-square-parking mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">Free Parkir</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Area parkir motor dan mobil luas, aman, dan tanpa biaya.
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fa-solid fa-mosque mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">Musholla</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Tempat ibadah bersih, ber-AC, dan nyaman di dalam gedung.
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fa-regular fa-snowflake mb-4 text-2xl text-red-600"></i>
+                    <h3 class="font-bold">Full AC</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Suhu ruangan yang selalu sejuk agar tetap fokus dan segar.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- AMBIENCE BANNER -->
+        <section class="mx-auto mb-16 w-[90%] max-w-6xl overflow-hidden rounded-xl bg-slate-900 text-white shadow-xl">
+
+            <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1100&q=80"
+                alt="Diskusi Belajar"
+                class="h-64 w-full object-cover"
+            >
+
+            <div class="grid gap-6 p-7 md:grid-cols-3 md:items-center md:px-10">
+
+                <div>
+                    <h3 class="text-xl font-bold">
+                        <i class="fa-solid fa-circle-check mr-2 text-red-500"></i>
+                        Good Ambience
+                    </h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-400">
+                        Pencahayaan optimal dan suasana tenang untuk produktivitas maksimal.
+                    </p>
+                </div>
+
+                <div class="border-t border-white/10 pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+                    <h3 class="text-3xl font-bold">100+</h3>
+                    <p class="mt-1 text-xs text-slate-400">Kapasitas Kursi Belajar</p>
+                </div>
+
+                <div class="border-t border-white/10 pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+                    <h3 class="text-3xl font-bold">200+</h3>
+                    <p class="mt-1 text-xs text-slate-400">Mahasiswa Setiap Hari</p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- OUR SPACE -->
+        <section id="space" class="mx-auto w-[90%] max-w-6xl">
+
+            <div class="mb-9 text-center">
+                <h2 class="text-2xl font-bold">
+                    Our <span class="text-red-600">Space</span>
+                </h2>
+                <p class="mt-2 text-sm text-slate-500">
+                    Pilih tipe area sesuai gaya belajar dan kebutuhan kelompokmu
+                </p>
+            </div>
+
+            <div class="mb-16 grid gap-6 md:grid-cols-2">
+
+                <!-- Individual Desk -->
+                <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-lg sm:flex">
+                    <img
+                        src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=500&q=80"
+                        alt="Individual Desk"
+                        class="h-48 w-full object-cover sm:h-auto sm:w-2/5"
+                    >
+
+                    <div class="flex flex-1 flex-col justify-between p-5">
+                        <div>
+                            <h3 class="font-bold">Individual Desk</h3>
+                            <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                                Meja kubikel tenang untuk skripsi atau ujian akhir.
+                            </p>
+                        </div>
+
+                        <div class="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                            <span class="text-sm font-bold text-red-600">IDR 15.000 / jam</span>
+                            <a href="Fasilitas.html" class="flex h-8 w-8 items-center justify-center rounded bg-red-600 text-white hover:bg-red-700">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group Desk -->
+                <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-lg sm:flex">
+                    <img
+                        src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=500&q=80"
+                        alt="Group Desk"
+                        class="h-48 w-full object-cover sm:h-auto sm:w-2/5"
+                    >
+
+                    <div class="flex flex-1 flex-col justify-between p-5">
+                        <div>
+                            <h3 class="font-bold">Group Desk</h3>
+                            <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                                Meja panjang fleksibel untuk kelompok tugas 4-6 orang.
+                            </p>
+                        </div>
+
+                        <div class="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                            <span class="text-sm font-bold text-red-600">IDR 40.000 / jam</span>
+                            <a href="Fasilitas.html" class="flex h-8 w-8 items-center justify-center rounded bg-red-600 text-white hover:bg-red-700">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Silent Room -->
+                <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-lg sm:flex">
+                    <img
+                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80"
+                        alt="Silent Room"
+                        class="h-48 w-full object-cover sm:h-auto sm:w-2/5"
+                    >
+
+                    <div class="flex flex-1 flex-col justify-between p-5">
+                        <div>
+                            <h3 class="font-bold">Silent Room</h3>
+                            <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                                Zona hening tanpa percakapan untuk konsentrasi tinggi.
+                            </p>
+                        </div>
+
+                        <div class="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                            <span class="text-sm font-bold text-red-600">IDR 20.000 / jam</span>
+                            <a href="Fasilitas.html" class="flex h-8 w-8 items-center justify-center rounded bg-red-600 text-white hover:bg-red-700">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conference Room -->
+                <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-lg sm:flex">
+                    <img
+                        src="https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&w=500&q=80"
+                        alt="Conference Room"
+                        class="h-48 w-full object-cover sm:h-auto sm:w-2/5"
+                    >
+
+                    <div class="flex flex-1 flex-col justify-between p-5">
+                        <div>
+                            <h3 class="font-bold">Conference Room</h3>
+                            <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                                Ruang rapat tertutup dengan TV projector dan whiteboard.
+                            </p>
+                        </div>
+
+                        <div class="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                            <span class="text-sm font-bold text-red-600">IDR 75.000 / jam</span>
+                            <a href="Fasilitas.html" class="flex h-8 w-8 items-center justify-center rounded bg-red-600 text-white hover:bg-red-700">
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- TUKAR POIN -->
+        <section id="poin" class="mx-auto mb-16 grid w-[90%] max-w-6xl items-center gap-10 md:grid-cols-2">
+
             <div>
-              <h4>Individual Desk</h4>
-              <p>Meja kubikel tenang untuk skripsi atau ujian akhir.</p>
-            </div>
-            <div class="space-meta">
-              <span class="space-price">IDR 15.000 / jam</span>
-              <a href="Fasilitas.html" class="btn-arrow"><i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
+                <h2 class="text-3xl font-extrabold leading-tight">
+                    Nugas Makin Hemat dengan <span class="text-red-600">Poin!</span>
+                </h2>
 
-        <div class="space-card">
-          <img src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=500&q=80" alt="Group Desk">
-          <div class="space-info">
+                <p class="mt-4 text-sm leading-relaxed text-slate-500">
+                    Kumpulkan reward poin dari setiap kunjungan dan tukarkan dengan diskon sewa meja berikutnya.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+
+                <div class="rounded-xl border border-slate-200 border-l-4 border-l-red-600 bg-white p-6 shadow-sm">
+                    <p class="mb-2 text-xs font-bold uppercase tracking-wide text-slate-400">
+                        <i class="fa-solid fa-coins mr-2 text-red-600"></i>
+                        Level 1 - Cashback
+                    </p>
+                    <h3 class="font-bold">Kumpulkan Poin</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Dapatkan 10% cashback poin secara instan pada setiap pemesanan meja dan ruang kerja.
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-200 border-l-4 border-l-amber-500 bg-white p-6 shadow-sm">
+                    <p class="mb-2 text-xs font-bold uppercase tracking-wide text-slate-400">
+                        <i class="fa-solid fa-gift mr-2 text-amber-500"></i>
+                        Rewards - Redeem
+                    </p>
+                    <h3 class="font-bold">Tukar Poin</h3>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-500">
+                        Gunakan poin terkumpul untuk memotong tagihan booking jam berikutnya atau snack gratis.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- HAPPY HOUR -->
+        <section class="mx-auto mb-16 flex w-[90%] max-w-6xl flex-col justify-between gap-5 rounded-xl bg-slate-900 p-7 text-white shadow-xl sm:flex-row sm:items-center sm:px-10">
+
             <div>
-              <h4>Group Desk</h4>
-              <p>Meja panjang fleksibel untuk kelompok tugas 4-6 orang.</p>
+                <h3 class="font-extrabold tracking-wider">
+                    SPECIAL HAPPY HOUR
+                    <span class="ml-2 rounded bg-red-600 px-2 py-1 text-[10px]">HEMAT 40%</span>
+                </h3>
+
+                <p class="mt-2 text-xs text-slate-400">
+                    Senin - Kamis | 08.00 - 12.00 WIB
+                </p>
             </div>
-            <div class="space-meta">
-              <span class="space-price">IDR 40.000 / jam</span>
-              <a href="Fasilitas.html" class="btn-arrow"><i class="fa-solid fa-arrow-right"></i></a>
+
+            <div class="sm:text-right">
+                <p class="text-xs text-slate-400">Mulai dari</p>
+                <h3 class="text-xl font-bold text-red-400">IDR 10.000 / 2 Jam</h3>
             </div>
-          </div>
-        </div>
 
-        <div class="space-card">
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80" alt="Silent Room">
-          <div class="space-info">
-            <div>
-              <h4>Silent Room</h4>
-              <p>Zona hening tanpa percakapan untuk konsentrasi tinggi.</p>
+        </section>
+
+
+        <!-- FAQ -->
+        <section id="faq" class="mx-auto w-[90%] max-w-6xl">
+
+            <div class="mb-9 text-center">
+                <h2 class="text-2xl font-bold">
+                    Frequently <span class="text-red-600">Asked Question</span>
+                </h2>
             </div>
-            <div class="space-meta">
-              <span class="space-price">IDR 20.000 / jam</span>
-              <a href="Fasilitas.html" class="btn-arrow"><i class="fa-solid fa-arrow-right"></i></a>
+
+            <div class="mb-16 grid gap-4 md:grid-cols-2">
+
+                <!-- FAQ 1 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Apakah perlu reservasi sebelumnya?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Bisa langsung datang (walk-in), namun kami menyarankan reservasi terlebih dahulu saat jam sibuk atau weekend agar meja terjamin.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Berapa minimal durasi sewa ruangan?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Minimal sewa adalah 1 jam untuk individual desk dan meeting room.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Apakah ada colokan di setiap meja?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Ya, setiap kursi dilengkapi dengan stop kontak personal 2 lubang yang aman.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Apakah ada promo bulanan untuk mahasiswa?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Ada, kami menyediakan paket Monthly Membership khusus mahasiswa dengan diskon hingga 30%.
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Bolehkah membawa makanan dari luar?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Makanan ringan diperbolehkan di area santai, namun makanan berat disarankan di area outdoor smoking room.
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Metode pembayaran apa saja yang diterima?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Kami menerima QRIS, transfer bank, e-wallet (GoPay, OVO, ShopeePay), dan kartu debit atau kredit.
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Apakah tersedia ruang private meeting?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Ya, Conference Room kami berkapasitas 8-10 orang lengkap dengan monitor presentasi dan papan tulis.
+                    </div>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="faq-item overflow-hidden rounded-lg border border-slate-200 bg-white">
+                    <button type="button" class="faq-question flex w-full items-center justify-between p-4 text-left text-sm font-medium">
+                        Apakah parkir kendaraan berbayar?
+                        <span class="faq-icon text-lg font-bold text-red-600">+</span>
+                    </button>
+                    <div class="faq-answer hidden border-t border-slate-100 px-4 py-4 text-xs leading-relaxed text-slate-500">
+                        Tidak, fasilitas parkir motor dan mobil gratis untuk seluruh pengunjung.
+                    </div>
+                </div>
+
             </div>
-          </div>
-        </div>
+        </section>
 
-        <div class="space-card">
-          <img src="https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&w=500&q=80" alt="Conference Room">
-          <div class="space-info">
-            <div>
-              <h4>Conference Room</h4>
-              <p>Ruang rapat tertutup dengan TV projector & whiteboard.</p>
+
+        <!-- LOCATION -->
+        <section id="lokasi" class="mx-auto mb-16 grid w-[90%] max-w-6xl overflow-hidden rounded-xl border border-slate-200 bg-white md:grid-cols-2">
+
+            <div class="flex flex-col justify-between p-7 md:p-10">
+
+                <div>
+                    <h2 class="text-2xl font-extrabold">
+                        Come On!
+                        <span class="text-red-600">Work In Here!</span>
+                    </h2>
+
+                    <p class="mt-3 text-xs leading-relaxed text-slate-500">
+                        Kunjungi cabang terdekat dan rasakan suasana belajar yang tenang, nyaman, dan produktif.
+                    </p>
+
+                    <div class="mt-6 h-36 overflow-hidden rounded-lg border border-slate-200">
+                        <iframe
+                            src="https://www.google.com/maps?q=Surabaya,East%20Java&output=embed"
+                            class="h-full w-full border-0"
+                            loading="lazy"
+                            title="Lokasi NUGAS Space Surabaya">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
+                    <div>
+                        <h3 class="text-sm font-bold">Surabaya Center</h3>
+                        <p class="mt-1 text-xs text-slate-500">Buka 08.00 - 23.00 WIB</p>
+                    </div>
+
+                    <a
+                        href="https://www.google.com/maps/search/nugas+space+surabaya/@-7.2807588,112.7841528,15z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MTEwNC4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="rounded-md bg-red-600 px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-red-700">
+                        Buka Rute
+                    </a>
+                </div>
+
             </div>
-            <div class="space-meta">
-              <span class="space-price">IDR 75.000 / jam</span>
-              <a href="Fasilitas.html" class="btn-arrow"><i class="fa-solid fa-arrow-right"></i></a>
+
+            <div class="min-h-64">
+                <img
+                    src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=600&q=80"
+                    alt="Interior Nugas Space"
+                    class="h-full w-full object-cover"
+                >
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 6. NUGAS MAKIN HEMAT DENGAN POIN -->
-    <section class="container" id="poin">
-      <div class="poin-section">
-        <div class="poin-left">
-          <h2>Nugas Makin Hemat dengan <span>Poin!</span></h2>
-          <p>Kumpulkan reward poin dari setiap kunjungan dan tukarkan dengan diskon sewa meja berikutnya.</p>
-        </div>
-        <div class="poin-right">
-          <div class="poin-card card-red">
-            <div class="poin-card-header"><i class="fa-solid fa-coins" style="color:var(--primary-red)"></i> LEVEL 1 • CASHBACK</div>
-            <h4>Kumpulkan Poin</h4>
-            <p>Dapatkan 10% cashback poin secara instan pada setiap pemesanan meja dan ruang kerja.</p>
-          </div>
-          <div class="poin-card card-orange">
-            <div class="poin-card-header"><i class="fa-solid fa-gift" style="color:#f59e0b"></i> REWARDS • REDEEM</div>
-            <h4>Tukar Poin</h4>
-            <p>Gunakan poin terkumpul untuk memotong tagihan booking jam berikutnya atau snack gratis.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- 7. HAPPY HOUR BANNER -->
-    <section class="container">
-      <div class="happy-hour">
-        <div>
-          <div class="hh-title">SPECIAL HAPPY HOUR <span class="hh-badge">HEMAT 40%</span></div>
-          <div class="hh-time">Senin - Kamis | 08.00 - 12.00 WIB</div>
-        </div>
-        <div class="hh-price">
-          <small>Mulai dari</small><br>
-          <strong>IDR 10.000 / 2 Jam</strong>
-        </div>
-      </div>
-    </section>
+    </main>
 
-    <!-- 8. FREQUENTLY ASKED QUESTIONS (FAQ DENGAN INTERAKSI ACCORDION) -->
-    <section class="container" id="faq">
-      <div class="section-title">
-        <h2>Frequently <span>Asked Question</span></h2>
-      </div>
-      <div class="faq-grid">
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Apakah perlu reservasi sebelumnya?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Bisa langsung datang (walk-in), namun kami menyarankan reservasi terlebih dahulu saat jam sibuk/weekend agar meja terjamin.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Berapa minimal durasi sewa ruangan?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Minimal sewa adalah 1 jam untuk individual desk dan meeting room.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Apakah ada colokan di setiap meja?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Ya, setiap kursi dilengkapi dengan stop kontak personal 2 lubang yang aman.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Apakah ada promo bulanan untuk mahasiswa?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Ada, kami menyediakan paket Monthly Membership khusus mahasiswa dengan diskon s/d 30%.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Bolehkah membawa makanan dari luar?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Makanan ringan (snack) diperbolehkan di area santai, namun makanan berat disarankan di area outdoor smoking room.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Metode pembayaran apa saja yang diterima?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Kami menerima QRIS, transfer bank, e-wallet (GoPay, OVO, ShopeePay), dan kartu debit/kredit.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Apakah tersedia ruang private meeting?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Ya, Conference Room kami berkapasitas 8-10 orang lengkap dengan monitor presentasi dan papan tulis.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-          <div class="faq-header"><span>Apakah parkir kendaraan berbayar?</span> <span class="faq-icon">+</span></div>
-          <div class="faq-body">Tidak, fasilitas parkir motor dan mobil gratis untuk seluruh pengunjung yang nugas.</div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 9. COME ON! WORK IN HERE (LOKASI & CABANG) -->
-    <section class="container" id="lokasi">
-      <div class="visit-card">
-        <div class="visit-left">
-          <div>
-            <h3>Come On! <span>Work In Here!</span></h3>
-            <p>Kunjungi cabang terdekat dan rasakan suasana belajar yang tenang, nyaman, dan produktif.</p>
-            
-            <div class="map-preview">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126646.20963124578!2d112.67137953284534!3d-7.275441712217144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbf8381ac015%3A0x3027a76e352be40!2sSurabaya%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
-                loading="lazy">
-              </iframe>
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 py-12 text-slate-400">
+
+        <div class="mx-auto w-[90%] max-w-6xl">
+
+            <div class="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
+
+                <div>
+                    <div class="mb-4 flex flex-col leading-none">
+                        <span class="text-2xl font-extrabold text-white">NUGAS</span>
+                        <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-400">SPACE</span>
+                    </div>
+
+                    <p class="text-xs leading-relaxed">
+                        Platform study space dan collaborative hub bagi mahasiswa, pelajar, dan pegiat karya kreatif.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="mb-4 text-sm font-bold text-white">Navigasi</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li><a href="Beranda.html" class="hover:text-white">Home</a></li>
+                        <li><a href="Fasilitas.html" class="hover:text-white">Our Space</a></li>
+                        <li><a href="#poin" class="hover:text-white">Tukar Poin</a></li>
+                        <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="mb-4 text-sm font-bold text-white">Fasilitas</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li><a href="Fasilitas.html" class="hover:text-white">High Speed Wi-Fi</a></li>
+                        <li><a href="Fasilitas.html" class="hover:text-white">Free Flow Drinks</a></li>
+                        <li><a href="Fasilitas.html" class="hover:text-white">Musholla & AC</a></li>
+                        <li><a href="Fasilitas.html" class="hover:text-white">Meeting Room</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="mb-4 text-sm font-bold text-white">Kontak</h3>
+                    <ul class="space-y-3 text-xs">
+                        <li><i class="fa-regular fa-envelope mr-2"></i>support@nugas.space</li>
+                        <li><i class="fa-solid fa-phone mr-2"></i>+62 812-3456-7890</li>
+                        <li><i class="fa-solid fa-location-dot mr-2"></i>Surabaya, Jawa Timur</li>
+                    </ul>
+                </div>
+
             </div>
-          </div>
 
-          <div class="visit-meta">
-            <div>
-              <strong>Surabaya Center</strong><br>
-              <small style="color:var(--text-muted)">Buka 08.00 - 23.00 WIB</small>
+            <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-slate-500">
+                &copy; 2026 NUGAS Space. All rights reserved.
             </div>
-            <a href="https://maps.google.com" target="_blank" class="btn-red">Buka Rute</a>
-          </div>
-        </div>
-        <div class="visit-right">
-          <img src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?auto=format&fit=crop&w=600&q=80" alt="Interior Nugas">
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <!-- 10. DARK NAVY FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="brand-logo" style="margin-bottom: 0.8rem;">
-            <span class="logo-main" style="color: #fff;">NUGAS</span>
-            <span class="logo-sub" style="color: #f87171;">SPACE</span>
-          </div>
-          <p>Platform study space dan collaborative hub bagi mahasiswa, pelajar, dan pegiat karya kreatif.</p>
         </div>
-        <div class="footer-col">
-          <h4>Navigasi</h4>
-          <ul>
-            <li><a href="Beranda.html">Home</a></li>
-            <li><a href="Fasilitas.html">Our Space</a></li>
-            <li><a href="#poin">Tukar Poin</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Fasilitas</h4>
-          <ul>
-            <li><a href="Fasilitas.html">High Speed Wi-Fi</a></li>
-            <li><a href="Fasilitas.html">Free Flow Drinks</a></li>
-            <li><a href="Fasilitas.html">Musholla & AC</a></li>
-            <li><a href="Fasilitas.html">Meeting Room</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Kontak</h4>
-          <ul>
-            <li><i class="fa-regular fa-envelope" style="margin-right: 6px;"></i> support@nugas.space</li>
-            <li><i class="fa-solid fa-phone" style="margin-right: 6px;"></i> +62 812-3456-7890</li>
-            <li><i class="fa-solid fa-location-dot" style="margin-right: 6px;"></i> Surabaya, Jawa Timur</li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; 2026 NUGAS Space. All rights reserved.
-      </div>
-    </div>
-  </footer>
 
-  <script>
-    // Interaksi FAQ Accordion Buka / Tutup
-    function toggleFaq(el) {
-      el.classList.toggle('active');
-    }
-  </script>
+    </footer>
+
+
+    <!-- JAVASCRIPT: FAQ ACCORDION -->
+    <script>
+        // Ambil semua elemen FAQ
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        // Tambahkan event click pada setiap FAQ
+        faqItems.forEach(function(item) {
+
+            const tombol = item.querySelector(".faq-question");
+            const jawaban = item.querySelector(".faq-answer");
+            const ikon = item.querySelector(".faq-icon");
+
+            tombol.addEventListener("click", function() {
+
+                // Cek apakah FAQ sedang terbuka
+                const sedangTerbuka = !jawaban.classList.contains("hidden");
+
+                // Tutup semua FAQ
+                faqItems.forEach(function(faq) {
+                    faq.querySelector(".faq-answer").classList.add("hidden");
+                    faq.querySelector(".faq-icon").textContent = "+";
+                });
+
+                // Buka FAQ yang diklik jika sebelumnya tertutup
+                if (!sedangTerbuka) {
+                    jawaban.classList.remove("hidden");
+                    ikon.textContent = "−";
+                }
+
+            });
+
+        });
+    </script>
+
 </body>
 </html>
