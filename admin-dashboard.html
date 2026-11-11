@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard (CRUD Meja & Ruangan) - NUGAS Space</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS hasil compile -->
+    <link rel="stylesheet" href="./assets/css/output.css">
+</head>
+
+<body class="bg-slate-50 font-['Poppins'] text-slate-800 antialiased">
+
+    <div class="flex min-h-screen">
+
+        <!-- ========================================================= -->
+        <!-- SIDEBAR KIRI (Terinspirasi dari referensi UXETO + Tema NUGAS) -->
+        <!-- ========================================================= -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col justify-between border-r border-slate-200 bg-white px-5 py-6 transition-transform duration-200 lg:static lg:translate-x-0">
+
+            <div>
+                <!-- Brand Logo -->
+                <div class="mb-8 flex items-center justify-between px-2">
+                    <a href="Beranda.html" class="flex flex-col leading-none">
+                        <span class="text-2xl font-extrabold text-slate-900">NUGAS</span>
+                        <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-600">ADMIN PANEL</span>
+                    </a>
+                    <button type="button" id="closeSidebarBtn" class="text-slate-400 hover:text-slate-700 lg:hidden">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Menu Grup: MANAGE -->
+                <div class="mb-6">
+                    <p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                        Manage
+                    </p>
+                    <ul class="space-y-1 text-xs font-medium">
+                        <li>
+                            <a href="#top" class="flex items-center gap-3 rounded-lg bg-red-50 px-3 py-2.5 font-semibold text-red-600">
+                                <i class="fa-solid fa-table-cells-large w-4 text-center"></i>
+                                <span>Dashboard & CRUD</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#crudSection" class="flex items-center justify-between rounded-lg px-3 py-2.5 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-chair w-4 text-center text-slate-400"></i>
+                                    <span>Meja & Ruangan</span>
+                                </div>
+                                <span id="sidebarTotalBadge" class="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-700">0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Fasilitas.html" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">
+                                <i class="fa-regular fa-map w-4 text-center text-slate-400"></i>
+                                <span>Lihat Katalog / Denah</span>
+                            </a>
+                        </li>
+                        <li>
+                            <button type="button" onclick="openAddModal()" class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">
+                                <i class="fa-solid fa-circle-plus w-4 text-center text-red-600"></i>
+                                <span>Tambah Ruangan Baru</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Filter Cepat Kategori dari Sidebar -->
+                <div class="mb-6">
+                    <p class="mb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                        Kategori Ruang
+                    </p>
+                    <ul class="space-y-1 border-l-2 border-slate-100 ml-4 pl-3 text-xs text-slate-500">
+                        <li>
+                            <button type="button" onclick="setCategoryFilter('all')" class=" py-1 hover:text-red-600 font-medium">Semua Unit</button>
+                        </li>
+                        <li>
+                            <button type="button" onclick="setCategoryFilter('Individual Desk')" class="py-1 hover:text-red-600">Individual Desk</button>
+                        </li>
+                        <li>
+                            <button type="button" onclick="setCategoryFilter('Group Desk')" class="py-1 hover:text-red-600">Group Desk</button>
+                        </li>
+                        <li>
+                            <button type="button" onclick="setCategoryFilter('Silent Room')" class="py-1 hover:text-red-600">Silent Room</button>
+                        </li>
+                        <li>
+                            <button type="button" onclick="setCategoryFilter('Conference Room')" class="py-1 hover:text-red-600">Conference Room</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Menu Grup: PREFERENCES -->
+                <div>
+                    <p class="mb-3 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                        Preferences
+                    </p>
+                    <ul class="space-y-1 text-xs font-medium text-slate-600">
+                        <li>
+                            <button type="button" onclick="resetDefaultData()" class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition hover:bg-slate-100 hover:text-slate-900">
+                                <i class="fa-solid fa-rotate-left w-4 text-center text-slate-400"></i>
+                                <span>Reset Data Default</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a href="Beranda.html" class="flex items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-slate-100 hover:text-slate-900">
+                                <i class="fa-solid fa-globe w-4 text-center text-slate-400"></i>
+                                <span>Ke Halaman Utama</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tombol Logout di Bawah Sidebar -->
+            <div class="border-t border-slate-100 pt-4">
+                <button
+                    type="button"
+                    id="logoutBtn"
+                    class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold text-red-600 transition hover:bg-red-50"
+                >
+                    <i class="fa-solid fa-arrow-right-from-bracket w-4 text-center"></i>
+                    <span>Logout Staff</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- ========================================================= -->
+        <!-- KONTEN UTAMA DASHBOARD                                    -->
+        <!-- ========================================================= -->
+        <div id="top" class="flex flex-1 flex-col overflow-x-hidden">
+
+            <!-- TOPBAR -->
+            <header class="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
+                <div class="flex items-center gap-4">
+                    <button type="button" id="openSidebarBtn" class="rounded-lg border border-slate-200 p-2 text-slate-600 hover:bg-slate-50 lg:hidden">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-lg font-extrabold text-slate-900 md:text-xl">
+                            Manajemen Meja & Ruangan
+                        </h1>
+                        <p class="text-[11px] text-slate-400">
+                            Kelola data inventaris meja, kapasitas kursi, tarif per jam, serta status ketersediaan secara langsung.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Profil Admin & Tombol Tambah Cepat -->
+                <div class="flex items-center gap-4">
+                    <button
+                        type="button"
+                        onclick="openAddModal()"
+                        class="hidden items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-red-600/20 transition hover:bg-red-700 sm:inline-flex"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Tambah Meja / Ruang</span>
+                    </button>
+
+                    <div class="flex items-center gap-3 border-l border-slate-200 pl-4">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-xs font-bold text-white">
+                            AD
+                        </div>
+                        <div class="hidden text-left sm:block">
+                            <p id="adminEmailDisplay" class="text-xs font-bold text-slate-800">staff@nugas.space</p>
+                            <p class="text-[10px] font-semibold text-red-600">Administrator</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ISI HALAMAN -->
+            <main class="mx-auto w-full max-w-7xl flex-1 p-6">
+
+                <!-- 1. EMPAT KARTU ANALITIK ATAS (Mirip Referensi Gambar UXETO) -->
+                <section class="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+                    <!-- Card 1: Total Unit Meja & Ruangan -->
+                    <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-white">
+                                    <i class="fa-solid fa-layer-group text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-medium text-slate-400">Total Meja & Ruang</p>
+                                    <p id="metricTotalUnits" class="text-lg font-extrabold text-slate-900">0 Unit</p>
+                                </div>
+                            </div>
+                            <span class="rounded bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-600">Aktif</span>
+                        </div>
+                        <div class="mt-4 flex items-end justify-between border-t border-slate-100 pt-3">
+                            <div>
+                                <span class="text-[11px] text-slate-400">Total Kapasitas Kursi</span>
+                                <p id="metricTotalCapacity" class="text-sm font-extrabold text-slate-800">0 Kursi</p>
+                            </div>
+                            <div class="flex items-end gap-1">
+                                <span class="h-3 w-1.5 rounded-full bg-slate-300"></span>
+                                <span class="h-5 w-1.5 rounded-full bg-slate-400"></span>
+                                <span class="h-4 w-1.5 rounded-full bg-slate-300"></span>
+                                <span class="h-7 w-1.5 rounded-full bg-slate-900"></span>
+                                <span class="h-6 w-1.5 rounded-full bg-red-600"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Unit Tersedia -->
+                    <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                                    <i class="fa-solid fa-circle-check text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-medium text-slate-400">Tersedia (Available)</p>
+                                    <p id="metricAvailableUnits" class="text-lg font-extrabold text-slate-900">0 Unit</p>
+                                </div>
+                            </div>
+                            <span id="metricAvailablePct" class="text-sm font-extrabold text-emerald-600">0%</span>
+                        </div>
+                        <div class="mt-4 flex items-end justify-between border-t border-slate-100 pt-3">
+                            <span class="text-[11px] text-slate-400">Siap dipesan mahasiswa</span>
+                            <div class="flex items-end gap-1">
+                                <span class="h-4 w-1.5 rounded-full bg-emerald-200"></span>
+                                <span class="h-6 w-1.5 rounded-full bg-emerald-400"></span>
+                                <span class="h-5 w-1.5 rounded-full bg-emerald-300"></span>
+                                <span class="h-7 w-1.5 rounded-full bg-emerald-600"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Sedang Digunakan / Terisi -->
+                    <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-600">
+                                    <i class="fa-solid fa-user-clock text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-medium text-slate-400">Terisi / Digunakan</p>
+                                    <p id="metricOccupiedUnits" class="text-lg font-extrabold text-slate-900">0 Unit</p>
+                                </div>
+                            </div>
+                            <span id="metricOccupiedPct" class="text-sm font-extrabold text-red-600">0%</span>
+                        </div>
+                        <div class="mt-4 flex items-end justify-between border-t border-slate-100 pt-3">
+                            <span class="text-[11px] text-slate-400">Terkunci dari double booking</span>
+                            <div class="flex items-end gap-1">
+                                <span class="h-3 w-1.5 rounded-full bg-red-200"></span>
+                                <span class="h-7 w-1.5 rounded-full bg-red-600"></span>
+                                <span class="h-5 w-1.5 rounded-full bg-red-400"></span>
+                                <span class="h-6 w-1.5 rounded-full bg-red-500"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Maintenance / Nonaktif -->
+                    <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
+                                    <i class="fa-solid fa-screwdriver-wrench text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-medium text-slate-400">Maintenance / Perbaikan</p>
+                                    <p id="metricMaintenanceUnits" class="text-lg font-extrabold text-slate-900">0 Unit</p>
+                                </div>
+                            </div>
+                            <span id="metricMaintenancePct" class="text-sm font-extrabold text-amber-600">0%</span>
+                        </div>
+                        <div class="mt-4 flex items-end justify-between border-t border-slate-100 pt-3">
+                            <span class="text-[11px] text-slate-400">Sementara ditutup</span>
+                            <div class="flex items-end gap-1">
+                                <span class="h-5 w-1.5 rounded-full bg-amber-300"></span>
+                                <span class="h-3 w-1.5 rounded-full bg-amber-200"></span>
+                                <span class="h-6 w-1.5 rounded-full bg-amber-500"></span>
+                                <span class="h-4 w-1.5 rounded-full bg-amber-400"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- 2. PANEL TENGAH: DISTRIBUSI KATEGORI & PROPORSI STATUS (Mirip Layout Grafik Referensi) -->
+                <section class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
+
+                    <!-- Kolom Kiri (2/3): Ringkasan Kapasitas & Tarif per Kategori Ruang -->
+                    <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-xs lg:col-span-2">
+                        <div class="mb-4 flex items-center justify-between">
+                            <div>
+                                <h2 class="text-sm font-bold text-slate-900">
+                                    Distribusi Kapasitas & Ketersediaan per Kategori
+                                </h2>
+                                <p class="text-xs text-slate-400">
+                                    Pantau jumlah unit dan total kursi berdasarkan tipe area belajar NUGAS Space
+                                </p>
+                            </div>
+                            <span class="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+                                Real-Time Sync
+                            </span>
+                        </div>
+
+                        <div id="categoryBreakdownList" class="space-y-4 pt-2">
+                            <!-- Diisi dinamis oleh JS -->
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan (1/3): Proporsi Ketersediaan & Quick Action -->
+                    <div class="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-sm font-bold text-slate-900">Ringkasan Potensi Tarif</h2>
+                                <i class="fa-solid fa-coins text-red-600"></i>
+                            </div>
+                            <p class="mt-1 text-xs text-slate-400">Total potensi pendapatan sewa maksimal per jam jika seluruh unit terisi:</p>
+                            <p id="metricMaxRevenuePerHour" class="mt-2 text-2xl font-extrabold text-red-600">IDR 0 / jam</p>
+
+                            <!-- Visual Bubble Persentase mirip sudut kanan bawah gambar referensi -->
+                            <div class="my-5 flex items-center justify-center gap-3 py-2">
+                                <div class="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-slate-900 text-white shadow-md">
+                                    <span id="bubbleAvailPct" class="text-lg font-extrabold">0%</span>
+                                    <span class="text-[9px] uppercase tracking-wider text-slate-300">Tersedia</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <div class="flex h-14 w-14 flex-col items-center justify-center rounded-full bg-red-600 text-white shadow">
+                                        <span id="bubbleOccPct" class="text-xs font-extrabold">0%</span>
+                                        <span class="text-[8px]">Terisi</span>
+                                    </div>
+                                    <div class="flex h-12 w-12 flex-col items-center justify-center rounded-full bg-amber-500 text-white shadow">
+                                        <span id="bubbleMaintPct" class="text-[11px] font-extrabold">0%</span>
+                                        <span class="text-[7px]">Maint</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4">
+                            <button
+                                type="button"
+                                onclick="setAllAvailable()"
+                                class="w-full rounded-lg border border-slate-300 bg-slate-50 py-2.5 text-xs font-semibold text-slate-700 transition hover:border-red-600 hover:bg-red-50 hover:text-red-600"
+                            >
+                                <i class="fa-solid fa-check-double mr-1.5"></i> Set Semua Unit "Tersedia"
+                            </button>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- 3. TABEL MANAJEMEN CRUD MEJA & RUANGAN (Mirip Tabel Bawah Gambar Referensi) -->
+                <section id="crudSection" class="rounded-xl border border-slate-200 bg-white shadow-xs">
+
+                    <!-- Header Tabel & Baris Filter/Pencarian -->
+                    <div class="flex flex-col justify-between gap-4 border-b border-slate-100 p-6 lg:flex-row lg:items-center">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900">
+                                Daftar Inventaris Meja & Ruangan (CRUD)
+                            </h2>
+                            <p class="text-xs text-slate-400">
+                                Tambah unit baru, ubah kapasitas kursi, ganti status ketersediaan langsung, atau hapus ruangan.
+                            </p>
+                        </div>
+
+                        <!-- Filter Controls -->
+                        <div class="flex flex-wrap items-center gap-3">
+                            <!-- Search -->
+                            <div class="flex items-center rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 focus-within:border-red-500 focus-within:bg-white">
+                                <i class="fa-solid fa-magnifying-glass mr-2 text-xs text-slate-400"></i>
+                                <input
+                                    type="text"
+                                    id="searchInput"
+                                    placeholder="Cari kode / nama ruang..."
+                                    class="w-40 bg-transparent text-xs text-slate-800 outline-none sm:w-48"
+                                >
+                            </div>
+
+                            <!-- Filter Kategori -->
+                            <select
+                                id="filterCategory"
+                                class="rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-700 outline-none focus:border-red-500 focus:bg-white"
+                            >
+                                <option value="all">Semua Kategori</option>
+                                <option value="Individual Desk">Individual Desk</option>
+                                <option value="Group Desk">Group Desk</option>
+                                <option value="Silent Room">Silent Room</option>
+                                <option value="Conference Room">Conference Room</option>
+                            </select>
+
+                            <!-- Filter Status -->
+                            <select
+                                id="filterStatus"
+                                class="rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-700 outline-none focus:border-red-500 focus:bg-white"
+                            >
+                                <option value="all">Semua Status</option>
+                                <option value="available">Tersedia (Live)</option>
+                                <option value="occupied">Terisi (Occupied)</option>
+                                <option value="maintenance">Maintenance (Disable)</option>
+                            </select>
+
+                            <!-- Tombol Tambah -->
+                            <button
+                                type="button"
+                                onclick="openAddModal()"
+                                class="inline-flex items-center gap-1.5 rounded-lg bg-red-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-red-700"
+                            >
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Tambah Data</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabel Responsif -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-100 bg-slate-50/70 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                                    <th class="py-3.5 pl-6 pr-3">ID / Kode</th>
+                                    <th class="px-3 py-3.5">Nama Meja & Ruangan</th>
+                                    <th class="px-3 py-3.5">Lokasi & Zona</th>
+                                    <th class="px-3 py-3.5">Kelola Kapasitas</th>
+                                    <th class="px-3 py-3.5">Status Ketersediaan</th>
+                                    <th class="px-3 py-3.5">Harga / Jam</th>
+                                    <th class="py-3.5 pl-3 pr-6 text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crudTableBody" class="divide-y divide-slate-100 text-xs">
+                                <!-- Baris tabel dirender oleh JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Empty State jika pencarian tidak ditemukan -->
+                    <div id="emptyTableState" class="hidden py-12 text-center">
+                        <i class="fa-regular fa-folder-open mb-2 text-3xl text-slate-300"></i>
+                        <p class="text-sm font-bold text-slate-700">Data Meja / Ruangan Tidak Ditemukan</p>
+                        <p class="text-xs text-slate-400">Coba ubah filter pencarian atau tambahkan data ruangan baru.</p>
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- MODAL TAMBAH & EDIT MEJA / RUANGAN (CREATE & UPDATE)      -->
+    <!-- ========================================================= -->
+    <div id="crudModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4 backdrop-blur-[1px]">
+        <div class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
+
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between bg-slate-900 px-6 py-4 text-white">
+                <div>
+                    <span id="modalSubtitle" class="text-[10px] font-bold uppercase tracking-widest text-red-400">FORM INVENTARIS</span>
+                    <h3 id="modalTitle" class="text-base font-bold">Tambah Meja / Ruangan Baru</h3>
+                </div>
+                <button type="button" id="closeModalBtn" class="text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body Form -->
+            <form id="spaceForm" class="p-6 space-y-4">
+                <input type="hidden" id="editIndex" value="">
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <!-- Kode Unit -->
+                    <div>
+                        <label for="inputCode" class="mb-1 block text-xs font-semibold text-slate-600">Kode Meja / Ruangan *</label>
+                        <input
+                            type="text"
+                            id="inputCode"
+                            required
+                            placeholder="Cth: M-01 atau CNF-02"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm uppercase outline-none focus:border-red-500"
+                        >
+                    </div>
+
+                    <!-- Kategori -->
+                    <div>
+                        <label for="inputCategory" class="mb-1 block text-xs font-semibold text-slate-600">Kategori Ruang *</label>
+                        <select
+                            id="inputCategory"
+                            required
+                            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-red-500"
+                        >
+                            <option value="Individual Desk">Individual Desk</option>
+                            <option value="Group Desk">Group Desk</option>
+                            <option value="Silent Room">Silent Room</option>
+                            <option value="Conference Room">Conference Room</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Nama Unit -->
+                <div>
+                    <label for="inputName" class="mb-1 block text-xs font-semibold text-slate-600">Nama Meja / Ruangan *</label>
+                    <input
+                        type="text"
+                        id="inputName"
+                        required
+                        placeholder="Cth: Meja Belajar Nomor 12 (Dekat Jendela)"
+                        class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-red-500"
+                    >
+                </div>
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <!-- Lantai / Lokasi -->
+                    <div>
+                        <label for="inputFloor" class="mb-1 block text-xs font-semibold text-slate-600">Lokasi Lantai *</label>
+                        <select
+                            id="inputFloor"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs font-medium outline-none focus:border-red-500"
+                        >
+                            <option value="Lantai 1 - Non-Smoking">Lantai 1 - Non-Smoking</option>
+                            <option value="Lantai 2 - Non-Smoking">Lantai 2 - Non-Smoking</option>
+                            <option value="Lantai 2 - Smoking Indoor">Lantai 2 - Smoking Indoor</option>
+                        </select>
+                    </div>
+
+                    <!-- Kapasitas Kursi -->
+                    <div>
+                        <label for="inputCapacity" class="mb-1 block text-xs font-semibold text-slate-600">Kapasitas (Orang) *</label>
+                        <input
+                            type="number"
+                            id="inputCapacity"
+                            min="1"
+                            max="50"
+                            required
+                            value="1"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-red-500"
+                        >
+                    </div>
+
+                    <!-- Harga Sewa / Jam -->
+                    <div>
+                        <label for="inputPrice" class="mb-1 block text-xs font-semibold text-slate-600">Tarif / Jam (IDR) *</label>
+                        <input
+                            type="number"
+                            id="inputPrice"
+                            min="0"
+                            step="1000"
+                            required
+                            value="15000"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-red-500"
+                        >
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <!-- Status Ketersediaan -->
+                    <div>
+                        <label for="inputStatus" class="mb-1 block text-xs font-semibold text-slate-600">Status Ketersediaan *</label>
+                        <select
+                            id="inputStatus"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold outline-none focus:border-red-500"
+                        >
+                            <option value="available">Tersedia (Available / Live)</option>
+                            <option value="occupied">Terisi / Digunakan (Occupied)</option>
+                            <option value="maintenance">Maintenance / Perbaikan (Disable)</option>
+                        </select>
+                    </div>
+
+                    <!-- Fasilitas -->
+                    <div>
+                        <label for="inputFacilities" class="mb-1 block text-xs font-semibold text-slate-600">Fasilitas (Pisahkan koma)</label>
+                        <input
+                            type="text"
+                            id="inputFacilities"
+                            placeholder="Stop Kontak, Wi-Fi, AC"
+                            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs outline-none focus:border-red-500"
+                        >
+                    </div>
+                </div>
+
+                <!-- Tombol Aksi Modal -->
+                <div class="flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
+                    <button
+                        type="button"
+                        id="cancelModalBtn"
+                        class="rounded-lg border border-slate-300 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                    >
+                        Batal
+                    </button>
+                    <button
+                        type="submit"
+                        class="rounded-lg bg-red-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-red-600/20 hover:bg-red-700"
+                    >
+                        <i class="fa-solid fa-floppy-disk mr-1.5"></i> Simpan Data
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- MODAL KONFIRMASI HAPUS (DELETE)                           -->
+    <!-- ========================================================= -->
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4 backdrop-blur-[1px]">
+        <div class="w-full max-w-sm overflow-hidden rounded-2xl bg-white p-6 text-center shadow-2xl">
+            <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
+                <i class="fa-solid fa-trash-can text-lg"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">Hapus Data Ruangan?</h3>
+            <p class="mt-1 text-xs text-slate-500">
+                Apakah kamu yakin ingin menghapus <strong id="deleteTargetName" class="text-slate-800"></strong> dari daftar inventaris?
+            </p>
+            <div class="mt-6 flex gap-3">
+                <button
+                    type="button"
+                    id="cancelDeleteBtn"
+                    class="flex-1 rounded-lg border border-slate-300 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                    Batal
+                </button>
+                <button
+                    type="button"
+                    id="confirmDeleteBtn"
+                    class="flex-1 rounded-lg bg-red-600 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-red-700"
+                >
+                    Ya, Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFIKASI -->
+    <div
+        id="toast"
+        class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-lg bg-slate-900 px-5 py-3 text-center text-xs font-medium text-white shadow-xl"
+    >
+        Notifikasi
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- JAVASCRIPT: CRUD ENGINE, KAPASITAS & STATUS KETERSEDIAAN  -->
+    <!-- ========================================================= -->
+    <script>
+        const STORAGE_KEY = "nugas_admin_spaces_v1";
+
+        // Data Awal (Default) sesuai kategori & denah NUGAS Space
+        const defaultSpaces = [
+            {
+                code: "M-01",
+                name: "Individual Desk #01 (Dinding Kanan)",
+                category: "Individual Desk",
+                floor: "Lantai 1 - Non-Smoking",
+                capacity: 1,
+                price: 15000,
+                status: "available",
+                facilities: "Stop Kontak 2 Lubang, Kursi Ergonomis, AC"
+            },
+            {
+                code: "M-10",
+                name: "Quad Desk #10 (Tengah Kanan)",
+                category: "Individual Desk",
+                floor: "Lantai 1 - Non-Smoking",
+                capacity: 1,
+                price: 15000,
+                status: "occupied",
+                facilities: "Stop Kontak, Lampu Meja, Wi-Fi Cepat"
+            },
+            {
+                code: "GRP-24",
+                name: "Group Desk Blok 24-27",
+                category: "Group Desk",
+                floor: "Lantai 1 - Non-Smoking",
+                capacity: 4,
+                price: 40000,
+                status: "available",
+                facilities: "Meja Kolaborasi, 4 Stop Kontak, Papan Tulis Kecil"
+            },
+            {
+                code: "GRP-47",
+                name: "Group Desk Koridor Bawah (47-52)",
+                category: "Group Desk",
+                floor: "Lantai 1 - Non-Smoking",
+                capacity: 6,
+                price: 40000,
+                status: "available",
+                facilities: "Area Diskusi, 6 Stop Kontak, AC"
+            },
+            {
+                code: "SLN-60",
+                name: "Silent Zone Desk #60",
+                category: "Silent Room",
+                floor: "Lantai 2 - Non-Smoking",
+                capacity: 2,
+                price: 20000,
+                status: "available",
+                facilities: "Zona Hening, Sekat Akustik, Lampu Baca"
+            },
+            {
+                code: "SMK-88",
+                name: "Smoking Indoor Desk #88",
+                category: "Individual Desk",
+                floor: "Lantai 2 - Smoking Indoor",
+                capacity: 1,
+                price: 15000,
+                status: "occupied",
+                facilities: "Exhaust Fan, Asbak, Stop Kontak"
+            },
+            {
+                code: "SMK-92",
+                name: "Smoking Wall Desk #92",
+                category: "Individual Desk",
+                floor: "Lantai 2 - Smoking Indoor",
+                capacity: 1,
+                price: 15000,
+                status: "maintenance",
+                facilities: "Exhaust Fan, Stop Kontak"
+            },
+            {
+                code: "CNF-01",
+                name: "VIP Conference Room A",
+                category: "Conference Room",
+                floor: "Lantai 2 - Non-Smoking",
+                capacity: 10,
+                price: 75000,
+                status: "available",
+                facilities: "Smart TV Proyektor, Whiteboard, Kedap Suara"
+            }
+        ];
+
+        // Load dari localStorage atau pakai default
+        let spacesList = [];
+        function loadSpaces() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    spacesList = JSON.parse(saved);
+                } catch (e) {
+                    spacesList = [...defaultSpaces];
+                }
+            } else {
+                spacesList = [...defaultSpaces];
+                saveSpaces();
+            }
+        }
+
+        function saveSpaces() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(spacesList));
+        }
+
+        // Tampilkan email admin yang login dari login.html
+        const loggedEmail = sessionStorage.getItem("nugasEmail");
+        if (loggedEmail) {
+            document.getElementById("adminEmailDisplay").textContent = loggedEmail;
+        }
+
+        let deleteIndexTarget = null;
+        let toastTimer;
+
+        function formatRupiah(num) {
+            return "IDR " + Number(num).toLocaleString("id-ID");
+        }
+
+        // Render Metrik Kartu Atas, Breakdown Kategori, dan Tabel CRUD
+        function renderDashboard() {
+            const searchVal = document.getElementById("searchInput").value.trim().toLowerCase();
+            const catFilter = document.getElementById("filterCategory").value;
+            const statusFilter = document.getElementById("filterStatus").value;
+
+            // 1. Hitung Statistik Keseluruhan
+            const totalUnits = spacesList.length;
+            let totalCap = 0;
+            let availCount = 0;
+            let occCount = 0;
+            let maintCount = 0;
+            let maxRevenue = 0;
+
+            spacesList.forEach(function(item) {
+                totalCap += Number(item.capacity);
+                maxRevenue += Number(item.price);
+                if (item.status === "available") availCount++;
+                else if (item.status === "occupied") occCount++;
+                else if (item.status === "maintenance") maintCount++;
+            });
+
+            const availPct = totalUnits ? Math.round((availCount / totalUnits) * 100) : 0;
+            const occPct = totalUnits ? Math.round((occCount / totalUnits) * 100) : 0;
+            const maintPct = totalUnits ? Math.round((maintCount / totalUnits) * 100) : 0;
+
+            document.getElementById("sidebarTotalBadge").textContent = totalUnits;
+            document.getElementById("metricTotalUnits").textContent = totalUnits + " Unit";
+            document.getElementById("metricTotalCapacity").textContent = totalCap + " Kursi";
+
+            document.getElementById("metricAvailableUnits").textContent = availCount + " Unit";
+            document.getElementById("metricAvailablePct").textContent = availPct + "%";
+
+            document.getElementById("metricOccupiedUnits").textContent = occCount + " Unit";
+            document.getElementById("metricOccupiedPct").textContent = occPct + "%";
+
+            document.getElementById("metricMaintenanceUnits").textContent = maintCount + " Unit";
+            document.getElementById("metricMaintenancePct").textContent = maintPct + "%";
+
+            document.getElementById("metricMaxRevenuePerHour").textContent = formatRupiah(maxRevenue) + " / jam";
+            document.getElementById("bubbleAvailPct").textContent = availPct + "%";
+            document.getElementById("bubbleOccPct").textContent = occPct + "%";
+            document.getElementById("bubbleMaintPct").textContent = maintPct + "%";
+
+            // 2. Render Breakdown per Kategori
+            const categories = ["Individual Desk", "Group Desk", "Silent Room", "Conference Room"];
+            const breakdownContainer = document.getElementById("categoryBreakdownList");
+            breakdownContainer.innerHTML = "";
+
+            categories.forEach(function(catName) {
+                const catItems = spacesList.filter(function(s) { return s.category === catName; });
+                const catAvail = catItems.filter(function(s) { return s.status === "available"; }).length;
+                const catSeats = catItems.reduce(function(acc, cur) { return acc + Number(cur.capacity); }, 0);
+                const pct = catItems.length ? Math.round((catAvail / catItems.length) * 100) : 0;
+
+                breakdownContainer.innerHTML += `
+                    <div>
+                        <div class="mb-1.5 flex items-center justify-between text-xs">
+                            <span class="font-bold text-slate-800">${catName}</span>
+                            <span class="text-slate-500">
+                                <strong>${catAvail}</strong>/${catItems.length} Unit Tersedia • <strong>${catSeats} Kursi</strong>
+                            </span>
+                        </div>
+                        <div class="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+                            <div class="h-full rounded-full bg-red-600 transition-all duration-300" style="width: ${pct}%;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // 3. Render Tabel CRUD
+            const tbody = document.getElementById("crudTableBody");
+            const emptyState = document.getElementById("emptyTableState");
+            tbody.innerHTML = "";
+
+            let visibleRows = 0;
+
+            spacesList.forEach(function(item, index) {
+                const matchSearch =
+                    item.code.toLowerCase().includes(searchVal) ||
+                    item.name.toLowerCase().includes(searchVal) ||
+                    item.floor.toLowerCase().includes(searchVal) ||
+                    item.facilities.toLowerCase().includes(searchVal);
+
+                const matchCat = catFilter === "all" || item.category === catFilter;
+                const matchStatus = statusFilter === "all" || item.status === statusFilter;
+
+                if (!matchSearch || !matchCat || !matchStatus) return;
+
+                visibleRows++;
+
+                // Badge Warna Status
+                let statusSelectClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
+                if (item.status === "occupied") {
+                    statusSelectClass = "bg-red-50 text-red-700 border-red-200";
+                } else if (item.status === "maintenance") {
+                    statusSelectClass = "bg-amber-50 text-amber-700 border-amber-200";
+                }
+
+                const tr = document.createElement("tr");
+                tr.className = "transition hover:bg-slate-50/80";
+
+                tr.innerHTML = `
+                    <!-- ID / Kode -->
+                    <td class="py-4 pl-6 pr-3 font-bold text-slate-900 whitespace-nowrap">
+                        <span class="rounded bg-slate-100 px-2.5 py-1 text-xs font-extrabold text-slate-800">#${item.code}</span>
+                    </td>
+
+                    <!-- Nama & Kategori -->
+                    <td class="px-3 py-4">
+                        <div class="font-bold text-slate-900">${item.name}</div>
+                        <div class="mt-0.5 text-[11px] font-medium text-red-600">${item.category} • <span class="text-slate-400 font-normal">${item.facilities}</span></div>
+                    </td>
+
+                    <!-- Lokasi Lantai -->
+                    <td class="px-3 py-4 whitespace-nowrap text-slate-600">
+                        <i class="fa-solid fa-location-dot mr-1 text-slate-400"></i>${item.floor}
+                    </td>
+
+                    <!-- Kelola Kapasitas Cepat (- / +) -->
+                    <td class="px-3 py-4 whitespace-nowrap">
+                        <div class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-2 py-1">
+                            <button
+                                type="button"
+                                onclick="adjustCapacity(${index}, -1)"
+                                class="flex h-5 w-5 items-center justify-center rounded bg-slate-100 font-bold text-slate-600 hover:bg-red-600 hover:text-white"
+                                title="Kurangi Kapasitas"
+                            >−</button>
+                            <span class="min-w-[54px] text-center font-bold text-slate-800">${item.capacity} Kursi</span>
+                            <button
+                                type="button"
+                                onclick="adjustCapacity(${index}, 1)"
+                                class="flex h-5 w-5 items-center justify-center rounded bg-slate-100 font-bold text-slate-600 hover:bg-red-600 hover:text-white"
+                                title="Tambah Kapasitas"
+                            >+</button>
+                        </div>
+                    </td>
+
+                    <!-- Kelola Status Ketersediaan Langsung -->
+                    <td class="px-3 py-4 whitespace-nowrap">
+                        <select
+                            onchange="quickChangeStatus(${index}, this.value)"
+                            class="rounded-full border px-3 py-1 text-[11px] font-bold outline-none cursor-pointer ${statusSelectClass}"
+                        >
+                            <option value="available" ${item.status === "available" ? "selected" : ""}>● Tersedia (Live)</option>
+                            <option value="occupied" ${item.status === "occupied" ? "selected" : ""}>● Terisi (Occupied)</option>
+                            <option value="maintenance" ${item.status === "maintenance" ? "selected" : ""}>● Maintenance (Disable)</option>
+                        </select>
+                    </td>
+
+                    <!-- Harga / Jam -->
+                    <td class="px-3 py-4 font-bold text-slate-800 whitespace-nowrap">
+                        ${formatRupiah(item.price)}
+                    </td>
+
+                    <!-- Action (Edit & Delete) -->
+                    <td class="py-4 pl-3 pr-6 text-right whitespace-nowrap">
+                        <div class="inline-flex items-center gap-2">
+                            <button
+                                type="button"
+                                onclick="openEditModal(${index})"
+                                class="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-600 transition hover:border-slate-900 hover:bg-slate-900 hover:text-white"
+                                title="Edit Data Ruangan"
+                            >
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </button>
+                            <button
+                                type="button"
+                                onclick="openDeleteModal(${index})"
+                                class="flex h-8 w-8 items-center justify-center rounded-lg border border-red-200 text-red-600 transition hover:bg-red-600 hover:text-white"
+                                title="Hapus Ruangan"
+                            >
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+
+            if (visibleRows === 0) {
+                emptyState.classList.remove("hidden");
+            } else {
+                emptyState.classList.add("hidden");
+            }
+        }
+
+        // Fitur 1: Kelola Kapasitas Langsung dari Tabel
+        window.adjustCapacity = function(index, delta) {
+            const current = Number(spacesList[index].capacity);
+            const updated = current + delta;
+            if (updated < 1) {
+                showToast("Kapasitas minimal adalah 1 kursi!");
+                return;
+            }
+            spacesList[index].capacity = updated;
+            saveSpaces();
+            renderDashboard();
+            showToast("Kapasitas " + spacesList[index].code + " diperbarui menjadi " + updated + " kursi.");
+        };
+
+        // Fitur 2: Ubah Status Ketersediaan Langsung dari Tabel
+        window.quickChangeStatus = function(index, newStatus) {
+            spacesList[index].status = newStatus;
+            saveSpaces();
+            renderDashboard();
+            const labelMap = {
+                available: "Tersedia (Live)",
+                occupied: "Terisi (Occupied)",
+                maintenance: "Maintenance (Disable)"
+            };
+            showToast("Status " + spacesList[index].code + " diubah ke " + labelMap[newStatus]);
+        };
+
+        // Fitur 3: Buka Modal Tambah (Create)
+        window.openAddModal = function() {
+            document.getElementById("spaceForm").reset();
+            document.getElementById("editIndex").value = "";
+            document.getElementById("modalSubtitle").textContent = "TAMBAH DATA BARU";
+            document.getElementById("modalTitle").textContent = "Tambah Meja / Ruangan Baru";
+
+            const modal = document.getElementById("crudModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        // Fitur 4: Buka Modal Edit (Update)
+        window.openEditModal = function(index) {
+            const item = spacesList[index];
+            document.getElementById("editIndex").value = index;
+            document.getElementById("modalSubtitle").textContent = "EDIT INVENTARIS #" + item.code;
+            document.getElementById("modalTitle").textContent = "Edit Data Meja & Ruangan";
+
+            document.getElementById("inputCode").value = item.code;
+            document.getElementById("inputCategory").value = item.category;
+            document.getElementById("inputName").value = item.name;
+            document.getElementById("inputFloor").value = item.floor;
+            document.getElementById("inputCapacity").value = item.capacity;
+            document.getElementById("inputPrice").value = item.price;
+            document.getElementById("inputStatus").value = item.status;
+            document.getElementById("inputFacilities").value = item.facilities;
+
+            const modal = document.getElementById("crudModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        function closeCrudModal() {
+            const modal = document.getElementById("crudModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        document.getElementById("closeModalBtn").addEventListener("click", closeCrudModal);
+        document.getElementById("cancelModalBtn").addEventListener("click", closeCrudModal);
+
+        // Simpan Form Tambah / Edit
+        document.getElementById("spaceForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const editIdx = document.getElementById("editIndex").value;
+            const newItem = {
+                code: document.getElementById("inputCode").value.trim().toUpperCase(),
+                category: document.getElementById("inputCategory").value,
+                name: document.getElementById("inputName").value.trim(),
+                floor: document.getElementById("inputFloor").value,
+                capacity: parseInt(document.getElementById("inputCapacity").value, 10) || 1,
+                price: parseInt(document.getElementById("inputPrice").value, 10) || 0,
+                status: document.getElementById("inputStatus").value,
+                facilities: document.getElementById("inputFacilities").value.trim() || "Standar NUGAS Space"
+            };
+
+            if (editIdx === "") {
+                // Tambah Baru
+                spacesList.unshift(newItem);
+                showToast("Unit #" + newItem.code + " berhasil ditambahkan!");
+            } else {
+                // Update Data Lama
+                spacesList[parseInt(editIdx, 10)] = newItem;
+                showToast("Data #" + newItem.code + " berhasil diperbarui!");
+            }
+
+            saveSpaces();
+            closeCrudModal();
+            renderDashboard();
+        });
+
+        // Fitur 5: Hapus Data (Delete)
+        window.openDeleteModal = function(index) {
+            deleteIndexTarget = index;
+            const item = spacesList[index];
+            document.getElementById("deleteTargetName").textContent = "#" + item.code + " - " + item.name;
+
+            const modal = document.getElementById("deleteModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        };
+
+        function closeDeleteModal() {
+            deleteIndexTarget = null;
+            const modal = document.getElementById("deleteModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        document.getElementById("cancelDeleteBtn").addEventListener("click", closeDeleteModal);
+        document.getElementById("confirmDeleteBtn").addEventListener("click", function() {
+            if (deleteIndexTarget !== null) {
+                const removed = spacesList.splice(deleteIndexTarget, 1)[0];
+                saveSpaces();
+                renderDashboard();
+                showToast("Unit #" + removed.code + " telah dihapus.");
+            }
+            closeDeleteModal();
+        });
+
+        // Fitur Tambahan: Set Semua Unit Tersedia & Reset Default
+        window.setAllAvailable = function() {
+            spacesList.forEach(function(item) {
+                item.status = "available";
+            });
+            saveSpaces();
+            renderDashboard();
+            showToast("Seluruh meja & ruangan berhasil diset ke status Tersedia!");
+        };
+
+        window.resetDefaultData = function() {
+            spacesList = [...defaultSpaces];
+            saveSpaces();
+            renderDashboard();
+            showToast("Data inventaris dikembalikan ke pengaturan awal.");
+        };
+
+        window.setCategoryFilter = function(cat) {
+            document.getElementById("filterCategory").value = cat;
+            renderDashboard();
+        };
+
+        // Filter & Search Event Listeners
+        document.getElementById("searchInput").addEventListener("input", renderDashboard);
+        document.getElementById("filterCategory").addEventListener("change", renderDashboard);
+        document.getElementById("filterStatus").addEventListener("change", renderDashboard);
+
+        // Sidebar Mobile Toggle
+        const sidebar = document.getElementById("sidebar");
+        document.getElementById("openSidebarBtn").addEventListener("click", function() {
+            sidebar.classList.remove("-translate-x-full");
+        });
+        document.getElementById("closeSidebarBtn").addEventListener("click", function() {
+            sidebar.classList.add("-translate-x-full");
+        });
+
+        // Logout kembali ke login.html
+        document.getElementById("logoutBtn").addEventListener("click", function() {
+            sessionStorage.removeItem("nugasRole");
+            sessionStorage.removeItem("nugasEmail");
+            showToast("Logout berhasil! Mengalihkan ke halaman login...");
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 900);
+        });
+
+        // Toast Helper
+        function showToast(msg) {
+            clearTimeout(toastTimer);
+            const toast = document.getElementById("toast");
+            toast.textContent = msg;
+            toast.classList.remove("hidden");
+            toastTimer = setTimeout(function() {
+                toast.classList.add("hidden");
+            }, 2800);
+        }
+
+        // Jalankan saat halaman dimuat
+        loadSpaces();
+        renderDashboard();
+    </script>
+
+</body>
+</html>
