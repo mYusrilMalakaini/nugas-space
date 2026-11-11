@@ -62,6 +62,10 @@
                         </select>
                         <p class="mt-2 text-[11px] text-slate-400">Daftar tipe dan harga mengikuti informasi Our Space pada Beranda.</p>
                     </div>
+                    <div id="selectedDeskNotice" class="hidden rounded-lg border border-red-100 bg-red-50 p-3 text-xs text-red-700">
+                        <i class="fa-solid fa-chair mr-1"></i>
+                        <span id="selectedDeskText" class="font-semibold"></span>
+                    </div>
 
                     <div class="grid gap-5 sm:grid-cols-3">
                         <div>
@@ -176,6 +180,14 @@
             conference: "Conference Room"
         };
 
+        // Data pilihan meja yang dikirim dari Fasilitas.html
+        let pendingBooking = null;
+        try {
+            pendingBooking = JSON.parse(sessionStorage.getItem("nugasPendingBooking") || "null");
+        } catch (error) {
+            pendingBooking = null;
+        }
+
         function getTransactions() {
             try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
             catch (error) { return []; }
@@ -222,6 +234,18 @@
         bookingDate.min = today;
         bookingDate.value = today;
 
+        if (pendingBooking && pendingBooking.unitId) {
+            spaceType.value = "individual";
+            spaceType.disabled = true;
+            document.getElementById("selectedDeskNotice").classList.remove("hidden");
+            document.getElementById("selectedDeskText").textContent =
+                "Meja #" + pendingBooking.unitId + " dipilih dari denah Fasilitas.";
+            document.getElementById("customerName").value = pendingBooking.name || "";
+            bookingDate.value = pendingBooking.date || today;
+            startTime.value = pendingBooking.time || "09:00";
+            durationInput.value = String(pendingBooking.duration || 1);
+        }
+
         spaceType.addEventListener("change", updateSummary);
         durationInput.addEventListener("change", updateSummary);
         document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => radio.addEventListener("change", updatePaymentView));
@@ -261,9 +285,35 @@
                 return;
             }
 
+            const transactions = getTransactions();
+
+            // Cek ulang ketersediaan meja sebelum transaksi disimpan
+            if (pendingBooking && pendingBooking.unitId) {
+                const requestedStart = Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5));
+                const requestedEnd = requestedStart + duration * 60;
+                const hasConflict = transactions.some(function(item) {
+                    if (
+                        String(item.unitId) !== String(pendingBooking.unitId) ||
+                        item.date !== date ||
+                        item.status === "Dibatalkan"
+                    ) return false;
+
+                    const existingStart = Number(String(item.time || "00:00").slice(0, 2)) * 60 +
+                        Number(String(item.time || "00:00").slice(3, 5));
+                    const existingEnd = existingStart + Number(item.duration || 0) * 60;
+                    return requestedStart < existingEnd && existingStart < requestedEnd;
+                });
+
+                if (hasConflict) {
+                    alert("Maaf, meja tersebut baru saja dipesan. Silakan kembali ke Fasilitas dan pilih meja lain.");
+                    return;
+                }
+            }
+
             const bookingId = "NGS-" + Date.now().toString().slice(-8);
             const transaction = {
                 id: bookingId,
+                unitId: pendingBooking && pendingBooking.unitId ? String(pendingBooking.unitId) : null,
                 name: name,
                 phone: phone,
                 space: spaceNames[spaceType.value],
@@ -278,14 +328,15 @@
                 createdAt: new Date().toISOString()
             };
 
-            const transactions = getTransactions();
             transactions.unshift(transaction);
             saveTransactions(transactions);
+            sessionStorage.removeItem("nugasPendingBooking");
+            pendingBooking = null;
             latestBookingId = bookingId;
 
             document.getElementById("resultBookingId").textContent = bookingId;
             document.getElementById("resultName").textContent = name + " (" + phone + ")";
-            document.getElementById("resultSchedule").textContent = spaceNames[spaceType.value] + " • " + date + " • " + time + " (" + duration + " jam)";
+            document.getElementById("resultSchedule").textContent = transaction.space + (transaction.unitId ? " • Meja #" + transaction.unitId : "") + " • " + date + " • " + time + " (" + duration + " jam)";
             document.getElementById("resultPayment").textContent = provider;
             document.getElementById("resultTotal").textContent = rupiah(total);
             document.getElementById("transactionStatus").textContent = transaction.status;

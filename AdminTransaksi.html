@@ -166,17 +166,13 @@
         const tableBody = document.getElementById("transactionTable");
         const searchInput = document.getElementById("searchInput");
         const statusFilter = document.getElementById("statusFilter");
-        const unitInventory = [
-            { id: "A01", type: "Individual Desk" },
-            { id: "A02", type: "Individual Desk" },
-            { id: "A03", type: "Individual Desk" },
-            { id: "A04", type: "Individual Desk" },
-            { id: "B01", type: "Group Desk" },
-            { id: "B02", type: "Group Desk" },
-            { id: "S01", type: "Silent Room" },
-            { id: "S02", type: "Silent Room" },
-            { id: "C01", type: "Conference Room" }
-        ];
+        const unitInventory = Array.from({ length: 98 }, function(_, index) {
+            const deskNumber = index + 1;
+            return {
+                id: String(deskNumber),
+                type: deskNumber <= 52 ? "Meja • Lantai 1" : "Meja • Lantai 2"
+            };
+        });
 
         function getTransactions() {
             try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
@@ -284,7 +280,7 @@
                         : '<button type="button" data-verify="' + escapeHTML(item.id) + '" class="rounded-lg bg-red-600 px-3 py-2 text-[11px] font-semibold text-white transition hover:bg-red-700">Verifikasi</button>';
                     return '<tr class="align-top hover:bg-slate-50/70">' +
                         '<td class="px-5 py-4"><p class="font-bold text-slate-800">' + escapeHTML(item.id) + '</p><p class="mt-1 font-semibold">' + escapeHTML(item.name) + '</p><p class="mt-1 text-[10px] text-slate-400">' + escapeHTML(item.phone) + '</p></td>' +
-                        '<td class="px-5 py-4"><p class="font-semibold text-slate-700">' + escapeHTML(item.space) + '</p><p class="mt-1 text-[10px] text-slate-400">' + schedule + '</p></td>' +
+                        '<td class="px-5 py-4"><p class="font-semibold text-slate-700">' + escapeHTML(item.space) + (item.unitId ? " • Meja #" + escapeHTML(item.unitId) : "") + '</p><p class="mt-1 text-[10px] text-slate-400">' + schedule + '</p></td>' +
                         '<td class="px-5 py-4"><p class="font-semibold">' + payment + '</p><p class="mt-1 text-[10px] text-slate-400">' + escapeHTML(item.paymentProvider) + '</p></td>' +
                         '<td class="px-5 py-4 font-bold text-slate-800">' + money(item.total) + '</td>' +
                         '<td class="px-5 py-4"><span class="inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold ' + statusClass(item.status) + '">' + escapeHTML(item.status) + '</span></td>' +
@@ -319,7 +315,7 @@
                 alert("Belum ada transaksi untuk diekspor.");
                 return;
             }
-            const columns = ["id", "name", "phone", "space", "date", "time", "duration", "paymentMethod", "paymentProvider", "total", "status", "createdAt", "verifiedAt"];
+            const columns = ["id", "name", "phone", "space", "unitId", "date", "time", "duration", "paymentMethod", "paymentProvider", "total", "status", "createdAt", "verifiedAt"];
             const csvCell = value => '"' + String(value ?? "").replace(/"/g, '""') + '"';
             const csv = [columns.join(","), ...transactions.map(item => columns.map(key => csvCell(item[key])).join(","))].join("\r\n");
             const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });

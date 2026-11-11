@@ -484,21 +484,7 @@
                         class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-red-500"
                     >
                 </div>
-
-                <div class="mb-5">
-                    <label for="bookingConfirmType" class="mb-1.5 block text-xs font-semibold text-slate-600">
-                        Status Konfirmasi
-                    </label>
-                    <select
-                        id="bookingConfirmType"
-                        class="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-xs font-medium text-slate-800 outline-none focus:border-red-500"
-                    >
-                        <option value="confirmed">Terkonfirmasi (Kunci Meja)</option>
-                        <option value="unconfirmed">Belum Terkonfirmasi / Hold </option>
-                    </select>
-                </div>
-
-                <div class="flex gap-3">
+<div class="flex gap-3">
                     <button
                         type="button"
                         id="btnCancelBook"
@@ -510,7 +496,7 @@
                         type="submit"
                         class="flex-1 rounded-lg bg-red-600 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-red-700"
                     >
-                        Konfirmasi Pesanan
+                        Lanjut ke Pembayaran
                     </button>
                 </div>
             </form>
@@ -575,7 +561,8 @@
     <!-- JAVASCRIPT: LOGIKA DENAH LANTAI 1 & 2 + ANTI DOUBLE BOOKING     -->
     <!-- =============================================================== -->
     <script>
-        const todayStr = new Date().toISOString().split("T")[0];
+        const nowForDate = new Date();
+        const todayStr = new Date(nowForDate.getTime() - nowForDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
         const filterDate = document.getElementById("filterDate");
         const filterTime = document.getElementById("filterTime");
         const filterDuration = document.getElementById("filterDuration");
@@ -586,7 +573,6 @@
 
         let currentFloor = 1;
         let selectedDeskNumber = null;
-        let isOverridingUnconfirmed = false;
         let toastTimer;
 
         // Struktur Tata Letak Nomor Meja Persis Sesuai Gambar 1 & Gambar 2
@@ -630,21 +616,33 @@
                 lowerWingPairs: [] // Di lantai 2 koridor kiri bawah kosong (area smoking)
             }
         };
+        // Sumber data reservasi bersama dengan Reservasi.html dan AdminTransaksi.html
+        const STORAGE_KEY = "nugasSpaceTransactions";
 
-        // Simulasi Data Reservasi Awal (Bisa dilihat pada jam 13:00 WIB hari ini)
-        let reservationsDB = [
-            // Contoh di Lantai 1
-            { deskNumber: 10, date: todayStr, startHour: 12, endHour: 15, holder: "Rizky Pratama", status: "confirmed" },
-            { deskNumber: 11, date: todayStr, startHour: 12, endHour: 15, holder: "Rizky Pratama", status: "confirmed" },
-            { deskNumber: 34, date: todayStr, startHour: 13, endHour: 16, holder: "Budi Santoso", status: "unconfirmed" },
-            { deskNumber: 42, date: todayStr, startHour: 13, endHour: 15, holder: "Siti Aminah", status: "confirmed" },
-            { deskNumber: 48, date: todayStr, startHour: 13, endHour: 15, holder: "Andi Wijaya", status: "unconfirmed" },
-            // Contoh di Lantai 2
-            { deskNumber: 88, date: todayStr, startHour: 13, endHour: 16, holder: "Dimas Anggara", status: "confirmed" },
-            { deskNumber: 89, date: todayStr, startHour: 13, endHour: 16, holder: "Dimas Anggara", status: "unconfirmed" },
-            { deskNumber: 64, date: todayStr, startHour: 12, endHour: 15, holder: "Nadya Putri", status: "confirmed" },
-            { deskNumber: 57, date: todayStr, startHour: 13, endHour: 15, holder: "Fajar Nugroho", status: "unconfirmed" }
-        ];
+        function getReservationsDB() {
+            try {
+                const transactions = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+                return transactions
+                    .filter(function(item) {
+                        return item.unitId && item.status !== "Dibatalkan";
+                    })
+                    .map(function(item) {
+                        const startHour = Number(String(item.time || "00:00").split(":")[0]);
+                        return {
+                            deskNumber: Number(item.unitId),
+                            date: item.date,
+                            startHour: startHour,
+                            endHour: startHour + Number(item.duration || 0),
+                            holder: item.name || "Pemesan",
+                            status: item.status === "Terverifikasi" ? "confirmed" : "unconfirmed"
+                        };
+                    });
+            } catch (error) {
+                console.error("Gagal membaca data reservasi:", error);
+                return [];
+            }
+        }
 
         function formatHour(h) {
             return String(h).padStart(2, "0") + ":00";
@@ -667,7 +665,7 @@
 
         // Mengecek ketersediaan suatu nomor meja pada tanggal & jam terpilih
         function getDeskStatus(deskNum, dateVal, reqStart, reqEnd) {
-            const conflicts = reservationsDB.filter(function(r) {
+            const conflicts = getReservationsDB().filter(function(r) {
                 return (
                     r.deskNumber === deskNum &&
                     r.date === dateVal &&
@@ -940,45 +938,26 @@
 
             const statusObj = getDeskStatus(deskNum, dateVal, startHour, endHour);
 
-            // 1. Jika sudah TERKONFIRMASI -> Cegah Double Booking sepenuhnya!
             if (statusObj.state === "confirmed") {
                 showToast(
-                    "Pencegahan Double Booking: Meja #" +
-                    deskNum +
-                    " sudah terkonfirmasi oleh " +
-                    statusObj.record.holder +
-                    " (" +
-                    formatHour(statusObj.record.startHour) +
-                    "-" +
-                    formatHour(statusObj.record.endHour) +
-                    " WIB)!"
+                    "Meja #" + deskNum + " sudah terverifikasi oleh " +
+                    statusObj.record.holder + ". Silakan pilih meja lain."
+                );
+                return;
+            }
+
+            if (statusObj.state === "unconfirmed") {
+                showToast(
+                    "Meja #" + deskNum + " sedang menunggu pembayaran/verifikasi. Silakan pilih meja lain."
                 );
                 return;
             }
 
             selectedDeskNumber = deskNum;
-
-            // 2. Jika BELUM TERKONFIRMASI -> Munculkan Modal Peringatan Double Booking
-            if (statusObj.state === "unconfirmed") {
-                isOverridingUnconfirmed = true;
-                document.getElementById("warnDeskTitle").textContent =
-                    "Meja #" + deskNum + " (" + getDeskZoneInfo(deskNum) + ")";
-                document.getElementById("warnHolder").textContent = statusObj.record.holder;
-                document.getElementById("warnTime").textContent =
-                    formatHour(statusObj.record.startHour) + " - " + formatHour(statusObj.record.endHour) + " WIB";
-
-                const warnModal = document.getElementById("doubleBookingModal");
-                warnModal.classList.remove("hidden");
-                warnModal.classList.add("flex");
-                return;
-            }
-
-            // 3. Jika TERSEDIA -> Buka Modal Reservasi
-            isOverridingUnconfirmed = false;
-            openBookingModal(deskNum, false);
+            openBookingModal(deskNum);
         };
 
-        function openBookingModal(deskNum, forceConfirmed) {
+        function openBookingModal(deskNum) {
             const dateVal = filterDate.value;
             const startHour = parseInt(filterTime.value, 10);
             const duration = parseInt(filterDuration.value, 10);
@@ -993,14 +972,6 @@
                 dateVal + " | " + formatHour(startHour) + " - " + formatHour(endHour) + " WIB";
             document.getElementById("summaryCost").textContent =
                 "IDR " + totalCost.toLocaleString("id-ID");
-
-            const confirmSelect = document.getElementById("bookingConfirmType");
-            if (forceConfirmed) {
-                confirmSelect.value = "confirmed";
-                confirmSelect.disabled = true;
-            } else {
-                confirmSelect.disabled = false;
-            }
 
             const bookModal = document.getElementById("bookingModal");
             bookModal.classList.remove("hidden");
@@ -1022,58 +993,37 @@
 
         document.getElementById("closeWarnModal").addEventListener("click", closeWarnModal);
         document.getElementById("btnCancelWarn").addEventListener("click", closeWarnModal);
-        document.getElementById("btnProceedOverride").addEventListener("click", function() {
-            closeWarnModal();
-            if (selectedDeskNumber !== null) {
-                openBookingModal(selectedDeskNumber, true);
-            }
-        });
 
         document.getElementById("closeBookModal").addEventListener("click", closeBookModal);
         document.getElementById("btnCancelBook").addEventListener("click", closeBookModal);
 
-        // Simpan Reservasi Baru
+        // Kirim pilihan meja ke halaman Reservasi & Pembayaran
         document.getElementById("bookingForm").addEventListener("submit", function(e) {
             e.preventDefault();
+
             if (selectedDeskNumber === null) return;
 
             const nameVal = document.getElementById("customerName").value.trim();
-            const confirmType = document.getElementById("bookingConfirmType").value;
+            if (!nameVal) {
+                alert("Mohon masukkan nama pemesan.");
+                return;
+            }
+
             const dateVal = filterDate.value;
             const startHour = parseInt(filterTime.value, 10);
             const duration = parseInt(filterDuration.value, 10);
-            const endHour = startHour + duration;
 
-            if (!nameVal) return;
-
-            if (isOverridingUnconfirmed) {
-                reservationsDB = reservationsDB.filter(function(r) {
-                    const isConflict =
-                        r.deskNumber === selectedDeskNumber &&
-                        r.date === dateVal &&
-                        r.status === "unconfirmed" &&
-                        isOverlap(startHour, endHour, r.startHour, r.endHour);
-                    return !isConflict;
-                });
-            }
-
-            reservationsDB.push({
-                deskNumber: selectedDeskNumber,
+            const pendingBooking = {
+                unitId: String(selectedDeskNumber),
+                name: nameVal,
                 date: dateVal,
-                startHour: startHour,
-                endHour: endHour,
-                holder: nameVal,
-                status: confirmType
-            });
+                time: String(startHour).padStart(2, "0") + ":00",
+                duration: duration,
+                spaceKey: "individual"
+            };
 
-            closeBookModal();
-            renderFloorPlan();
-
-            if (confirmType === "confirmed") {
-                showToast("Meja #" + selectedDeskNumber + " berhasil dikonfirmasi & dikunci (Merah)!");
-            } else {
-                showToast("Meja #" + selectedDeskNumber + " berhasil di-hold sementara (Kuning)!");
-            }
+            sessionStorage.setItem("nugasPendingBooking", JSON.stringify(pendingBooking));
+            window.location.href = "Reservasi.html";
         });
 
         // Fitur Cari Nomor Meja Cepat (1 - 98)
@@ -1118,6 +1068,12 @@
 
         // Inisialisasi awal
         renderFloorPlan();
+
+        window.addEventListener("storage", function(event) {
+            if (event.key === STORAGE_KEY || event.key === null) {
+                renderFloorPlan();
+            }
+        });
     </script>
 
 </body>
