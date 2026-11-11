@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservasi & Pembayaran - NUGAS Space</title>
+
+    <link href="./assets/css/output.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./assets/css/output.css">
 </head>
+
 <body class="min-h-screen bg-slate-50 font-['Poppins'] text-slate-800">
+
+    <!-- NAVBAR -->
     <header class="border-b border-slate-200 bg-white">
         <nav class="mx-auto flex w-[90%] max-w-6xl items-center justify-between py-5">
             <a href="Beranda.html" class="flex flex-col leading-none">
                 <span class="text-2xl font-extrabold text-slate-900">NUGAS</span>
                 <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-600">SPACE</span>
             </a>
-            <div class="flex items-center gap-4 text-sm font-semibold">
-                <a href="Beranda.html" class="hidden text-slate-500 transition hover:text-red-600 sm:inline">Beranda</a>
-                <a href="AdminTransaksi.html" class="rounded-lg border border-slate-200 px-4 py-2 text-slate-600 transition hover:border-red-300 hover:text-red-600">
-                    <i class="fa-solid fa-chart-line mr-2"></i>Admin
-                </a>
-            </div>
+
+            <a href="Beranda.html" class="text-sm font-semibold text-slate-500 transition hover:text-red-600">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Kembali ke Beranda
+            </a>
         </nav>
     </header>
 
@@ -30,56 +32,78 @@
         <div class="mb-8">
             <p class="text-xs font-bold uppercase tracking-[2px] text-red-600">Booking Workspace</p>
             <h1 class="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">Reservasi & Pembayaran</h1>
-            <p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-500">Pilih ruang, tentukan jadwal, dan selesaikan proses reservasi NUGAS Space.</p>
+            <p class="mt-3 max-w-2xl text-sm leading-relaxed text-slate-500">
+                Lengkapi data pemesan dan pembayaran untuk meja yang sudah kamu pilih dari denah fasilitas.
+            </p>
         </div>
 
-        <div class="grid items-start gap-7 lg:grid-cols-[1.45fr_0.8fr]">
+        <div class="grid items-start gap-7 lg:grid-cols-[1.5fr_0.8fr]">
+
+            <!-- FORM RESERVASI -->
             <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-                <div class="mb-7 flex items-center gap-3">
-                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600"><i class="fa-regular fa-calendar-check text-lg"></i></div>
-                    <div><h2 class="font-bold">Detail Reservasi</h2><p class="text-xs text-slate-400">Lengkapi data pemesanan kamu</p></div>
+                <div class="mb-6 flex items-center gap-3">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600">
+                        <i class="fa-regular fa-calendar-check text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold">Detail Reservasi</h2>
+                        <p class="text-xs text-slate-400">Lengkapi informasi pemesanan kamu</p>
+                    </div>
+                </div>
+
+                <div id="selectedDeskNotice" class="mb-5 hidden rounded-xl border border-red-100 bg-red-50 p-4 text-sm text-red-800">
+                    <div class="font-bold"><i class="fa-solid fa-chair mr-2"></i>Meja yang dipilih</div>
+                    <p id="selectedDeskSummary" class="mt-1"></p>
                 </div>
 
                 <form id="bookingForm" class="space-y-5">
                     <div class="grid gap-5 sm:grid-cols-2">
                         <div>
                             <label for="customerName" class="mb-2 block text-xs font-semibold text-slate-600">Nama pemesan</label>
-                            <input id="customerName" type="text" required maxlength="80" placeholder="Masukkan nama lengkap" class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
+                            <input id="customerName" type="text" required placeholder="Masukkan nama lengkap"
+                                class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
                         </div>
                         <div>
                             <label for="customerPhone" class="mb-2 block text-xs font-semibold text-slate-600">Nomor WhatsApp</label>
-                            <input id="customerPhone" type="tel" required maxlength="20" placeholder="Contoh: 081234567890" class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
+                            <input id="customerPhone" type="tel" required placeholder="Contoh: 081234567890"
+                                class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
                         </div>
                     </div>
 
                     <div>
                         <label for="spaceType" class="mb-2 block text-xs font-semibold text-slate-600">Pilih tipe tempat</label>
-                        <select id="spaceType" required class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
-                            <option value="individual" data-price="15000">Individual Desk — IDR 15.000 / jam</option>
-                            <option value="group" data-price="40000">Group Desk — IDR 40.000 / jam</option>
-                            <option value="silent" data-price="20000">Silent Room — IDR 20.000 / jam</option>
-                            <option value="conference" data-price="75000">Conference Room — IDR 75.000 / jam</option>
+                        <select id="spaceType" required
+                            class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
+                            <option value="individual" data-price="15000">Individual Desk — Rp15.000 / jam</option>
+                            <option value="group" data-price="40000">Group Desk — Rp40.000 / jam</option>
+                            <option value="silent" data-price="20000">Silent Room — Rp20.000 / jam</option>
+                            <option value="conference" data-price="75000">Conference Room — Rp75.000 / jam</option>
                         </select>
-                        <p class="mt-2 text-[11px] text-slate-400">Daftar tipe dan harga mengikuti informasi Our Space pada Beranda.</p>
-                    </div>
-                    <div id="selectedDeskNotice" class="hidden rounded-lg border border-red-100 bg-red-50 p-3 text-xs text-red-700">
-                        <i class="fa-solid fa-chair mr-1"></i>
-                        <span id="selectedDeskText" class="font-semibold"></span>
+                        <p class="mt-2 text-[11px] text-slate-400">Harga mengikuti informasi tipe tempat pada halaman Beranda.</p>
                     </div>
 
                     <div class="grid gap-5 sm:grid-cols-3">
                         <div>
-                            <label for="bookingDate" class="mb-2 block text-xs font-semibold text-slate-600">Tanggal reservasi</label>
-                            <input id="bookingDate" type="date" required class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
+                            <label for="bookingDate" class="mb-2 block text-xs font-semibold text-slate-600">Tanggal</label>
+                            <input id="bookingDate" type="date" required
+                                class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
                         </div>
                         <div>
                             <label for="startTime" class="mb-2 block text-xs font-semibold text-slate-600">Jam mulai</label>
-                            <input id="startTime" type="time" min="08:00" max="22:00" value="09:00" required class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
+                            <input id="startTime" type="time" min="08:00" max="22:00" value="09:00" required
+                                class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
                         </div>
                         <div>
                             <label for="duration" class="mb-2 block text-xs font-semibold text-slate-600">Durasi</label>
-                            <select id="duration" required class="w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
-                                <option value="1">1 jam</option><option value="2">2 jam</option><option value="3">3 jam</option><option value="4">4 jam</option><option value="5">5 jam</option><option value="6">6 jam</option><option value="8">8 jam</option>
+                            <select id="duration" required
+                                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
+                                <option value="1">1 jam</option>
+                                <option value="2">2 jam</option>
+                                <option value="3">3 jam</option>
+                                <option value="4">4 jam</option>
+                                <option value="5">5 jam</option>
+                                <option value="6">6 jam</option>
+                                <option value="8">8 jam</option>
                             </select>
                         </div>
                     </div>
@@ -89,89 +113,145 @@
                         <div class="grid gap-3 sm:grid-cols-2">
                             <label class="payment-option flex cursor-pointer items-center gap-3 rounded-xl border-2 border-red-500 bg-red-50 p-4 transition">
                                 <input type="radio" name="paymentMethod" value="cash" checked class="accent-red-600">
-                                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-red-600"><i class="fa-solid fa-money-bill-wave"></i></span>
-                                <span><span class="block text-sm font-semibold">Cash</span><span class="block text-[11px] text-slate-500">Bayar langsung di lokasi</span></span>
+                                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-red-600">
+                                    <i class="fa-solid fa-money-bill-wave"></i>
+                                </span>
+                                <span>
+                                    <span class="block text-sm font-semibold">Cash</span>
+                                    <span class="block text-[11px] text-slate-500">Bayar langsung di lokasi</span>
+                                </span>
                             </label>
+
                             <label class="payment-option flex cursor-pointer items-center gap-3 rounded-xl border-2 border-slate-200 p-4 transition hover:border-red-300">
                                 <input type="radio" name="paymentMethod" value="noncash" class="accent-red-600">
-                                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50 text-red-600"><i class="fa-solid fa-wallet"></i></span>
-                                <span><span class="block text-sm font-semibold">Non-cash</span><span class="block text-[11px] text-slate-500">QRIS / transfer / e-wallet</span></span>
+                                <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50 text-red-600">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </span>
+                                <span>
+                                    <span class="block text-sm font-semibold">Non-cash</span>
+                                    <span class="block text-[11px] text-slate-500">QRIS / transfer / e-wallet</span>
+                                </span>
                             </label>
                         </div>
+
                         <div id="noncashOptions" class="mt-4 hidden">
-                            <label for="paymentProvider" class="mb-2 block text-xs font-semibold text-slate-600">Pilih metode non-cash</label>
-                            <select id="paymentProvider" class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100">
-                                <option value="QRIS">QRIS</option><option value="Transfer Bank">Transfer Bank</option><option value="E-wallet">E-wallet (GoPay / OVO / ShopeePay)</option>
+                            <label for="paymentProvider" class="mb-2 block text-xs font-semibold text-slate-600">Pilih pembayaran non-cash</label>
+                            <select id="paymentProvider"
+                                class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100">
+                                <option value="QRIS">QRIS</option>
+                                <option value="Transfer Bank">Transfer Bank</option>
+                                <option value="E-wallet">E-wallet (GoPay / OVO / ShopeePay)</option>
                             </select>
+                            <p class="mt-2 text-[11px] text-slate-400">Ini simulasi pilihan metode pembayaran. Belum terhubung ke payment gateway.</p>
                         </div>
                     </div>
 
                     <div class="rounded-lg bg-amber-50 p-4 text-xs leading-relaxed text-amber-800">
                         <i class="fa-solid fa-circle-info mr-1"></i>
-                        Prototype frontend: pembayaran dan penyimpanan transaksi disimulasikan di browser. Belum terhubung ke backend atau payment gateway.
+                        Reservasi pada halaman ini merupakan simulasi frontend. Pembayaran belum memproses uang sungguhan dan data belum tersimpan ke server.
                     </div>
-                    <button type="submit" class="w-full rounded-lg bg-red-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-red-600/20 transition hover:bg-red-700 active:scale-[0.99]">
+
+                    <button type="submit"
+                        class="w-full rounded-lg bg-red-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-red-600/20 transition hover:bg-red-700 active:scale-[0.99]">
                         Buat Reservasi <i class="fa-solid fa-arrow-right ml-2"></i>
                     </button>
                 </form>
             </section>
 
+            <!-- RINGKASAN BIAYA -->
             <aside class="space-y-5">
                 <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <div class="mb-5 flex items-center gap-3">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700"><i class="fa-solid fa-receipt"></i></div>
-                        <div><h2 class="font-bold">Ringkasan Biaya</h2><p class="text-xs text-slate-400">Estimasi pembayaran</p></div>
+                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+                        <div>
+                            <h2 class="font-bold">Ringkasan Biaya</h2>
+                            <p class="text-xs text-slate-400">Estimasi pembayaran</p>
+                        </div>
                     </div>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex justify-between gap-3"><span class="text-slate-500">Tipe tempat</span><span id="summarySpace" class="text-right font-semibold">Individual Desk</span></div>
-                        <div class="flex justify-between gap-3"><span class="text-slate-500">Harga per jam</span><span id="summaryPrice" class="font-semibold">IDR 15.000</span></div>
-                        <div class="flex justify-between gap-3"><span class="text-slate-500">Durasi</span><span id="summaryDuration" class="font-semibold">1 jam</span></div>
-                        <div class="border-t border-dashed border-slate-200 pt-4"><div class="flex items-center justify-between"><span class="font-semibold">Total biaya</span><span id="totalPrice" class="text-xl font-extrabold text-red-600">IDR 15.000</span></div></div>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between gap-3">
+                            <span class="text-slate-500">Tipe tempat</span>
+                            <span id="summarySpace" class="text-right font-semibold">Individual Desk</span>
+                        </div>
+                        <div class="flex justify-between gap-3">
+                            <span class="text-slate-500">Harga per jam</span>
+                            <span id="summaryPrice" class="font-semibold">Rp15.000</span>
+                        </div>
+                        <div class="flex justify-between gap-3">
+                            <span class="text-slate-500">Durasi</span>
+                            <span id="summaryDuration" class="font-semibold">1 jam</span>
+                        </div>
+                        <div class="border-t border-dashed border-slate-200 pt-4">
+                            <div class="flex items-center justify-between">
+                                <span class="font-semibold">Total biaya</span>
+                                <span id="totalPrice" class="text-xl font-extrabold text-red-600">Rp15.000</span>
+                            </div>
+                        </div>
                     </div>
                 </section>
+
                 <section class="rounded-2xl bg-slate-900 p-6 text-white">
                     <h3 class="font-bold">Informasi Reservasi</h3>
                     <ul class="mt-4 space-y-3 text-xs leading-relaxed text-slate-300">
                         <li class="flex gap-3"><i class="fa-regular fa-clock mt-0.5 text-red-400"></i><span>Jam operasional 08.00–23.00 WIB.</span></li>
                         <li class="flex gap-3"><i class="fa-solid fa-calendar-check mt-0.5 text-red-400"></i><span>Pastikan tanggal dan jam reservasi sudah sesuai.</span></li>
-                        <li class="flex gap-3"><i class="fa-solid fa-wallet mt-0.5 text-red-400"></i><span>Verifikasi pembayaran dilakukan melalui admin.</span></li>
+                        <li class="flex gap-3"><i class="fa-solid fa-wallet mt-0.5 text-red-400"></i><span>Pembayaran cash dilakukan langsung di lokasi.</span></li>
                     </ul>
                 </section>
             </aside>
         </div>
 
+        <!-- HASIL RESERVASI -->
         <section id="bookingResult" class="mt-8 hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8" aria-live="polite">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div><p class="text-xs font-bold uppercase tracking-widest text-red-600">Reservasi berhasil dibuat</p><h2 class="mt-1 text-2xl font-extrabold">Ringkasan Transaksi</h2><p class="mt-1 text-sm text-slate-500">Simpan nomor reservasi untuk referensi.</p></div>
-                <span id="transactionStatus" class="inline-flex w-fit items-center rounded-full bg-amber-100 px-4 py-2 text-xs font-bold text-amber-800">Menunggu pembayaran</span>
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-red-600">Reservasi dibuat</p>
+                    <h2 class="mt-1 text-2xl font-extrabold">Ringkasan Transaksi</h2>
+                    <p class="mt-1 text-sm text-slate-500">Simpan nomor reservasi ini untuk referensi.</p>
+                </div>
+                <span id="transactionStatus" class="inline-flex w-fit items-center rounded-full bg-amber-100 px-4 py-2 text-xs font-bold text-amber-800">
+                    Menunggu pembayaran
+                </span>
             </div>
+
             <div class="mt-6 grid gap-4 border-y border-slate-100 py-5 sm:grid-cols-2">
                 <div><p class="text-xs text-slate-400">Nomor reservasi</p><p id="resultBookingId" class="mt-1 font-bold"></p></div>
                 <div><p class="text-xs text-slate-400">Nama pemesan</p><p id="resultName" class="mt-1 font-semibold"></p></div>
                 <div><p class="text-xs text-slate-400">Tempat dan jadwal</p><p id="resultSchedule" class="mt-1 font-semibold"></p></div>
                 <div><p class="text-xs text-slate-400">Metode pembayaran</p><p id="resultPayment" class="mt-1 font-semibold"></p></div>
             </div>
+
             <div class="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div><p class="text-xs text-slate-400">Total transaksi</p><p id="resultTotal" class="text-2xl font-extrabold text-red-600"></p></div>
-                <button id="simulatePaymentButton" type="button" class="hidden rounded-lg bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700">Simulasikan pembayaran</button>
+                <div>
+                    <p class="text-xs text-slate-400">Total transaksi</p>
+                    <p id="resultTotal" class="text-2xl font-extrabold text-red-600"></p>
+                </div>
+                <button id="simulatePaymentButton" type="button" class="hidden rounded-lg bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700">
+                    Simulasikan pembayaran berhasil
+                </button>
             </div>
             <p id="resultNote" class="mt-4 text-xs leading-relaxed text-slate-500"></p>
-            <a href="AdminTransaksi.html" class="mt-4 inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-700">Lihat di dashboard admin <i class="fa-solid fa-arrow-right ml-2"></i></a>
         </section>
     </main>
 
-    <footer class="mt-12 border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400">&copy; 2026 NUGAS Space. All rights reserved.</footer>
+    <footer class="mt-12 border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400">
+        &copy; 2026 NUGAS Space. All rights reserved.
+    </footer>
 
     <script>
-        const STORAGE_KEY = "nugasSpaceTransactions";
-        const form = document.getElementById("bookingForm");
+        const bookingForm = document.getElementById("bookingForm");
         const spaceType = document.getElementById("spaceType");
         const durationInput = document.getElementById("duration");
         const bookingDate = document.getElementById("bookingDate");
         const startTime = document.getElementById("startTime");
         const noncashOptions = document.getElementById("noncashOptions");
+        const paymentProvider = document.getElementById("paymentProvider");
+        const bookingResult = document.getElementById("bookingResult");
         const simulatePaymentButton = document.getElementById("simulatePaymentButton");
-        let latestBookingId = null;
+        const STORAGE_KEY = "nugasSpaceTransactions";
 
         const spaceNames = {
             individual: "Individual Desk",
@@ -180,17 +260,18 @@
             conference: "Conference Room"
         };
 
-        // Data pilihan meja yang dikirim dari Fasilitas.html
-        let pendingBooking = null;
-        try {
-            pendingBooking = JSON.parse(sessionStorage.getItem("nugasPendingBooking") || "null");
-        } catch (error) {
-            pendingBooking = null;
+        function readJSON(key, fallback) {
+            try {
+                const value = JSON.parse(localStorage.getItem(key));
+                return value === null ? fallback : value;
+            } catch (error) {
+                return fallback;
+            }
         }
 
         function getTransactions() {
-            try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
-            catch (error) { return []; }
+            const transactions = readJSON(STORAGE_KEY, []);
+            return Array.isArray(transactions) ? transactions : [];
         }
 
         function saveTransactions(transactions) {
@@ -198,126 +279,172 @@
         }
 
         function rupiah(amount) {
-            return "IDR " + new Intl.NumberFormat("id-ID", { maximumFractionDigits: 0 }).format(amount);
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                maximumFractionDigits: 0
+            }).format(amount);
         }
 
-        function selectedPrice() {
+        // Pilihan dapat datang dari denah versi localStorage maupun sessionStorage.
+        let selectedDesk = readJSON("nugasSpaceSelectedDesk", null);
+        let pendingBooking = null;
+        try {
+            pendingBooking = JSON.parse(sessionStorage.getItem("nugasPendingBooking") || "null");
+        } catch (error) {
+            pendingBooking = null;
+        }
+
+        const deskSelection = selectedDesk || pendingBooking;
+        const selectedUnitId = deskSelection
+            ? (deskSelection.deskNumber ?? deskSelection.unitId ?? null)
+            : null;
+
+        function getSelectedPrice() {
             return Number(spaceType.options[spaceType.selectedIndex].dataset.price);
         }
 
         function updateSummary() {
-            const price = selectedPrice();
+            const price = getSelectedPrice();
             const duration = Number(durationInput.value);
-            document.getElementById("summarySpace").textContent = spaceNames[spaceType.value];
+            document.getElementById("summarySpace").textContent =
+                selectedUnitId !== null ? "Individual Desk - Meja #" + selectedUnitId : spaceNames[spaceType.value];
             document.getElementById("summaryPrice").textContent = rupiah(price);
             document.getElementById("summaryDuration").textContent = duration + " jam";
             document.getElementById("totalPrice").textContent = rupiah(price * duration);
         }
 
         function updatePaymentView() {
-            const method = document.querySelector('input[name="paymentMethod"]:checked').value;
-            noncashOptions.classList.toggle("hidden", method !== "noncash");
-            document.querySelectorAll(".payment-option").forEach(function(label) {
-                const checked = label.querySelector("input").checked;
-                label.classList.toggle("border-red-500", checked);
-                label.classList.toggle("bg-red-50", checked);
-                label.classList.toggle("border-slate-200", !checked);
+            const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            noncashOptions.classList.toggle("hidden", selectedMethod !== "noncash");
+
+            document.querySelectorAll(".payment-option").forEach(function(option) {
+                const radio = option.querySelector("input");
+                option.classList.toggle("border-red-500", radio.checked);
+                option.classList.toggle("bg-red-50", radio.checked);
+                option.classList.toggle("border-slate-200", !radio.checked);
             });
         }
 
-        function localDateString(date) {
-            const offset = date.getTimezoneOffset();
-            return new Date(date.getTime() - offset * 60000).toISOString().split("T")[0];
+        function setTodayAsMinimum() {
+            const now = new Date();
+            const today = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+                .toISOString().split("T")[0];
+
+            bookingDate.min = today;
+            bookingDate.value = (deskSelection && deskSelection.date) || today;
+
+            if (deskSelection) {
+                spaceType.value = "individual";
+                spaceType.disabled = true;
+
+                if (deskSelection.time) startTime.value = deskSelection.time;
+                if (deskSelection.duration) durationInput.value = String(deskSelection.duration);
+
+                const customerName = document.getElementById("customerName");
+                if (deskSelection.name) customerName.value = deskSelection.name;
+
+                if (selectedUnitId !== null) {
+                    document.getElementById("selectedDeskNotice").classList.remove("hidden");
+                    document.getElementById("selectedDeskSummary").textContent =
+                        "Meja #" + selectedUnitId +
+                        (deskSelection.zone ? " • " + deskSelection.zone : "") +
+                        (deskSelection.date ? " • " + deskSelection.date : "") +
+                        (deskSelection.time ? " • " + deskSelection.time : "") +
+                        (deskSelection.duration ? " selama " + deskSelection.duration + " jam" : "");
+                }
+
+                if (deskSelection.duration) durationInput.disabled = true;
+                if (deskSelection.date) bookingDate.readOnly = true;
+                if (deskSelection.time) startTime.readOnly = true;
+            }
         }
 
-        const today = localDateString(new Date());
-        bookingDate.min = today;
-        bookingDate.value = today;
+        function hasBookingConflict(unitId, date, time, duration, transactions) {
+            const requestedStart = Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5));
+            const requestedEnd = requestedStart + duration * 60;
 
-        if (pendingBooking && pendingBooking.unitId) {
-            spaceType.value = "individual";
-            spaceType.disabled = true;
-            document.getElementById("selectedDeskNotice").classList.remove("hidden");
-            document.getElementById("selectedDeskText").textContent =
-                "Meja #" + pendingBooking.unitId + " dipilih dari denah Fasilitas.";
-            document.getElementById("customerName").value = pendingBooking.name || "";
-            bookingDate.value = pendingBooking.date || today;
-            startTime.value = pendingBooking.time || "09:00";
-            durationInput.value = String(pendingBooking.duration || 1);
+            return transactions.some(function(item) {
+                if (
+                    String(item.unitId) !== String(unitId) ||
+                    item.date !== date ||
+                    item.status === "Dibatalkan"
+                ) return false;
+
+                const existingTime = String(item.time || "00:00");
+                const existingStart = Number(existingTime.slice(0, 2)) * 60 +
+                    Number(existingTime.slice(3, 5));
+                const existingEnd = existingStart + Number(item.duration || 0) * 60;
+                return requestedStart < existingEnd && existingStart < requestedEnd;
+            });
         }
 
         spaceType.addEventListener("change", updateSummary);
         durationInput.addEventListener("change", updateSummary);
-        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => radio.addEventListener("change", updatePaymentView));
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(function(radio) {
+            radio.addEventListener("change", updatePaymentView);
+        });
 
-        form.addEventListener("submit", function(event) {
+        bookingForm.addEventListener("submit", function(event) {
             event.preventDefault();
+
             const name = document.getElementById("customerName").value.trim();
             const phone = document.getElementById("customerPhone").value.trim();
             const date = bookingDate.value;
             const time = startTime.value;
             const duration = Number(durationInput.value);
             const method = document.querySelector('input[name="paymentMethod"]:checked').value;
-            const provider = method === "cash" ? "Cash" : document.getElementById("paymentProvider").value;
-            const price = selectedPrice();
+            const provider = method === "cash" ? "Cash (bayar di lokasi)" : paymentProvider.value;
+            const price = getSelectedPrice();
             const total = price * duration;
 
             if (!name || !phone || !date || !time) {
                 alert("Mohon lengkapi semua data reservasi.");
                 return;
             }
-            if (!/^[0-9+()\-\s]{8,20}$/.test(phone)) {
-                alert("Nomor WhatsApp tidak valid. Periksa kembali nomor yang dimasukkan.");
+
+            if (!/^[0-9+()\-\s]{9,20}$/.test(phone)) {
+                alert("Nomor WhatsApp tidak valid.");
                 return;
             }
+
             if (time < "08:00" || time > "22:00") {
-                alert("Jam mulai reservasi harus antara pukul 08.00 sampai 22.00 WIB.");
+                alert("Jam mulai reservasi harus berada antara pukul 08.00 sampai 22.00 WIB.");
                 return;
             }
-            const start = new Date(date + "T" + time + ":00");
-            if (start.getTime() < Date.now()) {
+
+            const startDateTime = new Date(date + "T" + time + ":00");
+            if (startDateTime < new Date()) {
                 alert("Tanggal dan jam reservasi tidak boleh berada di waktu yang sudah lewat.");
                 return;
             }
+
             const endHour = Number(time.slice(0, 2)) + Number(time.slice(3, 5)) / 60 + duration;
             if (endHour > 23) {
-                alert("Durasi reservasi melewati jam operasional (maksimal pukul 23.00).");
+                alert("Durasi reservasi melewati jam operasional (maksimal sampai pukul 23.00).");
                 return;
             }
 
             const transactions = getTransactions();
-
-            // Cek ulang ketersediaan meja sebelum transaksi disimpan
-            if (pendingBooking && pendingBooking.unitId) {
-                const requestedStart = Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5));
-                const requestedEnd = requestedStart + duration * 60;
-                const hasConflict = transactions.some(function(item) {
-                    if (
-                        String(item.unitId) !== String(pendingBooking.unitId) ||
-                        item.date !== date ||
-                        item.status === "Dibatalkan"
-                    ) return false;
-
-                    const existingStart = Number(String(item.time || "00:00").slice(0, 2)) * 60 +
-                        Number(String(item.time || "00:00").slice(3, 5));
-                    const existingEnd = existingStart + Number(item.duration || 0) * 60;
-                    return requestedStart < existingEnd && existingStart < requestedEnd;
-                });
-
-                if (hasConflict) {
-                    alert("Maaf, meja tersebut baru saja dipesan. Silakan kembali ke Fasilitas dan pilih meja lain.");
-                    return;
-                }
+            if (selectedUnitId !== null && hasBookingConflict(selectedUnitId, date, time, duration, transactions)) {
+                alert("Maaf, meja tersebut baru saja dipesan. Silakan kembali ke Fasilitas dan pilih meja lain.");
+                return;
             }
 
             const bookingId = "NGS-" + Date.now().toString().slice(-8);
+            const selectedSpaceName = selectedUnitId !== null
+                ? "Individual Desk - Meja #" + selectedUnitId
+                : spaceNames[spaceType.value];
+
             const transaction = {
                 id: bookingId,
-                unitId: pendingBooking && pendingBooking.unitId ? String(pendingBooking.unitId) : null,
+                bookingId: bookingId,
+                unitId: selectedUnitId !== null ? String(selectedUnitId) : spaceType.value,
+                deskNumber: selectedUnitId !== null ? String(selectedUnitId) : null,
                 name: name,
                 phone: phone,
-                space: spaceNames[spaceType.value],
-                spaceKey: spaceType.value,
+                space: selectedSpaceName,
+                spaceKey: selectedUnitId !== null ? "individual" : spaceType.value,
                 date: date,
                 time: time,
                 duration: duration,
@@ -328,42 +455,65 @@
                 createdAt: new Date().toISOString()
             };
 
+            // Simpan satu format transaksi agar halaman denah dan admin membaca sumber data yang sama.
             transactions.unshift(transaction);
             saveTransactions(transactions);
+            localStorage.setItem("nugasSpaceLastBooking", JSON.stringify(transaction));
+            localStorage.removeItem("nugasSpaceSelectedDesk");
             sessionStorage.removeItem("nugasPendingBooking");
-            pendingBooking = null;
-            latestBookingId = bookingId;
 
             document.getElementById("resultBookingId").textContent = bookingId;
             document.getElementById("resultName").textContent = name + " (" + phone + ")";
-            document.getElementById("resultSchedule").textContent = transaction.space + (transaction.unitId ? " • Meja #" + transaction.unitId : "") + " • " + date + " • " + time + " (" + duration + " jam)";
+            document.getElementById("resultSchedule").textContent =
+                selectedSpaceName + " • " + date + " • " + time + " (" + duration + " jam)";
             document.getElementById("resultPayment").textContent = provider;
             document.getElementById("resultTotal").textContent = rupiah(total);
             document.getElementById("transactionStatus").textContent = transaction.status;
+
             document.getElementById("resultNote").textContent = method === "cash"
-                ? "Silakan lakukan pembayaran cash di lokasi. Admin dapat memverifikasi transaksi melalui dashboard admin."
-                : "Lakukan pembayaran non-cash sesuai metode yang dipilih, lalu gunakan tombol simulasi pembayaran untuk demo. Admin tetap perlu memverifikasi transaksi.";
+                ? "Silakan lakukan pembayaran cash di lokasi NUGAS Space. Status transaksi menunggu pembayaran."
+                : "Lakukan pembayaran sesuai metode yang dipilih, lalu tekan tombol simulasi. Pembayaran ini bukan transaksi sungguhan.";
+
             simulatePaymentButton.classList.toggle("hidden", method !== "noncash");
             simulatePaymentButton.disabled = false;
-            simulatePaymentButton.textContent = "Simulasikan pembayaran";
+            simulatePaymentButton.textContent = "Simulasikan pembayaran berhasil";
             simulatePaymentButton.classList.remove("cursor-not-allowed", "opacity-60");
-            document.getElementById("bookingResult").classList.remove("hidden");
-            document.getElementById("bookingResult").scrollIntoView({ behavior: "smooth", block: "start" });
+
+            bookingResult.classList.remove("hidden");
+            bookingResult.scrollIntoView({ behavior: "smooth", block: "start" });
         });
 
         simulatePaymentButton.addEventListener("click", function() {
+            const savedBooking = readJSON("nugasSpaceLastBooking", null);
+            if (!savedBooking) return;
+
             const transactions = getTransactions();
-            const transaction = transactions.find(item => item.id === latestBookingId);
-            if (!transaction || transaction.status !== "Menunggu pembayaran") return;
-            transaction.status = "Menunggu verifikasi";
+            const index = transactions.findIndex(function(item) {
+                return item.id === savedBooking.id || item.bookingId === savedBooking.bookingId;
+            });
+
+            if (index < 0) return;
+
+            transactions[index].status = "Menunggu verifikasi";
+            transactions[index].paymentNote = "Pembayaran disimulasikan oleh pengguna";
             saveTransactions(transactions);
-            document.getElementById("transactionStatus").textContent = transaction.status;
-            document.getElementById("resultNote").textContent = "Pembayaran berhasil disimulasikan. Transaksi sekarang menunggu verifikasi admin.";
+
+            savedBooking.status = "Menunggu verifikasi";
+            localStorage.setItem("nugasSpaceLastBooking", JSON.stringify(savedBooking));
+
+            const statusBadge = document.getElementById("transactionStatus");
+            statusBadge.textContent = "Menunggu verifikasi";
+            statusBadge.className =
+                "inline-flex w-fit items-center rounded-full bg-emerald-100 px-4 py-2 text-xs font-bold text-emerald-800";
+            document.getElementById("resultNote").textContent =
+                "Pembayaran disimulasikan dan menunggu verifikasi admin. Ini masih prototype frontend, belum terhubung ke payment gateway.";
+
             simulatePaymentButton.disabled = true;
             simulatePaymentButton.textContent = "Pembayaran disimulasikan";
             simulatePaymentButton.classList.add("cursor-not-allowed", "opacity-60");
         });
 
+        setTodayAsMinimum();
         updateSummary();
         updatePaymentView();
     </script>
