@@ -379,24 +379,25 @@
             const password = passwordInput.value;
 
             if (email === "" || password === "") {
-
                 showToast("Email dan password wajib diisi!");
-
                 return;
-
             }
 
-            const roleName = currentRole === "staff" ? "Staff" : "Customer";
+            const roleName = currentRole === "staff" ? "Staff / Admin" : "Customer";
 
-            showToast(
-                "Simulasi login sebagai " + roleName + " berhasil!"
-            );
+            // Simpan sesi sederhana di sessionStorage untuk ditampilkan di Dashboard Admin
+            sessionStorage.setItem("nugasRole", currentRole);
+            sessionStorage.setItem("nugasEmail", email);
+
+            showToast("Login sebagai " + roleName + " berhasil! Mengalihkan...");
 
             setTimeout(function() {
-
-                window.location.href = "Beranda.html";
-
-            }, 1200);
+                if (currentRole === "staff") {
+                    window.location.href = "admin-dashboard.html";
+                } else {
+                    window.location.href = "Beranda.html";
+                }
+            }, 1000);
 
         });
 
