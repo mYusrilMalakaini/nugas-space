@@ -21,9 +21,7 @@
 
     <div class="flex min-h-screen">
 
-        <!-- ========================================================= -->
-        <!-- SIDEBAR KIRI (Terinspirasi dari referensi UXETO + Tema Urban) -->
-        <!-- ========================================================= -->
+        <!--Sidebar Kiri-->
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col justify-between border-r border-slate-200 bg-white px-5 py-6 transition-transform duration-200 lg:static lg:translate-x-0">
 
             <div>
@@ -135,9 +133,7 @@
 
         </aside>
 
-        <!-- ========================================================= -->
-        <!-- KONTEN UTAMA DASHBOARD                                    -->
-        <!-- ========================================================= -->
+        <!--Konten Dashboard Utama-->
         <div id="top" class="flex flex-1 flex-col overflow-x-hidden">
 
             <!-- TOPBAR -->
@@ -179,10 +175,10 @@
                 </div>
             </header>
 
-            <!-- ISI HALAMAN -->
+            <!-- Isi Halaman -->
             <main class="mx-auto w-full max-w-7xl flex-1 p-6">
 
-                <!-- 1. EMPAT KARTU ANALITIK ATAS (Mirip Referensi Gambar UXETO) -->
+                <!--  Empat CArd Analitik bagian atas -->
                 <section class="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
                     <!-- Card 1: Total Unit Meja & Ruangan -->
@@ -291,7 +287,7 @@
 
                 </section>
 
-                <!-- 2. PANEL TENGAH: DISTRIBUSI KATEGORI & PROPORSI STATUS (Mirip Layout Grafik Referensi) -->
+                <!--  Distribusi Kategori & Proporsi Status -->
                 <section class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
 
                     <!-- Kolom Kiri (2/3): Ringkasan Kapasitas & Tarif per Kategori Ruang -->
@@ -315,7 +311,7 @@
                         </div>
                     </div>
 
-                    <!-- Kolom Kanan (1/3): Proporsi Ketersediaan & Quick Action -->
+                    <!-- Proporsi Ketersediaan & Quick Action -->
                     <div class="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
                         <div>
                             <div class="flex items-center justify-between">
@@ -357,7 +353,7 @@
 
                 </section>
 
-                <!-- 3. TABEL MANAJEMEN CRUD MEJA & RUANGAN (Mirip Tabel Bawah Gambar Referensi) -->
+                <!-- Tabel Manajemen CRUD Meja & Ruangan-->
                 <section id="crudSection" class="rounded-xl border border-slate-200 bg-white shadow-xs">
 
                     <!-- Header Tabel & Baris Filter/Pencarian -->
@@ -452,9 +448,8 @@
         </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- MODAL TAMBAH & EDIT MEJA / RUANGAN (CREATE & UPDATE)      -->
-    <!-- ========================================================= -->
+
+    <!-- Modal Tambah & Edit Meja / Ruangan (Create & Update)-->
     <div id="crudModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4 backdrop-blur-[1px]">
         <div class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
 
@@ -604,9 +599,7 @@
         </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- MODAL KONFIRMASI HAPUS (DELETE)                           -->
-    <!-- ========================================================= -->
+    <!-- Modal Konfirmasi Hapus (Delete)-->
     <div id="deleteModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4 backdrop-blur-[1px]">
         <div class="w-full max-w-sm overflow-hidden rounded-2xl bg-white p-6 text-center shadow-2xl">
             <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
@@ -635,7 +628,7 @@
         </div>
     </div>
 
-    <!-- TOAST NOTIFIKASI -->
+    <!-- Toast Notifikasi -->
     <div
         id="toast"
         class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-lg bg-slate-900 px-5 py-3 text-center text-xs font-medium text-white shadow-xl"
