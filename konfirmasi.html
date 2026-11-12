@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Space — Konfirmasi Reservasi, Invoice &amp; Riwayat Pemesanan</title>
+  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nugas: {
+              red: '#C73E52',
+              redHover: '#B23144',
+              redLight: '#FDF2F4',
+              navy: '#051B31',
+              navyCard: '#0A2542',
+              surface: '#F8F9FA'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #FFFFFF !important; }
+      .print-area { box-shadow: none !important; border: 1px solid #E2E8F0 !important; }
+    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-nugas-surface text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="no-print sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 px-4 sm:px-6 py-3.5 shadow-sm">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <img src="data:image/png;base64,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" alt="Urban Space Logo" class="h-7 sm:h-8 w-auto object-contain">
+        <span class="hidden sm:inline-block text-[10px] font-bold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md tracking-wider uppercase">Surabaya Keputih</span>
+      </div>
+
+      <!-- Main Section Tabs -->
+      <nav class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-bold">
+        <button id="nav-tab-invoice" class="px-3.5 py-2 rounded-lg bg-nugas-red text-white shadow-sm transition-all flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Konfirmasi &amp; Invoice</span>
+        </button>
+        <button id="nav-tab-history" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-nugas-navy transition-all flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Riwayat Booking</span>
+        </button>
+        <button id="nav-tab-notif" class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-nugas-navy transition-all flex items-center gap-1.5 relative">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <span>Notifikasi</span>
+          <span id="notif-badge-count" class="ml-0.5 px-1.5 py-0.5 rounded-full bg-nugas-red text-white text-[10px] font-black leading-none">2</span>
+        </button>
+      </nav>
+
+      <!-- User Status Badge -->
+      <div class="hidden md:flex items-center gap-2 text-xs">
+        <div class="w-7 h-7 rounded-full bg-nugas-redLight border border-red-200 text-nugas-red flex items-center justify-center font-black">AP</div>
+        <div class="leading-tight">
+          <div class="font-bold text-nugas-navy">Ahmad Pratama</div>
+          <div class="text-[10px] text-slate-400">Member Aktif</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FLOATING TOAST NOTIFICATION -->
+  <div id="toast-popup" class="no-print fixed bottom-5 right-5 z-50 max-w-sm w-full bg-nugas-navy text-white rounded-2xl p-4 shadow-2xl border border-slate-700 transform translate-y-24 opacity-0 pointer-events-none transition-all duration-300 flex items-start gap-3">
+    <div id="toast-icon" class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black shrink-0">✓</div>
+    <div class="flex-1 text-xs">
+      <div class="font-extrabold text-sm text-white" id="toast-title">Konfirmasi Berhasil</div>
+      <p class="text-slate-300 mt-0.5 leading-relaxed" id="toast-message">Reservasi meja Anda telah terkonfirmasi.</p>
+    </div>
+    <button id="btn-close-toast" class="text-slate-400 hover:text-white text-xs font-bold px-1">✕</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: KONFIRMASI RESERVASI & INVOICE  -->
+    <!-- ========================================== -->
+    <section id="section-invoice" class="space-y-6">
+
+      <!-- Confirmation Status Banner -->
+      <div id="confirmation-banner" class="no-print bg-emerald-50 border border-emerald-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+        <div class="flex items-start gap-3.5">
+          <div id="banner-icon-box" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-black shrink-0 shadow-sm">
+            ✓
+          </div>
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <h1 id="banner-heading" class="font-black text-base sm:text-lg text-nugas-navy">Reservasi Terkonfirmasi!</h1>
+              <span id="banner-pill" class="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider">LUNAS / PAID</span>
+            </div>
+            <p id="banner-subtext" class="text-xs text-slate-600 mt-1">
+              Bukti pemesanan dan kode QR Check-In telah dikirim ke WhatsApp &amp; Email Anda. Harap check-out 5 menit sebelum sesi berakhir.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button id="btn-trigger-notif-demo" class="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-nugas-navy border border-emerald-300 text-xs font-bold transition-all">
+            Simulasi Notifikasi
+          </button>
+          <button id="btn-print-page" class="px-4 py-2 rounded-xl bg-nugas-red hover:bg-nugas-redHover text-white text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            <span>Cetak / PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Invoice / Bukti Pemesanan Card -->
+      <div class="print-area bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+        <!-- Invoice Top Header -->
+        <div class="p-6 sm:p-8 bg-nugas-navy text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-3">
+              <div class="bg-white px-3 py-1.5 rounded-xl inline-flex items-center shadow-sm">
+                <img src="data:image/png;base64,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" alt="Urban Space Logo" class="h-6 w-auto object-contain">
+              </div>
+              <span class="text-[10px] font-bold px-2.5 py-1 rounded bg-white/10 text-slate-200 uppercase tracking-wider">Official Receipt</span>
+            </div>
+            <p class="text-xs text-slate-300 mt-1">Jl. Marina Emas No. 73 (Bumi Marina Emas Utara Blok F-19), Keputih, Sukolilo, Surabaya</p>
+            <p class="text-xs text-slate-400">WhatsApp CS: +62 821-3966-2022 | urbanspace.com</p>
+          </div>
+          <div class="sm:text-right">
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Nomor Invoice</div>
+            <div class="flex items-center sm:justify-end gap-2 mt-0.5">
+              <span id="inv-code" class="font-mono text-base sm:text-lg font-bold text-white">INV/URB/20261112/0841</span>
+              <button id="btn-copy-inv" class="no-print px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-[10px] font-bold text-slate-200 transition-all">Salin</button>
+            </div>
+            <div id="inv-date-issued" class="text-xs text-slate-400 mt-1">Diterbitkan: 12 Nov 2026, 08:05 WIB</div>
+          </div>
+        </div>
+
+        <!-- Customer & Booking Summary Grid -->
+        <div class="p-6 sm:p-8 bg-slate-50 border-b border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+          <div>
+            <span class="text-slate-400 font-bold uppercase tracking-wider block mb-1.5">Data Pemesan</span>
+            <div id="inv-cust-name" class="font-extrabold text-sm text-nugas-navy">Ahmad Pratama</div>
+            <div id="inv-cust-org" class="text-slate-600 mt-0.5">Institut Teknologi Sepuluh Nopember (ITS)</div>
+            <div id="inv-cust-contact" class="text-slate-500 mt-0.5">0812-3456-7890 &bull; ahmad.pratama@student.its.ac.id</div>
+          </div>
+
+          <div>
+            <span class="text-slate-400 font-bold uppercase tracking-wider block mb-1.5">Detail Tempat &amp; Sesi</span>
+            <div id="inv-space-name" class="font-extrabold text-sm text-nugas-red">Meja A-03 &mdash; Individual Desk</div>
+            <div id="inv-zone" class="text-slate-600 mt-0.5">Lantai 1, No-Smoking Indoor (Full AC)</div>
+            <div id="inv-schedule" class="font-bold text-nugas-navy mt-0.5">Kamis, 12 Nov 2026 &bull; 14:00 - 17:00 WIB (3 Jam)</div>
+          </div>
+
+          <div class="flex items-center md:justify-end gap-4">
+            <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3">
+              <!-- Vector QR Code Representation -->
+              <svg class="w-16 h-16 shrink-0" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="64" height="64" rx="6" fill="#FFFFFF"/>
+                <rect x="4" y="4" width="18" height="18" rx="2" fill="#051B31"/>
+                <rect x="8" y="8" width="10" height="10" fill="#FFFFFF"/>
+                <rect x="10" y="10" width="6" height="6" fill="#C73E52"/>
+                <rect x="42" y="4" width="18" height="18" rx="2" fill="#051B31"/>
+                <rect x="46" y="8" width="10" height="10" fill="#FFFFFF"/>
+                <rect x="48" y="10" width="6" height="6" fill="#C73E52"/>
+                <rect x="4" y="42" width="18" height="18" rx="2" fill="#051B31"/>
+                <rect x="8" y="46" width="10" height="10" fill="#FFFFFF"/>
+                <rect x="10" y="48" width="6" height="6" fill="#C73E52"/>
+                <rect x="28" y="6" width="8" height="8" fill="#051B31"/>
+                <rect x="28" y="18" width="10" height="6" fill="#051B31"/>
+                <rect x="26" y="28" width="12" height="12" rx="2" fill="#C73E52"/>
+                <rect x="42" y="28" width="8" height="12" fill="#051B31"/>
+                <rect x="54" y="28" width="6" height="6" fill="#051B31"/>
+                <rect x="28" y="44" width="8" height="16" fill="#051B31"/>
+                <rect x="40" y="46" width="10" height="8" fill="#051B31"/>
+                <rect x="52" y="42" width="8" height="18" fill="#051B31"/>
+              </svg>
+              <div>
+                <div class="text-[10px] font-bold text-slate-400 uppercase">QR Check-In</div>
+                <div id="inv-checkin-code" class="font-mono font-black text-sm text-nugas-navy">URB-841A</div>
+                <div id="inv-payment-method" class="text-[11px] font-semibold text-emerald-700 mt-0.5">QRIS Terverifikasi</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Itemized Billing Table -->
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="bg-slate-100 text-slate-600 uppercase tracking-wider text-[11px]">
+                  <th class="p-3.5 rounded-l-xl font-extrabold">Deskripsi Layanan</th>
+                  <th class="p-3.5 font-extrabold text-center">Tarif / Jam</th>
+                  <th class="p-3.5 font-extrabold text-center">Durasi</th>
+                  <th class="p-3.5 rounded-r-xl font-extrabold text-right">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr>
+                  <td class="p-4">
+                    <div id="inv-item-title" class="font-bold text-sm text-nugas-navy">Sewa Meja Individual A-03 (Close Bill)</div>
+                    <div class="text-slate-500 text-[11px] mt-0.5">Fasilitas: WiFi up to 200 Mbps, Colokan Personal, Free Flow Air Minum, Free Printing Tugas</div>
+                  </td>
+                  <td id="inv-item-rate" class="p-4 text-center font-semibold text-slate-700">IDR 5.000</td>
+                  <td id="inv-item-duration" class="p-4 text-center font-semibold text-slate-700">3 Jam</td>
+                  <td id="inv-item-subtotal" class="p-4 text-right font-extrabold text-nugas-navy">IDR 15.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Totals & Policy Footer -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-100 items-start">
+            <div class="bg-nugas-redLight border border-red-200 rounded-2xl p-4 text-xs space-y-1.5 text-slate-700">
+              <div class="font-black text-nugas-red">Ketentuan Check-In &amp; Close Bill:</div>
+              <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                <li>Tunjukkan QR Check-In atau Nomor Invoice ke staf resepsionis saat tiba.</li>
+                <li>Lakukan check-out 5 menit sebelum sesi berakhir agar tidak terkena charge jam berikutnya.</li>
+                <li>Diperbolehkan membawa makanan/minuman dari luar (tidak beraroma menyengat).</li>
+                <li>Pembatalan pesanan tidak memiliki kebijakan pengembalian dana (non-refundable).</li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-2.5 text-xs">
+              <div class="flex justify-between text-slate-500">
+                <span>Subtotal Layanan</span>
+                <span id="inv-sum-sub" class="font-bold text-slate-800">IDR 15.000</span>
+              </div>
+              <div class="flex justify-between text-slate-500">
+                <span>Potongan Voucher / Poin</span>
+                <span id="inv-sum-disc" class="font-bold text-slate-800">IDR 0</span>
+              </div>
+              <div class="flex justify-between text-emerald-700 font-bold">
+                <span>Cashback Poin (Sesi 14.00-21.00 WIB)</span>
+                <span id="inv-sum-points">+1.500 Poin</span>
+              </div>
+              <div class="pt-3 border-t border-slate-200 flex items-baseline justify-between">
+                <span class="font-black text-sm text-nugas-navy">TOTAL PEMBAYARAN</span>
+                <span id="inv-sum-total" class="font-black text-2xl text-nugas-red">IDR 15.000</span>
+              </div>
+              <div class="no-print pt-3 flex flex-wrap gap-2">
+                <button id="btn-toggle-status" class="flex-1 py-2.5 px-3 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-bold transition-all">
+                  Ubah Status Bayar
+                </button>
+                <button id="btn-wa-share" class="flex-1 py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition-all">
+                  Kirim ke WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2: RIWAYAT BOOKING PENGGUNA        -->
+    <!-- ========================================== -->
+    <section id="section-history" class="space-y-6 hidden">
+      <!-- Stats Overview -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[11px] font-bold text-slate-400 uppercase">Total Booking</div>
+          <div id="stat-total-bookings" class="text-2xl font-black text-nugas-navy mt-1">5 Sesi</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[11px] font-bold text-slate-400 uppercase">Total Jam Nugas</div>
+          <div id="stat-total-hours" class="text-2xl font-black text-nugas-navy mt-1">16 Jam</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[11px] font-bold text-slate-400 uppercase">Saldo Poin Aktif</div>
+          <div id="stat-total-points" class="text-2xl font-black text-emerald-600 mt-1">4.500 Poin</div>
+          <div class="text-[10px] text-slate-400">Berlaku 7 hari &bull; Tukar 10.00-14.00 WIB</div>
+        </div>
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-[11px] font-bold text-slate-400 uppercase">Cabang Favorit</div>
+          <div class="text-base font-black text-nugas-red mt-1">Surabaya Keputih</div>
+          <div class="text-[10px] text-slate-400">Jl. Marina Emas 73</div>
+        </div>
+      </div>
+
+      <!-- Filter & Search Bar -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-1.5 text-xs font-bold" id="history-filter-group">
+          <button class="filter-btn px-3.5 py-2 rounded-xl bg-nugas-navy text-white transition-all" data-filter="all">Semua</button>
+          <button class="filter-btn px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all" data-filter="active">Aktif</button>
+          <button class="filter-btn px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all" data-filter="pending">Menunggu Bayar</button>
+          <button class="filter-btn px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all" data-filter="completed">Selesai</button>
+          <button class="filter-btn px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all" data-filter="cancelled">Dibatalkan</button>
+        </div>
+
+        <div class="relative w-full sm:w-64">
+          <input type="text" id="history-search" placeholder="Cari no. invoice atau meja..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-nugas-red">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+      </div>
+
+      <!-- Booking History List -->
+      <div id="history-list-container" class="space-y-3"></div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3: NOTIFIKASI KONFIRMASI PEMESANAN -->
+    <!-- ========================================== -->
+    <section id="section-notif" class="space-y-6 hidden">
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="font-black text-xl text-nugas-navy">Notifikasi <span class="text-nugas-red">Konfirmasi Pemesanan</span></h2>
+            <p class="text-xs text-slate-500 mt-0.5">Riwayat pemberitahuan sistem, pengingat check-out Close Bill, dan pratinjau pesan WhatsApp/Email.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-add-sample-notif" class="px-3.5 py-2 rounded-xl bg-nugas-redLight hover:bg-red-100 text-nugas-red text-xs font-bold transition-all">
+              + Simulasi Notif Baru
+            </button>
+            <button id="btn-mark-all-read" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all">
+              Tandai Semua Dibaca
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+          <!-- Left: Notification Feed -->
+          <div class="lg:col-span-2 divide-y divide-slate-100" id="notif-feed-list"></div>
+
+          <!-- Right: WhatsApp & Email Confirmation Template Preview -->
+          <div class="p-6 bg-slate-50 space-y-4">
+            <div class="text-xs font-black text-nugas-navy uppercase tracking-wider">Pratinjau Pesan Otomatis</div>
+            
+            <!-- WhatsApp Bubble Mockup -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black text-emerald-700 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  WhatsApp Bot Urban Space
+                </span>
+                <span class="text-[10px] text-slate-400">Otomatis</span>
+              </div>
+              <div class="bg-emerald-50/70 border border-emerald-100 rounded-xl p-3 text-[11px] text-slate-700 space-y-1.5 leading-relaxed font-sans">
+                <p><strong>Halo Ahmad Pratama!</strong> Reservasi kamu di <strong>Urban Space Surabaya Keputih</strong> sudah terkonfirmasi.</p>
+                <p>
+                  📌 Kode: <span class="font-mono font-bold">INV/URB/20261112/0841</span><br>
+                  🪑 Meja: <strong>A-03 (Individual Desk)</strong><br>
+                  🕒 Jadwal: <strong>12 Nov 2026, 14:00 - 17:00 WIB</strong><br>
+                  💳 Status: <strong>LUNAS (IDR 15.000)</strong>
+                </p>
+                <p class="text-[10px] text-slate-500">Tunjukkan QR Check-In ke staf saat tiba. Ingat check-out 5 menit sebelum selesai ya!</p>
+              </div>
+            </div>
+
+            <!-- Email Preview Mockup -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black text-nugas-red">Konfirmasi Email (E-Ticket)</span>
+                <span class="text-[10px] text-slate-400">no-reply@urbanspace.com</span>
+              </div>
+              <div class="text-[11px] text-slate-600 space-y-1">
+                <div class="font-bold text-nugas-navy">Subjek: [Urban Space] Bukti Reservasi Meja A-03 Berhasil</div>
+                <p>Kamu mendapatkan <strong>+1.500 Cashback Poin</strong> yang dapat ditukarkan pada sesi pagi (10.00 - 14.00 WIB) dalam 7 hari ke depan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="no-print bg-nugas-navy text-slate-400 py-6 px-4 sm:px-6 text-xs mt-auto">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>Copyright &copy; 2026 Urban Space Coworking. Jl. Marina Emas No. 73, Sukolilo, Surabaya.</div>
+      <div class="text-slate-300 font-semibold">Minggu - Jumat: 10.00 - 02.00 WIB (Sabtu Tutup)</div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================
+    // STATE & DATA RIWAYAT PEMESANAN
+    // =========================================
+    const bookingHistoryData = [
+      {
+        id: 'INV/URB/20261112/0841',
+        checkinCode: 'URB-841A',
+        dateIssued: '12 Nov 2026, 08:05 WIB',
+        custName: 'Ahmad Pratama',
+        custOrg: 'Institut Teknologi Sepuluh Nopember (ITS)',
+        custContact: '0812-3456-7890 \u2022 ahmad.pratama@student.its.ac.id',
+        deskName: 'Meja A-03',
+        deskType: 'Individual Desk',
+        zone: 'Lantai 1, No-Smoking Indoor (Full AC)',
+        schedule: 'Kamis, 12 Nov 2026 \u2022 14:00 - 17:00 WIB (3 Jam)',
+        rate: 5000,
+        duration: 3,
+        discount: 0,
+        pointsEarned: 1500,
+        total: 15000,
+        paymentMethod: 'QRIS Terverifikasi',
+        status: 'active',
+        statusLabel: 'AKTIF / LUNAS'
+      },
+      {
+        id: 'INV/URB/20261113/0912',
+        checkinCode: 'URB-912B',
+        dateIssued: '12 Nov 2026, 07:50 WIB',
+        custName: 'Ahmad Pratama',
+        custOrg: 'Institut Teknologi Sepuluh Nopember (ITS)',
+        custContact: '0812-3456-7890 \u2022 ahmad.pratama@student.its.ac.id',
+        deskName: 'Study Room A',
+        deskType: 'Study Room (Privat 1-11 Org)',
+        zone: 'Lantai 1, Ruang Rapat Kedap Suara',
+        schedule: 'Jumat, 13 Nov 2026 \u2022 19:00 - 21:00 WIB (2 Jam)',
+        rate: 40000,
+        duration: 2,
+        discount: 0,
+        pointsEarned: 8000,
+        total: 80000,
+        paymentMethod: 'Menunggu QRIS / Tunai',
+        status: 'pending',
+        statusLabel: 'MENUNGGU BAYAR'
+      },
+      {
+        id: 'INV/URB/20261109/0520',
+        checkinCode: 'URB-520C',
+        dateIssued: '09 Nov 2026, 13:45 WIB',
+        custName: 'Ahmad Pratama',
+        custOrg: 'Institut Teknologi Sepuluh Nopember (ITS)',
+        custContact: '0812-3456-7890 \u2022 ahmad.pratama@student.its.ac.id',
+        deskName: 'Meja G-01',
+        deskType: 'Group Desk (4 Pax)',
+        zone: 'Lantai 1, Area Kolaborasi Kelompok',
+        schedule: 'Senin, 09 Nov 2026 \u2022 15:00 - 19:00 WIB (4 Jam)',
+        rate: 20000,
+        duration: 4,
+        discount: 0,
+        pointsEarned: 8000,
+        total: 80000,
+        paymentMethod: 'QRIS Terverifikasi',
+        status: 'completed',
+        statusLabel: 'SELESAI'
+      },
+      {
+        id: 'INV/URB/20261106/0311',
+        checkinCode: 'URB-311D',
+        dateIssued: '06 Nov 2026, 09:50 WIB',
+        custName: 'Ahmad Pratama',
+        custOrg: 'Institut Teknologi Sepuluh Nopember (ITS)',
+        custContact: '0812-3456-7890 \u2022 ahmad.pratama@student.its.ac.id',
+        deskName: 'Meja B-04',
+        deskType: 'Individual Desk (Happy Hour)',
+        zone: 'Lantai 1, No-Smoking Indoor (Full AC)',
+        schedule: 'Jumat, 06 Nov 2026 \u2022 10:00 - 13:00 WIB (3 Jam)',
+        rate: 3000,
+        duration: 3,
+        discount: 0,
+        pointsEarned: 0,
+        total: 9000,
+        paymentMethod: 'Tunai Kasir',
+        status: 'completed',
+        statusLabel: 'SELESAI'
+      },
+      {
+        id: 'INV/URB/20261103/0198',
+        checkinCode: 'URB-198E',
+        dateIssued: '03 Nov 2026, 20:10 WIB',
+        custName: 'Ahmad Pratama',
+        custOrg: 'Institut Teknologi Sepuluh Nopember (ITS)',
+        custContact: '0812-3456-7890 \u2022 ahmad.pratama@student.its.ac.id',
+        deskName: 'Meja A-01',
+        deskType: 'Individual Desk',
+        zone: 'Lantai 2, Smoking Indoor (Full AC)',
+        schedule: 'Selasa, 03 Nov 2026 \u2022 21:00 - 01:00 WIB (4 Jam)',
+        rate: 3000,
+        duration: 4,
+        discount: 0,
+        pointsEarned: 0,
+        total: 12000,
+        paymentMethod: 'Dibatalkan Pengguna',
+        status: 'cancelled',
+        statusLabel: 'DIBATALKAN'
+      }
+    ];
+
+    let notificationsData = [
+      {
+        id: 1,
+        title: 'Pembayaran QRIS Terkonfirmasi (LUNAS)',
+        desc: 'Invoice INV/URB/20261112/0841 untuk Meja A-03 (14:00 - 17:00 WIB) telah berhasil dibayar sebesar IDR 15.000.',
+        time: '5 menit yang lalu',
+        type: 'success',
+        unread: true,
+        invoiceId: 'INV/URB/20261112/0841'
+      },
+      {
+        id: 2,
+        title: 'Menunggu Pembayaran Reservasi Study Room A',
+        desc: 'Segera selesaikan pembayaran IDR 80.000 untuk jadwal Jumat, 13 Nov 2026 (19:00 - 21:00 WIB) sebelum batas waktu habis.',
+        time: '20 menit yang lalu',
+        type: 'warning',
+        unread: true,
+        invoiceId: 'INV/URB/20261113/0912'
+      },
+      {
+        id: 3,
+        title: 'Cashback +1.500 Poin Ditambahkan',
+        desc: 'Selamat! Kamu mendapat poin loyalitas 10% dari sesi sore. Tukarkan poinmu pada sesi pagi (10.00 - 14.00 WIB).',
+        time: 'Kemarin, 19:05 WIB',
+        type: 'info',
+        unread: false,
+        invoiceId: 'INV/URB/20261109/0520'
+      },
+      {
+        id: 4,
+        title: 'Pengingat Check-Out Close Bill',
+        desc: 'Sesi nugas di Meja G-01 telah selesai. Terima kasih telah melakukan check-out tepat waktu.',
+        time: '09 Nov 2026, 18:55 WIB',
+        type: 'info',
+        unread: false,
+        invoiceId: 'INV/URB/20261109/0520'
+      }
+    ];
+
+    let activeInvoice = bookingHistoryData[0];
+    let currentFilter = 'all';
+
+    // DOM References
+    const navTabInvoice = document.getElementById('nav-tab-invoice');
+    const navTabHistory = document.getElementById('nav-tab-history');
+    const navTabNotif = document.getElementById('nav-tab-notif');
+
+    const sectionInvoice = document.getElementById('section-invoice');
+    const sectionHistory = document.getElementById('section-history');
+    const sectionNotif = document.getElementById('section-notif');
+
+    const toastPopup = document.getElementById('toast-popup');
+    const toastTitle = document.getElementById('toast-title');
+    const toastMessage = document.getElementById('toast-message');
+    const toastIcon = document.getElementById('toast-icon');
+
+    // =========================================
+    // NAVIGATION & TOAST
+    // =========================================
+    function switchTab(tabName) {
+      const activeCls = 'px-3.5 py-2 rounded-lg bg-nugas-red text-white shadow-sm transition-all flex items-center gap-1.5';
+      const inactiveCls = 'px-3.5 py-2 rounded-lg text-slate-600 hover:text-nugas-navy transition-all flex items-center gap-1.5';
+
+      navTabInvoice.className = tabName === 'invoice' ? activeCls : inactiveCls;
+      navTabHistory.className = tabName === 'history' ? activeCls : inactiveCls;
+      navTabNotif.className = tabName === 'notif' ? activeCls + ' relative' : inactiveCls + ' relative';
+
+      sectionInvoice.classList.toggle('hidden', tabName !== 'invoice');
+      sectionHistory.classList.toggle('hidden', tabName !== 'history');
+      sectionNotif.classList.toggle('hidden', tabName !== 'notif');
+    }
+
+    navTabInvoice.addEventListener('click', () => switchTab('invoice'));
+    navTabHistory.addEventListener('click', () => switchTab('history'));
+    navTabNotif.addEventListener('click', () => switchTab('notif'));
+
+    let toastTimer = null;
+    function showToast(title, msg, isSuccess = true) {
+      toastTitle.textContent = title;
+      toastMessage.textContent = msg;
+      toastIcon.textContent = isSuccess ? '\u2713' : '!';
+      toastIcon.className = isSuccess
+        ? 'w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black shrink-0'
+        : 'w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-black shrink-0';
+
+      toastPopup.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toastPopup.classList.add('translate-y-0', 'opacity-100');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastPopup.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+        toastPopup.classList.remove('translate-y-0', 'opacity-100');
+      }, 4000);
+    }
+
+    document.getElementById('btn-close-toast').addEventListener('click', () => {
+      toastPopup.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+    });
+
+    // =========================================
+    // RENDER INVOICE DETAIL
+    // =========================================
+    function renderInvoice(item) {
+      activeInvoice = item;
+      document.getElementById('inv-code').textContent = item.id;
+      document.getElementById('inv-date-issued').textContent = 'Diterbitkan: ' + item.dateIssued;
+      document.getElementById('inv-cust-name').textContent = item.custName;
+      document.getElementById('inv-cust-org').textContent = item.custOrg;
+      document.getElementById('inv-cust-contact').textContent = item.custContact;
+      document.getElementById('inv-space-name').textContent = item.deskName + ' \u2014 ' + item.deskType;
+      document.getElementById('inv-zone').textContent = item.zone;
+      document.getElementById('inv-schedule').textContent = item.schedule;
+      document.getElementById('inv-checkin-code').textContent = item.checkinCode;
+      document.getElementById('inv-payment-method').textContent = item.paymentMethod;
+
+      document.getElementById('inv-item-title').textContent = 'Sewa ' + item.deskName + ' - ' + item.deskType + ' (Close Bill)';
+      document.getElementById('inv-item-rate').textContent = 'IDR ' + item.rate.toLocaleString('id-ID');
+      document.getElementById('inv-item-duration').textContent = item.duration + ' Jam';
+      document.getElementById('inv-item-subtotal').textContent = 'IDR ' + item.total.toLocaleString('id-ID');
+      document.getElementById('inv-sum-sub').textContent = 'IDR ' + item.total.toLocaleString('id-ID');
+      document.getElementById('inv-sum-disc').textContent = 'IDR ' + item.discount.toLocaleString('id-ID');
+      document.getElementById('inv-sum-points').textContent = '+' + item.pointsEarned.toLocaleString('id-ID') + ' Poin';
+      document.getElementById('inv-sum-total').textContent = 'IDR ' + item.total.toLocaleString('id-ID');
+
+      // Banner styling based on status
+      const banner = document.getElementById('confirmation-banner');
+      const iconBox = document.getElementById('banner-icon-box');
+      const heading = document.getElementById('banner-heading');
+      const pill = document.getElementById('banner-pill');
+      const subtext = document.getElementById('banner-subtext');
+
+      if (item.status === 'active' || item.status === 'completed') {
+        banner.className = 'no-print bg-emerald-50 border border-emerald-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm';
+        iconBox.className = 'w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-black shrink-0 shadow-sm';
+        iconBox.textContent = '\u2713';
+        heading.textContent = item.status === 'completed' ? 'Sesi Booking Selesai' : 'Reservasi Terkonfirmasi!';
+        pill.className = 'px-2.5 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider';
+        pill.textContent = item.statusLabel;
+        subtext.textContent = 'Bukti pemesanan dan kode QR Check-In siap digunakan. Harap check-out 5 menit sebelum sesi berakhir.';
+      } else if (item.status === 'pending') {
+        banner.className = 'no-print bg-amber-50 border border-amber-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm';
+        iconBox.className = 'w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg font-black shrink-0 shadow-sm';
+        iconBox.textContent = '!';
+        heading.textContent = 'Menunggu Pembayaran';
+        pill.className = 'px-2.5 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-black uppercase tracking-wider';
+        pill.textContent = item.statusLabel;
+        subtext.textContent = 'Selesaikan pembayaran via QRIS atau Tunai di kasir onsite sebelum jadwal dimulai.';
+      } else {
+        banner.className = 'no-print bg-slate-100 border border-slate-300 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm';
+        iconBox.className = 'w-10 h-10 rounded-xl bg-slate-500 text-white flex items-center justify-center text-lg font-black shrink-0 shadow-sm';
+        iconBox.textContent = '\u2715';
+        heading.textContent = 'Reservasi Dibatalkan';
+        pill.className = 'px-2.5 py-0.5 rounded-full bg-slate-600 text-white text-[10px] font-black uppercase tracking-wider';
+        pill.textContent = item.statusLabel;
+        subtext.textContent = 'Pemesanan ini telah dibatalkan oleh pengguna.';
+      }
+    }
+
+    // Invoice Buttons
+    document.getElementById('btn-copy-inv').addEventListener('click', () => {
+      const code = activeInvoice.id;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          showToast('Nomor Invoice Disalin', 'Kode ' + code + ' berhasil disalin ke clipboard.');
+        }).catch(() => {});
+      } else {
+        showToast('Nomor Invoice', 'Kode: ' + code);
+      }
+    });
+
+    document.getElementById('btn-print-page').addEventListener('click', () => {
+      window.print();
+    });
+
+    document.getElementById('btn-toggle-status').addEventListener('click', () => {
+      if (activeInvoice.status === 'pending') {
+        activeInvoice.status = 'active';
+        activeInvoice.statusLabel = 'AKTIF / LUNAS';
+        activeInvoice.paymentMethod = 'QRIS Terverifikasi';
+        showToast('Pembayaran Lunas!', 'Invoice ' + activeInvoice.id + ' kini berstatus AKTIF / LUNAS.');
+      } else if (activeInvoice.status === 'active') {
+        activeInvoice.status = 'pending';
+        activeInvoice.statusLabel = 'MENUNGGU BAYAR';
+        activeInvoice.paymentMethod = 'Menunggu QRIS / Tunai';
+        showToast('Status Diubah', 'Invoice ' + activeInvoice.id + ' diubah ke Menunggu Pembayaran.', false);
+      } else {
+        showToast('Info Status', 'Hanya invoice aktif atau menunggu bayar yang dapat diubah statusnya.', false);
+        return;
+      }
+      renderInvoice(activeInvoice);
+      renderHistory();
+    });
+
+    document.getElementById('btn-wa-share').addEventListener('click', () => {
+      const msg = encodeURIComponent(
+        'Halo Urban Space, berikut bukti reservasi saya:\n' +
+        'Invoice: ' + activeInvoice.id + '\n' +
+        'Meja: ' + activeInvoice.deskName + ' (' + activeInvoice.deskType + ')\n' +
+        'Jadwal: ' + activeInvoice.schedule + '\n' +
+        'Total: IDR ' + activeInvoice.total.toLocaleString('id-ID')
+      );
+      window.open('https://wa.me/6282139662022?text=' + msg, '_blank');
+    });
+
+    document.getElementById('btn-trigger-notif-demo').addEventListener('click', () => {
+      showToast('Notifikasi Konfirmasi Terkirim', 'WhatsApp & Email bukti booking ' + activeInvoice.id + ' telah dikirim.');
+    });
+
+    // =========================================
+    // RENDER RIWAYAT PEMESANAN
+    // =========================================
+    function getStatusBadgeClass(status) {
+      if (status === 'active') return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+      if (status === 'pending') return 'bg-amber-100 text-amber-800 border-amber-200';
+      if (status === 'completed') return 'bg-slate-100 text-slate-700 border-slate-200';
+      return 'bg-red-50 text-red-700 border-red-200';
+    }
+
+    function renderHistory() {
+      const container = document.getElementById('history-list-container');
+      const query = document.getElementById('history-search').value.trim().toLowerCase();
+
+      const filtered = bookingHistoryData.filter(item => {
+        const matchFilter = currentFilter === 'all' || item.status === currentFilter;
+        const matchQuery = !query ||
+          item.id.toLowerCase().includes(query) ||
+          item.deskName.toLowerCase().includes(query) ||
+          item.deskType.toLowerCase().includes(query);
+        return matchFilter && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 text-center text-xs text-slate-500">
+            Tidak ada riwayat pemesanan yang sesuai dengan filter atau pencarian Anda.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:border-nugas-red/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-mono text-xs font-bold text-slate-500">${item.id}</span>
+              <span class="px-2.5 py-0.5 rounded-full border text-[10px] font-black uppercase tracking-wider ${getStatusBadgeClass(item.status)}">
+                ${item.statusLabel}
+              </span>
+            </div>
+            <div class="font-black text-base text-nugas-navy">
+              ${item.deskName} <span class="text-slate-400 font-semibold text-xs">&bull; ${item.deskType}</span>
+            </div>
+            <div class="text-xs text-slate-600">${item.schedule}</div>
+            <div class="text-[11px] text-slate-400">${item.zone}</div>
+          </div>
+
+          <div class="flex flex-row md:flex-col items-center md:items-end justify-between gap-2 pt-3 md:pt-0 border-t md:border-t-0 border-slate-100">
+            <div class="text-left md:text-right">
+              <div class="text-[11px] text-slate-400 font-semibold">Total Biaya</div>
+              <div class="text-lg font-black text-nugas-red">IDR ${item.total.toLocaleString('id-ID')}</div>
+              ${item.pointsEarned > 0 ? `<div class="text-[10px] font-bold text-emerald-600">+${item.pointsEarned.toLocaleString('id-ID')} Poin</div>` : ''}
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="btn-view-invoice px-3.5 py-2 rounded-xl bg-nugas-navy hover:bg-slate-800 text-white text-xs font-bold transition-all" data-id="${item.id}">
+                Lihat Invoice
+              </button>
+              <button class="btn-rebook px-3 py-2 rounded-xl bg-nugas-redLight hover:bg-red-100 text-nugas-red text-xs font-bold transition-all" data-desk="${item.deskName}">
+                Pesan Lagi
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Attach listeners
+      container.querySelectorAll('.btn-view-invoice').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.getAttribute('data-id');
+          const found = bookingHistoryData.find(x => x.id === id);
+          if (found) {
+            renderInvoice(found);
+            switchTab('invoice');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      });
+
+      container.querySelectorAll('.btn-rebook').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const desk = e.currentTarget.getAttribute('data-desk');
+          showToast('Siap Pesan Ulang', 'Membuka template reservasi baru untuk ' + desk + '.');
+        });
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.className = 'filter-btn px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all';
+        });
+        e.currentTarget.className = 'filter-btn px-3.5 py-2 rounded-xl bg-nugas-navy text-white transition-all';
+        currentFilter = e.currentTarget.getAttribute('data-filter');
+        renderHistory();
+      });
+    });
+
+    document.getElementById('history-search').addEventListener('input', renderHistory);
+
+    // =========================================
+    // RENDER NOTIFIKASI KONFIRMASI
+    // =========================================
+    function renderNotifications() {
+      const listEl = document.getElementById('notif-feed-list');
+      const unreadCount = notificationsData.filter(n => n.unread).length;
+      const badge = document.getElementById('notif-badge-count');
+      badge.textContent = unreadCount;
+      badge.classList.toggle('hidden', unreadCount === 0);
+
+      listEl.innerHTML = notificationsData.map(n => {
+        let dotColor = 'bg-slate-400';
+        if (n.type === 'success') dotColor = 'bg-emerald-500';
+        if (n.type === 'warning') dotColor = 'bg-amber-500';
+        if (n.type === 'info') dotColor = 'bg-nugas-red';
+
+        return `
+          <div class="p-5 transition-all ${n.unread ? 'bg-nugas-redLight/40' : 'bg-white'} hover:bg-slate-50 flex items-start justify-between gap-4">
+            <div class="flex items-start gap-3">
+              <span class="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 ${dotColor}"></span>
+              <div class="space-y-1 text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="font-extrabold text-sm text-nugas-navy">${n.title}</span>
+                  ${n.unread ? '<span class="px-1.5 py-0.5 rounded bg-nugas-red text-white text-[9px] font-black uppercase">BARU</span>' : ''}
+                </div>
+                <p class="text-slate-600 leading-relaxed">${n.desc}</p>
+                <div class="text-[11px] text-slate-400 pt-0.5">${n.time}</div>
+              </div>
+            </div>
+            <button class="btn-notif-open shrink-0 px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-nugas-red text-xs font-bold text-nugas-navy transition-all" data-id="${n.id}" data-inv="${n.invoiceId}">
+              Buka Invoice
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      listEl.querySelectorAll('.btn-notif-open').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const nid = parseInt(e.currentTarget.getAttribute('data-id'), 10);
+          const invId = e.currentTarget.getAttribute('data-inv');
+          const notifObj = notificationsData.find(x => x.id === nid);
+          if (notifObj) notifObj.unread = false;
+          const foundInv = bookingHistoryData.find(x => x.id === invId);
+          if (foundInv) {
+            renderInvoice(foundInv);
+            switchTab('invoice');
+          }
+          renderNotifications();
+        });
+      });
+    }
+
+    document.getElementById('btn-mark-all-read').addEventListener('click', () => {
+      notificationsData.forEach(n => { n.unread = false; });
+      renderNotifications();
+      showToast('Semua Dibaca', 'Seluruh notifikasi konfirmasi telah ditandai sudah dibaca.');
+    });
+
+    document.getElementById('btn-add-sample-notif').addEventListener('click', () => {
+      const newId = Date.now();
+      notificationsData.unshift({
+        id: newId,
+        title: 'Pengingat Sesi Nugas Dimulai 15 Menit Lagi',
+        desc: 'Meja A-03 di Lantai 1 No-Smoking Indoor siap ditempati. Jangan lupa tunjukkan QR Check-In URB-841A ke staf.',
+        time: 'Baru saja',
+        type: 'success',
+        unread: true,
+        invoiceId: 'INV/URB/20261112/0841'
+      });
+      renderNotifications();
+      showToast('Notifikasi Baru Masuk', 'Pengingat sesi nugas di Meja A-03 baru saja diterima.');
+    });
+
+
+
+    // Initial Render
+    renderInvoice(activeInvoice);
+    renderHistory();
+    renderNotifications();
+  </script>
+</body>
+</html>
