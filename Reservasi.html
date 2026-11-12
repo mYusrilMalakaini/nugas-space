@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservasi & Pembayaran - NUGAS Space</title>
+    <title>Reservasi & Pembayaran - Urban Space</title>
 
     <link href="./assets/css/output.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
     <header class="border-b border-slate-200 bg-white">
         <nav class="mx-auto flex w-[90%] max-w-6xl items-center justify-between py-5">
             <a href="Beranda.html" class="flex flex-col leading-none">
-                <span class="text-2xl font-extrabold text-slate-900">NUGAS</span>
+                <span class="text-2xl font-extrabold text-slate-900">Urban</span>
                 <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-600">SPACE</span>
             </a>
 
@@ -238,7 +238,7 @@
     </main>
 
     <footer class="mt-12 border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-400">
-        &copy; 2026 NUGAS Space. All rights reserved.
+        &copy; 2026 Urban Space. All rights reserved.
     </footer>
 
     <script>
@@ -251,7 +251,7 @@
         const paymentProvider = document.getElementById("paymentProvider");
         const bookingResult = document.getElementById("bookingResult");
         const simulatePaymentButton = document.getElementById("simulatePaymentButton");
-        const STORAGE_KEY = "nugasSpaceTransactions";
+        const STORAGE_KEY = "UrbanSpaceTransactions";
 
         const spaceNames = {
             individual: "Individual Desk",
@@ -287,10 +287,10 @@
         }
 
         // Pilihan dapat datang dari denah versi localStorage maupun sessionStorage.
-        let selectedDesk = readJSON("nugasSpaceSelectedDesk", null);
+        let selectedDesk = readJSON("UrbanSpaceSelectedDesk", null);
         let pendingBooking = null;
         try {
-            pendingBooking = JSON.parse(sessionStorage.getItem("nugasPendingBooking") || "null");
+            pendingBooking = JSON.parse(sessionStorage.getItem("UrbanPendingBooking") || "null");
         } catch (error) {
             pendingBooking = null;
         }
@@ -458,9 +458,9 @@
             // Simpan satu format transaksi agar halaman denah dan admin membaca sumber data yang sama.
             transactions.unshift(transaction);
             saveTransactions(transactions);
-            localStorage.setItem("nugasSpaceLastBooking", JSON.stringify(transaction));
-            localStorage.removeItem("nugasSpaceSelectedDesk");
-            sessionStorage.removeItem("nugasPendingBooking");
+            localStorage.setItem("UrbanSpaceLastBooking", JSON.stringify(transaction));
+            localStorage.removeItem("UrbanSpaceSelectedDesk");
+            sessionStorage.removeItem("UrbanPendingBooking");
 
             document.getElementById("resultBookingId").textContent = bookingId;
             document.getElementById("resultName").textContent = name + " (" + phone + ")";
@@ -471,7 +471,7 @@
             document.getElementById("transactionStatus").textContent = transaction.status;
 
             document.getElementById("resultNote").textContent = method === "cash"
-                ? "Silakan lakukan pembayaran cash di lokasi NUGAS Space. Status transaksi menunggu pembayaran."
+                ? "Silakan lakukan pembayaran cash di lokasi Urban Space. Status transaksi menunggu pembayaran."
                 : "Lakukan pembayaran sesuai metode yang dipilih, lalu tekan tombol simulasi. Pembayaran ini bukan transaksi sungguhan.";
 
             simulatePaymentButton.classList.toggle("hidden", method !== "noncash");
@@ -484,7 +484,7 @@
         });
 
         simulatePaymentButton.addEventListener("click", function() {
-            const savedBooking = readJSON("nugasSpaceLastBooking", null);
+            const savedBooking = readJSON("UrbanSpaceLastBooking", null);
             if (!savedBooking) return;
 
             const transactions = getTransactions();
@@ -499,7 +499,7 @@
             saveTransactions(transactions);
 
             savedBooking.status = "Menunggu verifikasi";
-            localStorage.setItem("nugasSpaceLastBooking", JSON.stringify(savedBooking));
+            localStorage.setItem("UrbanSpaceLastBooking", JSON.stringify(savedBooking));
 
             const statusBadge = document.getElementById("transactionStatus");
             statusBadge.textContent = "Menunggu verifikasi";

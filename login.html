@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - NUGAS Space</title>
+    <title>Login - Urban Space</title>
 
     <!-- Tailwind CSS hasil compile -->
     <link href="./assets/css/output.css" rel="stylesheet">
@@ -73,7 +73,7 @@
 
                     <div class="mb-3 inline-flex items-center gap-1">
                         <span class="text-3xl font-extrabold tracking-tight text-slate-900">
-                            NUGAS
+                            Urban
                         </span>
 
                         <span class="mt-3 text-xs font-bold uppercase tracking-widest text-red-600">
@@ -283,10 +283,10 @@
                     "text-slate-500"
                 );
 
-                emailInput.placeholder = "staff@nugas.space";
+                emailInput.placeholder = "staff@Urban.space";
 
                 loginTitle.textContent = "Staff Portal";
-                loginSubtitle.textContent = "Masuk dengan kredensial staf NUGAS";
+                loginSubtitle.textContent = "Masuk dengan kredensial staf Urban";
 
             } else {
 
@@ -386,8 +386,8 @@
             const roleName = currentRole === "staff" ? "Staff / Admin" : "Customer";
 
             // Simpan sesi sederhana di sessionStorage untuk ditampilkan di Dashboard Admin
-            sessionStorage.setItem("nugasRole", currentRole);
-            sessionStorage.setItem("nugasEmail", email);
+            sessionStorage.setItem("UrbanRole", currentRole);
+            sessionStorage.setItem("UrbanEmail", email);
 
             showToast("Login sebagai " + roleName + " berhasil! Mengalihkan...");
 

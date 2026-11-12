@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Denah & Ketersediaan Meja - NUGAS Space</title>
+    <title>Denah & Ketersediaan Meja - Urban Space</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +96,7 @@
             <nav class="flex items-center justify-between py-5">
 
                 <a href="Beranda.html" class="flex flex-col leading-none">
-                    <span class="text-2xl font-extrabold text-slate-900">NUGAS</span>
+                    <span class="text-2xl font-extrabold text-slate-900">Urban</span>
                     <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-600">SPACE</span>
                 </a>
 
@@ -517,7 +517,7 @@
             <div class="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
                 <div>
                     <div class="mb-4 flex flex-col leading-none">
-                        <span class="text-2xl font-extrabold text-white">NUGAS</span>
+                        <span class="text-2xl font-extrabold text-white">Urban</span>
                         <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-400">SPACE</span>
                     </div>
                     <p class="text-xs leading-relaxed">
@@ -545,14 +545,14 @@
                 <div>
                     <h3 class="mb-4 text-sm font-bold text-white">Kontak</h3>
                     <ul class="space-y-3 text-xs">
-                        <li><i class="fa-regular fa-envelope mr-2"></i>support@nugas.space</li>
+                        <li><i class="fa-regular fa-envelope mr-2"></i>support@Urban.space</li>
                         <li><i class="fa-solid fa-phone mr-2"></i>+62 812-3456-7890</li>
                         <li><i class="fa-solid fa-location-dot mr-2"></i>Surabaya, Jawa Timur</li>
                     </ul>
                 </div>
             </div>
             <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-slate-500">
-                © 2026 NUGAS Space. All rights reserved.
+                © 2026 Urban Space. All rights reserved.
             </div>
         </div>
     </footer>
@@ -617,7 +617,7 @@
             }
         };
         // Sumber data reservasi bersama dengan Reservasi.html dan AdminTransaksi.html
-        const STORAGE_KEY = "nugasSpaceTransactions";
+        const STORAGE_KEY = "UrbanSpaceTransactions";
 
         function getReservationsDB() {
             try {
@@ -1022,7 +1022,7 @@
                 spaceKey: "individual"
             };
 
-            sessionStorage.setItem("nugasPendingBooking", JSON.stringify(pendingBooking));
+            sessionStorage.setItem("UrbanPendingBooking", JSON.stringify(pendingBooking));
             window.location.href = "Reservasi.html";
         });
 

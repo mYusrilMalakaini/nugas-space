@@ -1,6 +1,6 @@
 # NUGAS Space
 
-**NUGAS Space** adalah aplikasi berbasis website yang dirancang untuk memudahkan pengguna dalam mencari dan melakukan reservasi ruang maupun meja untuk belajar atau bekerja. Aplikasi ini dikembangkan sebagai proyek Tugas Besar mata kuliah Pemrograman Web.
+**Urban Space** adalah aplikasi berbasis website yang dirancang untuk memudahkan pengguna dalam mencari dan melakukan reservasi ruang maupun meja untuk belajar atau bekerja. Aplikasi ini dikembangkan sebagai proyek Tugas Besar mata kuliah Pemrograman Web.
 
 ## 📌 Tentang Proyek
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard (CRUD Meja & Ruangan) - NUGAS Space</title>
+    <title>Admin Dashboard (CRUD Meja & Ruangan) - Urban Space</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
     <div class="flex min-h-screen">
 
         <!-- ========================================================= -->
-        <!-- SIDEBAR KIRI (Terinspirasi dari referensi UXETO + Tema NUGAS) -->
+        <!-- SIDEBAR KIRI (Terinspirasi dari referensi UXETO + Tema Urban) -->
         <!-- ========================================================= -->
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col justify-between border-r border-slate-200 bg-white px-5 py-6 transition-transform duration-200 lg:static lg:translate-x-0">
 
@@ -30,7 +30,7 @@
                 <!-- Brand Logo -->
                 <div class="mb-8 flex items-center justify-between px-2">
                     <a href="Beranda.html" class="flex flex-col leading-none">
-                        <span class="text-2xl font-extrabold text-slate-900">NUGAS</span>
+                        <span class="text-2xl font-extrabold text-slate-900">Urban</span>
                         <span class="mt-1 text-[10px] font-bold tracking-[3px] text-red-600">ADMIN PANEL</span>
                     </a>
                     <button type="button" id="closeSidebarBtn" class="text-slate-400 hover:text-slate-700 lg:hidden">
@@ -172,7 +172,7 @@
                             AD
                         </div>
                         <div class="hidden text-left sm:block">
-                            <p id="adminEmailDisplay" class="text-xs font-bold text-slate-800">staff@nugas.space</p>
+                            <p id="adminEmailDisplay" class="text-xs font-bold text-slate-800">staff@Urban.space</p>
                             <p class="text-[10px] font-semibold text-red-600">Administrator</p>
                         </div>
                     </div>
@@ -302,7 +302,7 @@
                                     Distribusi Kapasitas & Ketersediaan per Kategori
                                 </h2>
                                 <p class="text-xs text-slate-400">
-                                    Pantau jumlah unit dan total kursi berdasarkan tipe area belajar NUGAS Space
+                                    Pantau jumlah unit dan total kursi berdasarkan tipe area belajar Urban Space
                                 </p>
                             </div>
                             <span class="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
@@ -647,9 +647,9 @@
     <!-- JAVASCRIPT: CRUD ENGINE, KAPASITAS & STATUS KETERSEDIAAN  -->
     <!-- ========================================================= -->
     <script>
-        const STORAGE_KEY = "nugas_admin_spaces_v1";
+        const STORAGE_KEY = "Urban_admin_spaces_v1";
 
-        // Data Awal (Default) sesuai kategori & denah NUGAS Space
+        // Data Awal (Default) sesuai kategori & denah Urban Space
         const defaultSpaces = [
             {
                 code: "M-01",
@@ -754,7 +754,7 @@
         }
 
         // Tampilkan email admin yang login dari login.html
-        const loggedEmail = sessionStorage.getItem("nugasEmail");
+        const loggedEmail = sessionStorage.getItem("UrbanEmail");
         if (loggedEmail) {
             document.getElementById("adminEmailDisplay").textContent = loggedEmail;
         }
@@ -1036,7 +1036,7 @@
                 capacity: parseInt(document.getElementById("inputCapacity").value, 10) || 1,
                 price: parseInt(document.getElementById("inputPrice").value, 10) || 0,
                 status: document.getElementById("inputStatus").value,
-                facilities: document.getElementById("inputFacilities").value.trim() || "Standar NUGAS Space"
+                facilities: document.getElementById("inputFacilities").value.trim() || "Standar Urban Space"
             };
 
             if (editIdx === "") {
@@ -1121,8 +1121,8 @@
 
         // Logout kembali ke login.html
         document.getElementById("logoutBtn").addEventListener("click", function() {
-            sessionStorage.removeItem("nugasRole");
-            sessionStorage.removeItem("nugasEmail");
+            sessionStorage.removeItem("UrbanRole");
+            sessionStorage.removeItem("UrbanEmail");
             showToast("Logout berhasil! Mengalihkan ke halaman login...");
             setTimeout(function() {
                 window.location.href = "login.html";
