@@ -1,0 +1,66 @@
+.floorplan-scroll {
+            overflow-x: auto;
+            padding-bottom: 12px;
+        }
+        .map-wrapper {
+            position: relative;
+            width: 820px;
+            min-height: 980px;
+            margin: 0 auto;
+        }
+        /* Tombol meja standar */
+        .desk-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            color: #ffffff;
+            border-radius: 6px;
+            transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+            user-select: none;
+            cursor: pointer;
+        }
+        .desk-btn:hover:not(:disabled) {
+            transform: scale(1.06);
+            filter: brightness(1.08);
+            z-index: 20;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+        }
+        .desk-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.92;
+        }
+        /* Warna Status Meja */
+        .desk-available {
+            background-color: #058761; 
+        }
+        .desk-unconfirmed {
+            background-color: #d97706; 
+        }
+        .desk-confirmed {
+            background-color: #8b0000; 
+        }
+        /* Indikator sandaran kursi abu-abu */
+        .chair-pill-v {
+            width: 9px;
+            height: 28px;
+            background-color: #d8dee9;
+            border-radius: 4px;
+        }
+        .chair-pill-h {
+            width: 32px;
+            height: 8px;
+            background-color: #d8dee9;
+            border-radius: 4px;
+        }
+        /* Rotasi teks vertikal sesuai gambar */
+        .rot-left {
+            display: inline-block;
+            transform: rotate(-90deg);
+        }
+        .rot-right {
+            display: inline-block;
+            transform: rotate(90deg);
+        }

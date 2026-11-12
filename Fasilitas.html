@@ -17,80 +17,13 @@
     <!-- Tailwind CSS hasil compile -->
     <link rel="stylesheet" href="./assets/css/output.css">
 
-    <!-- Custom CSS untuk mereplikasi bentuk denah L-Shape, kursi, & rotasi nomor -->
-    <style>
-        .floorplan-scroll {
-            overflow-x: auto;
-            padding-bottom: 12px;
-        }
-        .map-wrapper {
-            position: relative;
-            width: 820px;
-            min-height: 980px;
-            margin: 0 auto;
-        }
-        /* Tombol meja standar */
-        .desk-btn {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 13px;
-            color: #ffffff;
-            border-radius: 6px;
-            transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
-            user-select: none;
-            cursor: pointer;
-        }
-        .desk-btn:hover:not(:disabled) {
-            transform: scale(1.06);
-            filter: brightness(1.08);
-            z-index: 20;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-        }
-        .desk-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.92;
-        }
-        /* Warna Status Meja */
-        .desk-available {
-            background-color: #058761; 
-        }
-        .desk-unconfirmed {
-            background-color: #d97706; 
-        }
-        .desk-confirmed {
-            background-color: #8b0000; 
-        }
-        /* Indikator sandaran kursi abu-abu */
-        .chair-pill-v {
-            width: 9px;
-            height: 28px;
-            background-color: #d8dee9;
-            border-radius: 4px;
-        }
-        .chair-pill-h {
-            width: 32px;
-            height: 8px;
-            background-color: #d8dee9;
-            border-radius: 4px;
-        }
-        /* Rotasi teks vertikal sesuai gambar */
-        .rot-left {
-            display: inline-block;
-            transform: rotate(-90deg);
-        }
-        .rot-right {
-            display: inline-block;
-            transform: rotate(90deg);
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/css/Fasilitas.css">
+    
 </head>
 
 <body class="bg-slate-50 font-['Poppins'] text-slate-800">
 
-    <!-- NAVBAR -->
+    <!-- NAvbar -->
     <header class="sticky top-0 z-30 border-b border-slate-100 bg-white">
         <div class="mx-auto w-[90%] max-w-6xl">
             <nav class="flex items-center justify-between py-5">
@@ -127,7 +60,7 @@
 
     <main class="mx-auto w-[90%] max-w-6xl py-8">
 
-        <!-- JUDUL & DESKRIPSI HALAMAN -->
+        <!-- Judul & Deskripsi Halaman -->
         <section class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
                 <h1 class="mt-2 text-2xl font-extrabold text-slate-900 md:text-3xl">
@@ -159,7 +92,7 @@
             </div>
         </section>
 
-        <!-- PANEL FILTER TANGGAL & WAKTU -->
+        <!-- Panel Filter Tanggal & Waktu -->
         <section class="mb-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
 
@@ -265,13 +198,11 @@
             </div>
         </section>
 
-        <!-- AREA KANVAS DENAH MEJA (PERSIS SEPERTI GAMBAR) -->
+        <!-- Area Kanvas Denah Meja-->
         <section class="floorplan-scroll">
             <div class="map-wrapper">
 
-                <!-- ========================================================= -->
-                <!-- KANVAS UTAMA BERBENTUK L (Sama untuk Lantai 1 & Lantai 2) -->
-                <!-- ========================================================= -->
+                 <!-- Kanvas Utama Denah Lantai-->
                 <div id="mapContainer" class="relative w-[820px]">
 
                     <!-- BAGIAN ATAS RUANGAN (Lebar penuh 820px, Tinggi 690px) -->
@@ -294,7 +225,7 @@
                             </span>
                         </div>
 
-                        <!-- ISI GRID MEJA BAGIAN ATAS (4 Kolom: Kiri, Tengah-Kiri, Tengah-Kanan, Kanan) -->
+                        <!-- Grid Meja Bagian Atas (4 Kolom: Kiri, Tengah-Kiri, Tengah-Kanan, Kanan) -->
                         <div class="relative z-10 flex h-full justify-between px-6 pt-6 pb-6">
 
                             <!-- KOLOM 1: Dinding Kiri (7 Meja Vertikal) -->
@@ -311,14 +242,14 @@
 
                         </div>
 
-                        <!-- LABEL PINTU (Berada di tengah garis bawah bagian atas) -->
+                        <!-- Label Pintu(Berada di tengah garis bawah bagian atas) -->
                         <div class="absolute -bottom-3 left-1/2 z-20 -translate-x-1/2 border border-slate-200 bg-white px-14 py-0.5 text-xs font-bold text-slate-800 shadow-xs">
                             Pintu
                         </div>
 
                     </div>
 
-                    <!-- BAGIAN BAWAH RUANGAN: Koridor Kiri (Lebar 245px) + Kompas & Card Petunjuk (Kanan) -->
+                    <!-- Bagian Bawah Ruangan Koridor Kiri (Lebar 245px) + Kompas & Card Petunjuk (Kanan) -->
                     <div class="flex">
 
                         <!-- Koridor Kiri Bawah (L-Shape Extension) -->
@@ -333,7 +264,7 @@
                         <!-- Area Kanan Bawah (Kompas & Kotak Petunjuk / Tombol Ganti Lantai) -->
                         <div class="flex flex-1 items-end justify-end gap-6 pb-2 pl-8 pt-6">
 
-                            <!-- KOMPAS ARAH MATA ANGIN (B - U - T - S sesuai gambar) -->
+                            <!-- Kompas arah angin(B - U - T - S sesuai gambar) -->
                             <div class="flex flex-col items-center justify-center rounded-xl bg-white p-4 shadow-sm border border-slate-100">
                                 <span class="text-xs font-extrabold text-teal-800">B</span>
                                 <div class="my-1 flex items-center gap-2">
@@ -346,7 +277,7 @@
                                 <span class="text-xs font-extrabold text-teal-800">T</span>
                             </div>
 
-                            <!-- KOTAK SWITCH LANTAI & PETUNJUK WARNA (Persis di Pojok Kanan Bawah) -->
+                            <!-- Kotak Switch lantai (Persis di Pojok Kanan Bawah) -->
                             <div class="w-56 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
                                 <p id="switchFloorTitle" class="text-center text-xs font-medium text-slate-500">
                                     Lihat Denah Lantai 2
@@ -393,9 +324,7 @@
 
     </main>
 
-    <!-- =============================================================== -->
-    <!-- MODAL 1: PERINGATAN PENCEGAHAN DOUBLE BOOKING (UNCONFIRMED SLOT) -->
-    <!-- =============================================================== -->
+     <!-- Moal Peringatan Pencegahan Double Bookinh-->
     <div id="doubleBookingModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4 backdrop-blur-[1px]">
         <div class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
             <div class="flex items-center justify-between bg-amber-600 px-6 py-4 text-white">
@@ -443,9 +372,7 @@
         </div>
     </div>
 
-    <!-- =============================================================== -->
-    <!-- MODAL 2: FORM PEMESANAN MEJA                                    -->
-    <!-- =============================================================== -->
+     <!-- Modal Form Pemesanan Meja-->
     <div id="bookingModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4 backdrop-blur-[1px]">
         <div class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
             <div class="flex items-center justify-between bg-slate-900 px-6 py-4 text-white">
@@ -503,7 +430,7 @@
         </div>
     </div>
 
-    <!-- TOAST NOTIFIKASI -->
+    <!-- Toast Notifikasi-->
     <div
         id="toast"
         class="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 rounded-lg bg-slate-900 px-5 py-3 text-center text-xs font-medium text-white shadow-xl"
@@ -511,7 +438,7 @@
         Notifikasi
     </div>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="mt-16 bg-slate-900 py-12 text-slate-400">
         <div class="mx-auto w-[90%] max-w-6xl">
             <div class="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
@@ -557,524 +484,6 @@
         </div>
     </footer>
 
-    <!-- =============================================================== -->
-    <!-- JAVASCRIPT: LOGIKA DENAH LANTAI 1 & 2 + ANTI DOUBLE BOOKING     -->
-    <!-- =============================================================== -->
-    <script>
-        const nowForDate = new Date();
-        const todayStr = new Date(nowForDate.getTime() - nowForDate.getTimezoneOffset() * 60000).toISOString().split("T")[0];
-        const filterDate = document.getElementById("filterDate");
-        const filterTime = document.getElementById("filterTime");
-        const filterDuration = document.getElementById("filterDuration");
-        const searchDeskInput = document.getElementById("searchDeskNumber");
-
-        filterDate.value = todayStr;
-        filterDate.min = todayStr;
-
-        let currentFloor = 1;
-        let selectedDeskNumber = null;
-        let toastTimer;
-
-        // Struktur Tata Letak Nomor Meja Persis Sesuai Gambar 1 & Gambar 2
-        const floorLayouts = {
-            1: {
-                leftWall: [40, 41, 42, 43, 44, 45, 46],
-                midLeftClusters: [
-                    [[39, 38], [36, 37]],
-                    [[35, 34], [32, 33]],
-                    [[31, 30], [28, 29]],
-                    [[26, 27], [25, 24]]
-                ],
-                midRightClusters: [
-                    [[8, 9], [10, 11]],
-                    [[12, 13], [14, 15]],
-                    [[16, 17], [18, 19]],
-                    [[20, 21], [22, 23]]
-                ],
-                rightWall: [7, 6, 5, 4, 3, 2, 1],
-                lowerWingPairs: [
-                    [47, 52],
-                    [48, 51],
-                    [49, 50]
-                ]
-            },
-            2: {
-                leftWall: [92, 93, 94, 95, 96, 97, 98],
-                midLeftClusters: [
-                    [[91, 90], [88, 89]],
-                    [[87, 86], [84, 85]],
-                    [[83, 82], [80, 81]],
-                    [[78, 79], [76, 77]]
-                ],
-                midRightClusters: [
-                    [[60, 61], [62, 63]],
-                    [[64, 65], [66, 67]],
-                    [[68, 69], [70, 71]],
-                    [[72, 73], [74, 75]]
-                ],
-                rightWall: [59, 58, 57, 56, 55, 54, 53],
-                lowerWingPairs: [] // Di lantai 2 koridor kiri bawah kosong (area smoking)
-            }
-        };
-        // Sumber data reservasi bersama dengan Reservasi.html dan AdminTransaksi.html
-        const STORAGE_KEY = "UrbanSpaceTransactions";
-
-        function getReservationsDB() {
-            try {
-                const transactions = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-
-                return transactions
-                    .filter(function(item) {
-                        return item.unitId && item.status !== "Dibatalkan";
-                    })
-                    .map(function(item) {
-                        const startHour = Number(String(item.time || "00:00").split(":")[0]);
-                        return {
-                            deskNumber: Number(item.unitId),
-                            date: item.date,
-                            startHour: startHour,
-                            endHour: startHour + Number(item.duration || 0),
-                            holder: item.name || "Pemesan",
-                            status: item.status === "Terverifikasi" ? "confirmed" : "unconfirmed"
-                        };
-                    });
-            } catch (error) {
-                console.error("Gagal membaca data reservasi:", error);
-                return [];
-            }
-        }
-
-        function formatHour(h) {
-            return String(h).padStart(2, "0") + ":00";
-        }
-
-        function isOverlap(startA, endA, startB, endB) {
-            return startA < endB && endA > startB;
-        }
-
-        // Menentukan informasi zona dari nomor meja
-        function getDeskZoneInfo(num) {
-            if (num >= 1 && num <= 52) {
-                return "Lantai 1 • Non-Smoking Indoor";
-            }
-            if (num >= 76 && num <= 98) {
-                return "Lantai 2 • Smoking Indoor";
-            }
-            return "Lantai 2 • Non-Smoking Indoor";
-        }
-
-        // Mengecek ketersediaan suatu nomor meja pada tanggal & jam terpilih
-        function getDeskStatus(deskNum, dateVal, reqStart, reqEnd) {
-            const conflicts = getReservationsDB().filter(function(r) {
-                return (
-                    r.deskNumber === deskNum &&
-                    r.date === dateVal &&
-                    isOverlap(reqStart, reqEnd, r.startHour, r.endHour)
-                );
-            });
-
-            const confirmedConflict = conflicts.find(function(c) {
-                return c.status === "confirmed";
-            });
-            if (confirmedConflict) {
-                return { state: "confirmed", record: confirmedConflict };
-            }
-
-            const unconfirmedConflict = conflicts.find(function(c) {
-                return c.status === "unconfirmed";
-            });
-            if (unconfirmedConflict) {
-                return { state: "unconfirmed", record: unconfirmedConflict };
-            }
-
-            return { state: "available", record: null };
-        }
-
-        // Membuat class warna dan atribut tombol meja berdasarkan statusnya
-        function getDeskButtonMeta(deskNum) {
-            const dateVal = filterDate.value;
-            const startHour = parseInt(filterTime.value, 10);
-            const endHour = startHour + parseInt(filterDuration.value, 10);
-            const statusObj = getDeskStatus(deskNum, dateVal, startHour, endHour);
-
-            let colorClass = "desk-available";
-            let titleText = "Meja #" + deskNum + " - Tersedia (Klik untuk pesan)";
-
-            if (statusObj.state === "unconfirmed") {
-                colorClass = "desk-unconfirmed";
-                titleText = "Meja #" + deskNum + " - Sedang di-hold oleh " + statusObj.record.holder + " (Belum Terkonfirmasi - Klik untuk ambil alih)";
-            } else if (statusObj.state === "confirmed") {
-                colorClass = "desk-confirmed";
-                titleText = "Meja #" + deskNum + " - Tidak Tersedia / Terkonfirmasi oleh " + statusObj.record.holder;
-            }
-
-            return {
-                colorClass: colorClass,
-                titleText: titleText,
-                state: statusObj.state
-            };
-        }
-
-        // Komponen HTML Meja Vertikal (Dinding Kiri / Dinding Kanan)
-        function createSideWallDeskHTML(deskNum, side) {
-            const meta = getDeskButtonMeta(deskNum);
-            const rotClass = side === "left" ? "rot-left" : "rot-right";
-
-            const buttonHTML = `
-                <button
-                    type="button"
-                    id="desk-btn-${deskNum}"
-                    onclick="handleDeskClick(${deskNum})"
-                    title="${meta.titleText}"
-                    class="desk-btn ${meta.colorClass} h-[74px] w-[42px]"
-                >
-                    <span class="${rotClass}">${deskNum}</span>
-                </button>
-            `;
-
-            if (side === "left") {
-                return `
-                    <div class="flex items-center gap-1.5">
-                        ${buttonHTML}
-                        <div class="chair-pill-v"></div>
-                    </div>
-                `;
-            } else {
-                return `
-                    <div class="flex items-center gap-1.5">
-                        <div class="chair-pill-v"></div>
-                        ${buttonHTML}
-                    </div>
-                `;
-            }
-        }
-
-        // Komponen HTML Kelompok 4 Meja Horizontal (Area Tengah)
-        function createQuadClusterHTML(quadArray) {
-            const topRow = quadArray[0];
-            const bottomRow = quadArray[1];
-
-            function renderHorizontalDesk(num, chairPosition) {
-                const meta = getDeskButtonMeta(num);
-                const chairDiv = `<div class="chair-pill-h"></div>`;
-                const btnDiv = `
-                    <button
-                        type="button"
-                        id="desk-btn-${num}"
-                        onclick="handleDeskClick(${num})"
-                        title="${meta.titleText}"
-                        class="desk-btn ${meta.colorClass} h-[42px] w-[84px]"
-                    >
-                        ${num}
-                    </button>
-                `;
-
-                return `
-                    <div class="flex flex-col items-center gap-1.5">
-                        ${chairPosition === "top" ? chairDiv + btnDiv : btnDiv + chairDiv}
-                    </div>
-                `;
-            }
-
-            return `
-                <div class="flex flex-col gap-1.5">
-                    <div class="flex gap-1.5">
-                        ${renderHorizontalDesk(topRow[0], "top")}
-                        ${renderHorizontalDesk(topRow[1], "top")}
-                    </div>
-                    <div class="flex gap-1.5">
-                        ${renderHorizontalDesk(bottomRow[0], "bottom")}
-                        ${renderHorizontalDesk(bottomRow[1], "bottom")}
-                    </div>
-                </div>
-            `;
-        }
-
-        // Komponen HTML Meja Koridor Kiri Bawah Lantai 1 (Meja 47 - 52)
-        function createLowerWingDesksHTML(pairsArray) {
-            if (!pairsArray || pairsArray.length === 0) {
-                return "";
-            }
-
-            const rowsHTML = pairsArray.map(function(pair) {
-                const leftNum = pair[0];
-                const rightNum = pair[1];
-                const metaL = getDeskButtonMeta(leftNum);
-                const metaR = getDeskButtonMeta(rightNum);
-
-                return `
-                    <div class="flex items-center gap-1.5">
-                        <div class="chair-pill-v"></div>
-                        <button
-                            type="button"
-                            id="desk-btn-${leftNum}"
-                            onclick="handleDeskClick(${leftNum})"
-                            title="${metaL.titleText}"
-                            class="desk-btn ${metaL.colorClass} h-[72px] w-[42px]"
-                        >
-                            <span class="rot-left">${leftNum}</span>
-                        </button>
-                        <button
-                            type="button"
-                            id="desk-btn-${rightNum}"
-                            onclick="handleDeskClick(${rightNum})"
-                            title="${metaR.titleText}"
-                            class="desk-btn ${metaR.colorClass} h-[72px] w-[42px]"
-                        >
-                            <span class="rot-left">${rightNum}</span>
-                        </button>
-                        <div class="chair-pill-v"></div>
-                    </div>
-                `;
-            }).join("");
-
-            return `<div class="flex flex-col gap-2">${rowsHTML}</div>`;
-        }
-
-        // Render seluruh denah sesuai lantai yang aktif
-        function renderFloorPlan() {
-            const layout = floorLayouts[currentFloor];
-            const dateVal = filterDate.value;
-            const startHour = parseInt(filterTime.value, 10);
-            const endHour = startHour + parseInt(filterDuration.value, 10);
-
-            // Update Jadwal Badge
-            document.getElementById("scheduleSummaryBadge").textContent =
-                dateVal + " • " + formatHour(startHour) + " - " + formatHour(endHour) + " WIB";
-
-            // Atur tampilan khusus Lantai 1 vs Lantai 2 (Zona Smoking & Border Putus-putus)
-            const floor2SmokingBg = document.getElementById("floor2SmokingBg");
-            const floor2ZoneBadges = document.getElementById("floor2ZoneBadges");
-            const lowerLeftWing = document.getElementById("lowerLeftWing");
-
-            if (currentFloor === 2) {
-                floor2SmokingBg.classList.remove("hidden");
-                floor2ZoneBadges.classList.remove("hidden");
-                floor2ZoneBadges.classList.add("flex");
-                lowerLeftWing.style.backgroundColor = "#fff2f0";
-                lowerLeftWing.style.borderRight = "2px dashed rgba(194, 65, 12, 0.7)";
-            } else {
-                floor2SmokingBg.classList.add("hidden");
-                floor2ZoneBadges.classList.add("hidden");
-                floor2ZoneBadges.classList.remove("flex");
-                lowerLeftWing.style.backgroundColor = "#ffffff";
-                lowerLeftWing.style.borderRight = "1px solid #cbd5e1";
-            }
-
-            // Render ke-4 kolom utama + koridor bawah
-            document.getElementById("leftWallCol").innerHTML = layout.leftWall
-                .map(function(n) { return createSideWallDeskHTML(n, "left"); })
-                .join("");
-
-            document.getElementById("midLeftCol").innerHTML = layout.midLeftClusters
-                .map(function(cluster) { return createQuadClusterHTML(cluster); })
-                .join("");
-
-            document.getElementById("midRightCol").innerHTML = layout.midRightClusters
-                .map(function(cluster) { return createQuadClusterHTML(cluster); })
-                .join("");
-
-            document.getElementById("rightWallCol").innerHTML = layout.rightWall
-                .map(function(n) { return createSideWallDeskHTML(n, "right"); })
-                .join("");
-
-            document.getElementById("lowerWingDesks").innerHTML =
-                createLowerWingDesksHTML(layout.lowerWingPairs);
-
-            // Hitung Statistik Ketersediaan di Lantai Ini
-            const startDesk = currentFloor === 1 ? 1 : 53;
-            const endDesk = currentFloor === 1 ? 52 : 98;
-            let availCount = 0;
-            let unconfCount = 0;
-            let confCount = 0;
-
-            for (let d = startDesk; d <= endDesk; d++) {
-                const st = getDeskStatus(d, dateVal, startHour, endHour).state;
-                if (st === "available") availCount++;
-                else if (st === "unconfirmed") unconfCount++;
-                else confCount++;
-            }
-
-            document.getElementById("activeFloorLabel").textContent =
-                "Menampilkan: Denah Lantai " + currentFloor + " (Meja " + startDesk + " - " + endDesk + ")";
-            document.getElementById("statAvailable").textContent = availCount;
-            document.getElementById("statUnconfirmed").textContent = unconfCount;
-            document.getElementById("statConfirmed").textContent = confCount;
-
-            // Update teks tombol switch lantai di pojok kanan bawah & atas
-            const targetFloor = currentFloor === 1 ? 2 : 1;
-            document.getElementById("switchFloorTitle").textContent = "Lihat Denah Lantai " + targetFloor;
-            document.getElementById("switchFloorBtnText").textContent = "Denah Lantai " + targetFloor;
-
-            const topBtn1 = document.getElementById("topBtnFloor1");
-            const topBtn2 = document.getElementById("topBtnFloor2");
-            if (currentFloor === 1) {
-                topBtn1.className = "rounded-lg bg-red-600 px-4 py-2 text-xs font-semibold text-white transition";
-                topBtn2.className = "rounded-lg px-4 py-2 text-xs font-semibold text-slate-600 transition hover:text-slate-900";
-            } else {
-                topBtn2.className = "rounded-lg bg-red-600 px-4 py-2 text-xs font-semibold text-white transition";
-                topBtn1.className = "rounded-lg px-4 py-2 text-xs font-semibold text-slate-600 transition hover:text-slate-900";
-            }
-        }
-
-        // Fungsi Ganti Lantai
-        window.switchFloor = function(floorNum) {
-            currentFloor = floorNum;
-            renderFloorPlan();
-        };
-
-        window.toggleFloor = function() {
-            currentFloor = currentFloor === 1 ? 2 : 1;
-            renderFloorPlan();
-            showToast("Beralih ke tampilan Denah Lantai " + currentFloor);
-        };
-
-        // Ketika salah satu meja pada denah diklik
-        window.handleDeskClick = function(deskNum) {
-            const dateVal = filterDate.value;
-            const startHour = parseInt(filterTime.value, 10);
-            const duration = parseInt(filterDuration.value, 10);
-            const endHour = startHour + duration;
-
-            const statusObj = getDeskStatus(deskNum, dateVal, startHour, endHour);
-
-            if (statusObj.state === "confirmed") {
-                showToast(
-                    "Meja #" + deskNum + " sudah terverifikasi oleh " +
-                    statusObj.record.holder + ". Silakan pilih meja lain."
-                );
-                return;
-            }
-
-            if (statusObj.state === "unconfirmed") {
-                showToast(
-                    "Meja #" + deskNum + " sedang menunggu pembayaran/verifikasi. Silakan pilih meja lain."
-                );
-                return;
-            }
-
-            selectedDeskNumber = deskNum;
-            openBookingModal(deskNum);
-        };
-
-        function openBookingModal(deskNum) {
-            const dateVal = filterDate.value;
-            const startHour = parseInt(filterTime.value, 10);
-            const duration = parseInt(filterDuration.value, 10);
-            const endHour = startHour + duration;
-            const totalCost = 15000 * duration;
-
-            document.getElementById("modalZoneBadge").textContent = getDeskZoneInfo(deskNum);
-            document.getElementById("modalDeskHeading").textContent = "Reservasi Meja #" + deskNum;
-            document.getElementById("summaryDeskInfo").textContent =
-                "Meja #" + deskNum + " (" + getDeskZoneInfo(deskNum) + ")";
-            document.getElementById("summaryDateTime").textContent =
-                dateVal + " | " + formatHour(startHour) + " - " + formatHour(endHour) + " WIB";
-            document.getElementById("summaryCost").textContent =
-                "IDR " + totalCost.toLocaleString("id-ID");
-
-            const bookModal = document.getElementById("bookingModal");
-            bookModal.classList.remove("hidden");
-            bookModal.classList.add("flex");
-        }
-
-        function closeWarnModal() {
-            const warnModal = document.getElementById("doubleBookingModal");
-            warnModal.classList.add("hidden");
-            warnModal.classList.remove("flex");
-        }
-
-        function closeBookModal() {
-            const bookModal = document.getElementById("bookingModal");
-            bookModal.classList.add("hidden");
-            bookModal.classList.remove("flex");
-            document.getElementById("bookingForm").reset();
-        }
-
-        document.getElementById("closeWarnModal").addEventListener("click", closeWarnModal);
-        document.getElementById("btnCancelWarn").addEventListener("click", closeWarnModal);
-
-        document.getElementById("closeBookModal").addEventListener("click", closeBookModal);
-        document.getElementById("btnCancelBook").addEventListener("click", closeBookModal);
-
-        // Kirim pilihan meja ke halaman Reservasi & Pembayaran
-        document.getElementById("bookingForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            if (selectedDeskNumber === null) return;
-
-            const nameVal = document.getElementById("customerName").value.trim();
-            if (!nameVal) {
-                alert("Mohon masukkan nama pemesan.");
-                return;
-            }
-
-            const dateVal = filterDate.value;
-            const startHour = parseInt(filterTime.value, 10);
-            const duration = parseInt(filterDuration.value, 10);
-
-            const pendingBooking = {
-                unitId: String(selectedDeskNumber),
-                name: nameVal,
-                date: dateVal,
-                time: String(startHour).padStart(2, "0") + ":00",
-                duration: duration,
-                spaceKey: "individual"
-            };
-
-            sessionStorage.setItem("UrbanPendingBooking", JSON.stringify(pendingBooking));
-            window.location.href = "Reservasi.html";
-        });
-
-        // Fitur Cari Nomor Meja Cepat (1 - 98)
-        document.getElementById("btnFindDesk").addEventListener("click", function() {
-            const num = parseInt(searchDeskInput.value, 10);
-            if (!num || num < 1 || num > 98) {
-                renderFloorPlan();
-                showToast("Ketersediaan denah berhasil diperbarui!");
-                return;
-            }
-
-            const targetFloor = num <= 52 ? 1 : 2;
-            if (currentFloor !== targetFloor) {
-                currentFloor = targetFloor;
-                renderFloorPlan();
-            }
-
-            const btnEl = document.getElementById("desk-btn-" + num);
-            if (btnEl) {
-                btnEl.scrollIntoView({ behavior: "smooth", block: "center" });
-                btnEl.classList.add("ring-4", "ring-slate-900", "scale-110");
-                setTimeout(function() {
-                    btnEl.classList.remove("ring-4", "ring-slate-900", "scale-110");
-                }, 2200);
-            }
-        });
-
-        function showToast(message) {
-            clearTimeout(toastTimer);
-            const toast = document.getElementById("toast");
-            toast.textContent = message;
-            toast.classList.remove("hidden");
-            toastTimer = setTimeout(function() {
-                toast.classList.add("hidden");
-            }, 3200);
-        }
-
-        // Render ulang setiap kali tanggal/jam/durasi diubah
-        filterDate.addEventListener("change", renderFloorPlan);
-        filterTime.addEventListener("change", renderFloorPlan);
-        filterDuration.addEventListener("change", renderFloorPlan);
-
-        // Inisialisasi awal
-        renderFloorPlan();
-
-        window.addEventListener("storage", function(event) {
-            if (event.key === STORAGE_KEY || event.key === null) {
-                renderFloorPlan();
-            }
-        });
-    </script>
-
+    <script src="./assets/js/fasilitas.js"></script>
 </body>
 </html>
